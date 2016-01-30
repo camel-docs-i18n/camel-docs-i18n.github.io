@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Bean Binding
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="user-guide.html">User Guide</a>&nbsp;&gt;&nbsp;<a href="bean-integration.html">Bean Integration</a>&nbsp;&gt;&nbsp;<a href="bean-binding.html">Bean Binding</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="BeanBinding-BeanBinding">Bean Binding</h2><p>Bean Binding in Camel defines both which methods are invoked and also how the <a shape="rect" href="message.html">Message</a> is converted into the parameters of the method when it is invoked.</p><h3 id="BeanBinding-Choosingthemethodtoinvoke">Choosing the method to invoke</h3><p>The binding of a Camel <a shape="rect" href="message.html">Message</a> to a bean method call can occur in different ways, in the following order of importance:</p><ul><li>if the message contains the header <strong>CamelBeanMethodName</strong> then that method is invoked, converting the body to the type of the method's argument.<ul><li>From <strong>Camel 2.8</strong> onwards you can qualify parameter types to select exactly which method to use among overloads with the same name (see below for more details).</li><li>From <strong>Camel 2.9</strong> onwards you can specify parameter values directly in the method option (see below for more details).</li></ul></li><li>you can explicitly specify the method name in the <a shape="rect" href="dsl.html">DSL</a> or when using <a shape="rect" href="pojo-consuming.html">POJO Consuming</a> or <a shape="rect" href="pojo-producing.html">POJO Producing</a></li><li>if the bean has a method marked with the <code>@Handler</code> annotation, then that method is selected</li><li>if the bean can be converted to a <a shape="rect" href="processor.html">Processor</a> using the <a shape="rect" href="type-converter.html">Type Converter</a> mechanism, then this is used to process the message. The <a shape="rect" href="activemq.html">ActiveMQ</a> component uses this mechanism to allow any JMS MessageListener to be invoked directly by Camel without having to write any integration glue code. You can use the same mechanism to integrate Camel into any other messaging/remoting frameworks.</li><li>if the body of the message can be converted to a <a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/bean/BeanInvocation.html">BeanInvocation</a> (the default payload used by the <a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/bean/ProxyHelper.html">ProxyHelper</a>) component - then that is used to invoke the method and pass its arguments</li><li>otherwise the type of the body is used to find a matching method; an error is thrown if a single method cannot be chosen unambiguously.</li><li>you can also use Exchange as the parameter itself, but then the return type must be void.</li><li>if the bean class is private (or package-private), interface methods will be preferred (from <strong>Camel 2.9</strong> onwards) since Camel can't invoke class methods on such beans</li></ul><p>In cases where Camel cannot choose a method to invoke, an <code>AmbiguousMethodCallException</code> is thrown.</p><p>By default the return value is set on the outbound message body.</p><h3 id="BeanBinding-Parameterbinding">Parameter binding</h3><p>When a method has been chosen for invocation, Camel will bind to the parameters of the method.</p><p>The following Camel-specific types are automatically bound:</p><ul class="alternate"><li><code>org.apache.camel.Exchange</code></li><li><code>org.apache.camel.Message</code></li><li><code>org.apache.camel.CamelContext</code></li><li><code>org.apache.camel.TypeConverter</code></li><li><code>org.apache.camel.spi.Registry</code></li><li><code>java.lang.Exception</code></li></ul><p>So, if you declare any of these types, they will be provided by Camel. <strong>Note that <code>Exception</code> will bind to the caught exception of the <a shape="rect" href="exchange.html">Exchange</a></strong> - so it's often usable if you employ a <a shape="rect" href="pojo.html">Pojo</a> to handle, e.g., an <code>onException</code> route.</p><p>What is most interesting is that Camel will also try to bind the body of the <a shape="rect" href="exchange.html">Exchange</a> to the first parameter of the method signature (albeit not of any of the types above). So if, for instance, we declare a parameter as <code>String body</code>, then Camel will bind the IN body to this type. Camel will also automatically convert to the type declared in the method signature.</p><p>Let's review some examples:</p><p>Below is a simple method with a body binding. Camel will bind the IN body to the <code>body</code> parameter and convert it to a <code>String</code>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public String doSomething(String body)
+]]></script>
+</div></div><p>In the following sample we got one of the automatically-bound types as well - for instance, a <code>Registry</code> that we can use to lookup beans.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public String doSomething(String body, Registry registry)
+]]></script>
+</div></div><p>We can use <a shape="rect" href="exchange.html">Exchange</a> as well:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public String doSomething(String body, Exchange exchange)
+]]></script>
+</div></div><p>You can also have multiple types:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public String doSomething(String body, Exchange exchange, TypeConverter converter)
+]]></script>
+</div></div><p>And imagine you use a <a shape="rect" href="pojo.html">Pojo</a> to handle a given custom exception <code>InvalidOrderException</code> - we can then bind that as well:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public String badOrder(String body, InvalidOrderException invalid)
+]]></script>
+</div></div><p>Notice that we can bind to it even if we use a sub type of <code>java.lang.Exception</code> as Camel still knows it's an exception and can bind the cause (if any exists).</p><p>So what about headers and other stuff? Well now it gets a bit tricky - so we can use annotations to help us, or specify the binding in the method name option.<br clear="none"> See the following sections for more detail.</p><h3 id="BeanBinding-BindingAnnotations">Binding Annotations</h3><p>You can use the <a shape="rect" href="parameter-binding-annotations.html">Parameter Binding Annotations</a> to customize how parameter values are created from the <a shape="rect" href="message.html">Message</a></p><h4 id="BeanBinding-Examples">Examples</h4><p>For example, a <a shape="rect" href="bean.html">Bean</a> such as:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class Bar {
+
+    public String doSomething(String body) {
+      // process the in body and return whatever you want
+      return &quot;Bye World&quot;;
+   }
+]]></script>
+</div></div><p>Or the Exchange example. Notice that the return type must be <strong>void</strong> when there is only a single parameter of the type <code>org.apache.camel.Exchange</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class Bar {
+
+    public void doSomething(Exchange exchange) {
+      // process the exchange
+      exchange.getIn().setBody(&quot;Bye World&quot;);
+   }
+]]></script>
+</div></div><h4 id="BeanBinding-@Handler">@Handler</h4><p>You can mark a method in your bean with the @Handler annotation to indicate that this method should be used for <a shape="rect" href="bean-binding.html">Bean Binding</a>.<br clear="none"> This has an advantage as you need not specify a method name in the Camel route, and therefore do not run into problems after renaming the method in an IDE that can't find all its references.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class Bar {
+
+    @Handler
+    public String doSomething(String body) {
+      // process the in body and return whatever you want
+      return &quot;Bye World&quot;;
+   }
+]]></script>
+</div></div><h3 id="BeanBinding-Parameterbindingusingmethodoption">Parameter binding using method option</h3><p><strong>Available as of Camel 2.9</strong></p><p>Camel uses the following rules to determine if it's a parameter value in the method option</p><ul class="alternate"><li>The value is either <code>true</code> or <code>false</code> which denotes a boolean value</li><li>The value is a numeric value such as <code>123</code> or <code>7</code></li><li>The value is a String enclosed with either single or double quotes</li><li>The value is null which denotes a <code>null</code> value</li><li>It can be evaluated using the <a shape="rect" href="simple.html">Simple</a> language, which means you can use, e.g., body, header.foo and other <a shape="rect" href="simple.html">Simple</a> tokens. Notice the tokens must be enclosed with ${ }.</li></ul><p>Any other value is consider to be a type declaration instead - see the next section about specifying types for overloaded methods.</p><p>When invoking a <a shape="rect" href="bean.html">Bean</a> you can instruct Camel to invoke a specific method by providing the method name:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .bean(OrderService.class, &quot;doSomething&quot;)
+]]></script>
+</div></div><p>Here we tell Camel to invoke the doSomething method - Camel handles the parameters' binding. Now suppose the method has 2 parameters, and the 2nd parameter is a boolean where we want to pass in a true value:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public void doSomething(String payload, boolean highPriority) {
+   ...
+}
+]]></script>
+</div></div><p>This is now possible in <strong>Camel 2.9</strong> onwards:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .bean(OrderService.class, &quot;doSomething(*, true)&quot;)
+]]></script>
+</div></div><p>In the example above, we defined the first parameter using the wild card symbol *, which tells Camel to bind this parameter to any type, and let Camel figure this out. The 2nd parameter has a fixed value of <code>true</code>. Instead of the wildcard symbol we can instruct Camel to use the message body as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .bean(OrderService.class, &quot;doSomething(${body}, true)&quot;)
+]]></script>
+</div></div><p>The syntax of the parameters is using the <a shape="rect" href="simple.html">Simple</a> expression language so we have to use ${ } placeholders in the body to refer to the message body.</p><p>If you want to pass in a <code>null</code> value, then you can explicit define this in the method option as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .to(&quot;bean:orderService?method=doSomething(null, true)&quot;)
+]]></script>
+</div></div><p>Specifying <code>null</code> as a parameter value instructs Camel to force passing a <code>null</code> value.</p><p>Besides the message body, you can pass in the message headers as a <code>java.util.Map</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .bean(OrderService.class, &quot;doSomethingWithHeaders(${body}, ${headers})&quot;)
+]]></script>
+</div></div><p>You can also pass in other fixed values besides booleans. For example, you can pass in a String and an integer:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .bean(MyBean.class, &quot;echo(&#39;World&#39;, 5)&quot;)
+]]></script>
+</div></div><p>In the example above, we invoke the echo method with two parameters. The first has the content 'World' (without quotes), and the 2nd has the value of 5.<br clear="none"> Camel will automatically convert these values to the parameters' types.</p><p>Having the power of the <a shape="rect" href="simple.html">Simple</a> language allows us to bind to message headers and other values such as:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .bean(OrderService.class, &quot;doSomething(${body}, ${header.high})&quot;)
+]]></script>
+</div></div><p>You can also use the OGNL support of the <a shape="rect" href="simple.html">Simple</a> expression language. Now suppose the message body is an object which has a method named <code>asXml</code>. To invoke the <code>asXml</code> method we can do as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .bean(OrderService.class, &quot;doSomething(${body.asXml}, ${header.high})&quot;)
+]]></script>
+</div></div><p>Instead of using <code>.bean</code> as shown in the examples above, you may want to use <code>.to</code> instead as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .to(&quot;bean:orderService?method=doSomething(${body.asXml}, ${header.high})&quot;)
+]]></script>
+</div></div><h3 id="BeanBinding-Usingtypequalifierstoselectamongoverloadedmethods">Using type qualifiers to select among overloaded methods</h3><p><strong>Available as of Camel 2.8</strong></p><p>If you have a <a shape="rect" href="bean.html">Bean</a> with overloaded methods, you can now specify parameter types in the method name so Camel can match the method you intend to use.<br clear="none"> Given the following bean:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>MyBean</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+public static final class MyBean {
+
+    public String hello(String name) {
+        return &quot;Hello &quot; + name;
+    }
+
+    public String hello(String name, @Header(&quot;country&quot;) String country) {
+        return &quot;Hello &quot; + name + &quot; you are from &quot; + country;
+    }
+
+    public String times(String name, @Header(&quot;times&quot;) int times) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i &lt; times; i++) {
+            sb.append(name);
+        }
+        return sb.toString();
+    }
+
+    public String times(byte[] data, @Header(&quot;times&quot;) int times) {
+        String s = new String(data);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i &lt; times; i++) {
+            sb.append(s);
+            if (i &lt; times - 1) {
+                sb.append(&quot;,&quot;);
+            }
+        }
+        return sb.toString();
+    }
+
+    public String times(String name, int times, char separator) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i &lt; times; i++) {
+            sb.append(name);
+            if (i &lt; times - 1) {
+                sb.append(separator);
+            }
+        }
+        return sb.toString();
+    }
+
+}
+]]></script>
+</div></div><p>Then the <code>MyBean</code> has 2 overloaded methods with the names <code>hello</code> and <code>times</code>. So if we want to use the method which has 2 parameters we can do as follows in the Camel route:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Invoke 2 parameter method</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    .bean(MyBean.class, &quot;hello(String,String)&quot;)
+    .to(&quot;mock:result&quot;);
+]]></script>
+</div></div><p>We can also use a <code>*</code> as wildcard so we can just say we want to execute the method with 2 parameters we do</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Invoke 2 parameter method using wildcard</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    .bean(MyBean.class, &quot;hello(*,*)&quot;)
+    .to(&quot;mock:result&quot;);
+]]></script>
+</div></div><p>By default Camel will match the type name using the simple name, e.g. any leading package name will be disregarded. However if you want to match using the FQN, then specify the FQN type and Camel will leverage that. So if you have a <code>com.foo.MyOrder</code> and you want to match against the FQN, and <strong>not</strong> the simple name "MyOrder", then follow this example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   .bean(OrderService.class, &quot;doSomething(com.foo.MyOrder)&quot;)
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Camel currently only supports either specifying parameter binding or type per parameter in the method name option. You <strong>cannot</strong> specify both at the same time, such as</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[doSomething(com.foo.MyOrder ${body}, boolean ${header.high})
+]]></script>
+</div></div><p>This may change in the future.</p></div></div></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=63026">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=63026&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

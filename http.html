@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: HTTP
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="components.html">Components</a>&nbsp;&gt;&nbsp;<a href="http.html">HTTP</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="HTTP-HTTPComponent">HTTP Component</h2><p>The <strong>http:</strong> component provides HTTP based <a shape="rect" href="endpoint.html">endpoints</a> for consuming external HTTP resources (as a client to call external servers using HTTP).</p><p>Maven users will need to add the following dependency to their <code>pom.xml</code> for this component:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-http&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;
+]]></script>
+</div></div><h3 id="HTTP-URIformat">URI format</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[http:hostname[:port][/resourceUri][?param1=value1][&amp;param2=value2]
+]]></script>
+</div></div><p>Will by default use port 80 for HTTP and 443 for HTTPS.</p><div class="confluence-information-macro confluence-information-macro-information"><p class="title">camel-http vs camel-jetty</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can only produce to endpoints generated by the HTTP component. Therefore it should never be used as input into your camel Routes. To bind/expose an HTTP endpoint via a HTTP server as input to a camel route, you can use the <a shape="rect" href="jetty.html">Jetty Component</a> or the <a shape="rect" href="servlet.html">Servlet Component</a></p></div></div><h3 id="HTTP-Examples">Examples</h3><p>Call the url with the body using POST and return response as out message. If body is null call URL using GET and return response as out message</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Java DSL</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Spring DSL</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;direct:start&quot;)
+  .to(&quot;http://myhost/mypath&quot;);]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;from uri=&quot;direct:start&quot;/&gt;
+&lt;to uri=&quot;http://oldhost&quot;/&gt;]]></script>
+</div></div></td></tr></tbody></table></div><p>You can override the HTTP endpoint URI by adding a header. Camel will call the <a shape="rect" class="external-link" href="http://newhost" rel="nofollow">http://newhost</a>. This is very handy for e.g. REST urls.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Java DSL</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;direct:start&quot;)
+  .setHeader(Exchange.HTTP_URI, simple(&quot;http://myserver/orders/${header.orderId}&quot;))
+  .to(&quot;http://dummyhost&quot;);]]></script>
+</div></div></td></tr></tbody></table></div><p>URI parameters can either be set directly on the endpoint URI or as a header</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Java DSL</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;direct:start&quot;)
+  .to(&quot;http://oldhost?order=123&amp;detail=short&quot;);
+from(&quot;direct:start&quot;)
+  .setHeader(Exchange.HTTP_QUERY, constant(&quot;order=123&amp;detail=short&quot;))
+  .to(&quot;http://oldhost&quot;);
+]]></script>
+</div></div></td></tr></tbody></table></div><p>Set the HTTP request method to POST</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Java DSL</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Spring DSL</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;direct:start&quot;)
+  .setHeader(Exchange.HTTP_METHOD, constant(&quot;POST&quot;))
+  .to(&quot;http://www.google.com&quot;);
+]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;from uri=&quot;direct:start&quot;/&gt;
+&lt;setHeader headerName=&quot;CamelHttpMethod&quot;&gt;
+  &lt;constant&gt;POST&lt;/constant&gt;
+&lt;/setHeader&gt;
+&lt;to uri=&quot;http://www.google.com&quot;/&gt;
+&lt;to uri=&quot;mock:results&quot;/&gt;
+]]></script>
+</div></div></td></tr></tbody></table></div><h3 id="HTTP-HttpEndpointOptions">HttpEndpoint Options</h3><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Name</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default Value</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>throwExceptionOnFailure</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>true</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Option to disable throwing the <code>HttpOperationFailedException</code> in case of failed responses from the remote server. This allows you to get all responses regardless of the HTTP status code.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>bridgeEndpoint</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>If the option is true , HttpProducer will ignore the Exchange.HTTP_URI header, and use the endpoint's URI for request. You may also set the * throwExceptionOnFailure* to be false to let the HttpProducer send all the fault response back. <br clear="none" class="atl-forced-newline"> <strong>Camel 2.3:</strong> If the option is true, HttpProducer and CamelServlet will skip the gzip processing if the content-encoding is "gzip".</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>disableStreamCache</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>DefaultHttpBinding will copy the request input stream into a stream cache and put it into message body if this option is false to support read it twice, otherwise DefaultHttpBinding will set the request input stream direct into the message body.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><s><code>httpBindingRef</code></s></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><s><code>null</code></s></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><s><strong>Deprecated and removed in Camel 2.17:</strong> Reference to a <code>org.apache.camel.component.http.HttpBinding</code> in the <a shape="rect" href="registry.html">Registry</a>. Use the <code>httpBinding</code> option instead.</s></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>httpBinding</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> Reference to a <code>org.apache.camel.component.http.HttpBinding</code> in the <a shape="rect" href="registry.html">Registry</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><s><code>httpClientConfigurerRef</code></s></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><s><code>null</code></s></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><s><strong>Deprecated and removed in Camel 2.17:</strong> Reference to a <code>org.apache.camel.component.http.HttpClientConfigurer</code> in the <a shape="rect" href="registry.html">Registry</a>. Use the <code>httpClientConfigurer</code> option instead.</s></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>httpClientConfigurer</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> Reference to a <code>org.apache.camel.component.http.HttpClientConfigurer</code> in the <a shape="rect" href="registry.html">Registry</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>httpClient.XXX</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Setting options on the <a shape="rect" class="external-link" href="http://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/params/HttpClientParams.html">HttpClientParams</a>. For instance <code>httpClient.soTimeout=5000</code> will set the <code>SO_TIMEOUT</code> to 5 seconds.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>clientConnectionManager</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a custom <code>org.apache.http.conn.ClientConnectionManager</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>transferException</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.6:</strong> If enabled and an <a shape="rect" href="exchange.html">Exchange</a> failed processing on the consumer side, and if the caused <code>Exception</code> was send back serialized in the response as a <code>application/x-java-serialized-object</code> content type (for example using <a shape="rect" href="jetty.html">Jetty</a> or <a shape="rect" href="servlet.html">SERVLET</a> Camel components). On the producer side the exception will be deserialized and thrown as is, instead of the <code>HttpOperationFailedException</code>. The caused exception is required to be serialized.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>headerFilterStrategy</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> Reference to a instance of <code>org.apache.camel.spi.HeaderFilterStrategy</code> in the <a shape="rect" href="registry.html">Registry</a>. It will be used to apply the custom headerFilterStrategy on the new create HttpEndpoint.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>urlRewrite</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> <strong>Producer only</strong> Refers to a custom <code>org.apache.camel.component.http.UrlRewrite</code> which allows you to rewrite urls when you bridge/proxy endpoints. See more details at <a shape="rect" href="urlrewrite.html">UrlRewrite</a> and <a shape="rect" href="how-to-use-camel-as-a-http-proxy-between-a-client-and-server.html">How to use Camel as a HTTP proxy between a client and server</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>eagerCheckContentAvailable</code></td><td colspan="1" rowspan="1" class="confluenceTd"><code>false</code></td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.15.3/2.16:</strong> <strong>Consumer only</strong> &#160;Whether to eager check whether the HTTP requests has content if the content-length header is 0 or not present. &#160;This can be turned on in case HTTP clients do not send streamed data.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>copyHeaders</code></td><td colspan="1" rowspan="1" class="confluenceTd"><code>true</code></td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.16:</strong> &#160;If this option is true then IN exchange headers will be copied to OUT exchange headers according to copy strategy. Setting this to false, allows to only include the headers from the HTTP response (not propagating IN headers).</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>okStatusCodeRange</code></td><td colspan="1" rowspan="1" class="confluenceTd"><code>200-299</code></td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.16:</strong> The status codes which is considered a success response. The values are inclusive. The range must be defined as from-to with the dash included.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>ignoreResponseBody</code></td><td colspan="1" rowspan="1" class="confluenceTd"><code>false</code></td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.16:</strong> If this option is true, The http producer won't read response body and cache the input stream.</td></tr></tbody></table></div></div><h3 id="HTTP-AuthenticationandProxy">Authentication and Proxy</h3><p>The following authentication options can also be set on the HttpEndpoint:</p><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Name</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default Value</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>authMethod</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Authentication method, either as <code>Basic</code>, <code>Digest</code> or <code>NTLM</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>authMethodPriority</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Priority of authentication methods. Is a list separated with comma. For example: <code>Basic,Digest</code> to exclude <code>NTLM</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>authUsername</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Username for authentication</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>authPassword</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Password for authentication</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>authDomain</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Domain for NTML authentication</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>authHost</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Optional host for NTML authentication</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>proxyHost</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The proxy host name</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>proxyPort</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The proxy port number</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>proxyAuthMethod</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Authentication method for proxy, either as <code>Basic</code>, <code>Digest</code> or <code>NTLM</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>proxyAuthUsername</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Username for proxy authentication</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>proxyAuthPassword</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Password for proxy authentication</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>proxyAuthDomain</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Domain for proxy NTML authentication</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>proxyAuthHost</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Optional host for proxy NTML authentication</p></td></tr></tbody></table></div></div><p>When using authentication you <strong>must</strong> provide the choice of method for the <code>authMethod</code> or <code>authProxyMethod</code> options.<br clear="none"> You can configure the proxy and authentication details on either the <code>HttpComponent</code> or the <code>HttpEndoint</code>. Values provided on the <code>HttpEndpoint</code> will take precedence over <code>HttpComponent</code>. Its most likely best to configure this on the <code>HttpComponent</code> which allows you to do this once.</p><p>The <a shape="rect" href="http.html">HTTP</a> component uses convention over configuration which means that if you have not explicit set a <code>authMethodPriority</code> then it will fallback and use the select(ed) <code>authMethod</code> as priority as well. So if you use <code>authMethod.Basic</code> then the <code>auhtMethodPriority</code> will be <code>Basic</code> only.</p><p>Note: camel-http is based on HttpClient v3.x and as such has only <a shape="rect" class="external-link" href="http://hc.apache.org/httpclient-3.x/authentication.html#NTLM">limited support</a> for what is known as NTLMv1, the early version of the NTLM protocol. It does not support NTLMv2 at all. Camel-http4 has support for NTLMv2.</p><h3 id="HTTP-HttpComponentOptions">HttpComponent Options</h3><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Name</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default Value</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>httpBinding</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a custom <code>org.apache.camel.component.http.HttpBinding</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>httpClientConfigurer</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a custom <code>org.apache.camel.component.http.HttpClientConfigurer</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>httpConnectionManager</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a custom <code>org.apache.commons.httpclient.HttpConnectionManager</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>httpConfiguration</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a custom <code>org.apache.camel.component.http.HttpConfiguration</code></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>allowJavaSerializedObject</code></td><td colspan="1" rowspan="1" class="confluenceTd"><code>false</code></td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.16.1/2.15.5:</strong>&#160;Whether to allow java serialization when a request uses context-type=application/x-java-serialized-object. This is by default turned off. If you enable this then be aware that Java will deserialize the incoming data from the request to Java and that can be a potential security risk.</td></tr></tbody></table></div></div><p><code>HttpConfiguration</code> contains all the options listed in the table above under the section <em>HttpConfiguration - Setting Authentication and Proxy</em>.</p><h3 id="HTTP-MessageHeaders">Message Headers</h3><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Name</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Type</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_URI</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>String</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>URI to call. Will override existing URI set directly on the endpoint. <span>This uri is the uri of the http server to call. Its not the same as the Camel endpoint uri, where you can configure endpoint options such as security etc. This header does not support that, its only the uri of the http server.</span></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_METHOD</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>String</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>HTTP Method / Verb to use (GET/POST/PUT/DELETE/HEAD/OPTIONS/TRACE)</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_PATH</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>String</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Request URI's path, the header will be used to build the request URI with the HTTP_URI. <strong>Camel 2.3.0:</strong> If the path is start with "/", http producer will try to find the relative path based on the Exchange.HTTP_BASE_URI header or the exchange.getFromEndpoint().getEndpointUri();</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_QUERY</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>String</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>URI parameters. Will override existing URI parameters set directly on the endpoint.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_RESPONSE_CODE</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>int</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The HTTP response code from the external server. Is 200 for OK.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_CHARACTER_ENCODING</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>String</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Character encoding.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.CONTENT_TYPE</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>String</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The HTTP content type. Is set on both the IN and OUT message to provide a content type, such as <code>text/html</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.CONTENT_ENCODING</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>String</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The HTTP content encoding. Is set on both the IN and OUT message to provide a content encoding, such as <code>gzip</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_SERVLET_REQUEST</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>HttpServletRequest</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The <code>HttpServletRequest</code> object.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_SERVLET_RESPONSE</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>HttpServletResponse</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The <code>HttpServletResponse</code> object.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>Exchange.HTTP_PROTOCOL_VERSION</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>String</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.5:</strong> You can set the http protocol version with this header, eg. "HTTP/1.0". If you didn't specify the header, HttpProducer will use the default value "HTTP/1.1"</p></td></tr></tbody></table></div></div><p>The header name above are constants. For the spring DSL you have to use the value of the constant instead of the name.</p><h3 id="HTTP-MessageBody">Message Body</h3><p>Camel will store the HTTP response from the external server on the OUT body. All headers from the IN message will be copied to the OUT message, so headers are preserved during routing. Additionally Camel will add the HTTP response headers as well to the OUT message headers.</p><h3 id="HTTP-Responsecode">Response code</h3><p>Camel will handle according to the HTTP response code:</p><ul class="alternate"><li>Response code is in the range 100..299, Camel regards it as a success response.</li><li>Response code is in the range 300..399, Camel regards it as a redirection response and will throw a <code>HttpOperationFailedException</code> with the information.</li><li><p>Response code is 400+, Camel regards it as an external server failure and will throw a <code>HttpOperationFailedException</code> with the information.</p><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">throwExceptionOnFailure</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The option, <code>throwExceptionOnFailure</code>, can be set to <code>false</code> to prevent the <code>HttpOperationFailedException</code> from being thrown for failed response codes. This allows you to get any response from the remote server.<br clear="none"> There is a sample below demonstrating this.</p></div></div></li></ul><h3 id="HTTP-HttpOperationFailedException">HttpOperationFailedException</h3><p>This exception contains the following information:</p><ul class="alternate"><li>The HTTP status code</li><li>The HTTP status line (text of the status code)</li><li>Redirect location, if server returned a redirect</li><li>Response body as a <code>java.lang.String</code>, if server provided a body as response</li></ul><h3 id="HTTP-CallingusingGETorPOST">Calling using GET or POST</h3><p>The following algorithm is used to determine if either <code>GET</code> or <code>POST</code> HTTP method should be used:<br clear="none"> 1. Use method provided in header.<br clear="none"> 2. <code>GET</code> if query string is provided in header.<br clear="none"> 3. <code>GET</code> if endpoint is configured with a query string.<br clear="none"> 4. <code>POST</code> if there is data to send (body is not null).<br clear="none"> 5. <code>GET</code> otherwise.</p><h3 id="HTTP-HowtogetaccesstoHttpServletRequestandHttpServletResponse">How to get access to HttpServletRequest and HttpServletResponse</h3><p>You can get access to these two using the Camel type converter system using</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[HttpServletRequest request = exchange.getIn().getBody(HttpServletRequest.class);
+HttpServletRequest response = exchange.getIn().getBody(HttpServletResponse.class);
+]]></script>
+</div></div><h3 id="HTTP-Usingclienttimeout-SO_TIMEOUT">Using client timeout - SO_TIMEOUT</h3><p>See the unit test in <a shape="rect" class="external-link" href="http://svn.apache.org/viewvc?view=rev&amp;revision=781775">this link</a></p><h2 id="HTTP-MoreExamples">More Examples</h2><h3 id="HTTP-ConfiguringaProxy">Configuring a Proxy</h3><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Java DSL</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;direct:start&quot;)
+  .to(&quot;http://oldhost?proxyHost=www.myproxy.com&amp;proxyPort=80&quot;);
+]]></script>
+</div></div></td></tr></tbody></table></div><p>There is also support for proxy authentication via the <code>proxyUsername</code> and <code>proxyPassword</code> options.</p><h4 id="HTTP-UsingproxysettingsoutsideofURI">Using proxy settings outside of URI</h4><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Java DSL</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Spring DSL</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[ context.getProperties().put(&quot;http.proxyHost&quot;, &quot;172.168.18.9&quot;);
+ context.getProperties().put(&quot;http.proxyPort&quot; &quot;8080&quot;);
+]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   &lt;camelContext&gt;
+       &lt;properties&gt;
+           &lt;property key=&quot;http.proxyHost&quot; value=&quot;172.168.18.9&quot;/&gt;
+           &lt;property key=&quot;http.proxyPort&quot; value=&quot;8080&quot;/&gt;
+      &lt;/properties&gt;
+   &lt;/camelContext&gt;
+]]></script>
+</div></div></td></tr></tbody></table></div><p>Options on Endpoint will override options on the context.</p><h3 id="HTTP-Configuringcharset">Configuring charset</h3><p>If you are using <code>POST</code> to send data you can configure the <code>charset</code></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[setProperty(Exchange.CHARSET_NAME, &quot;iso-8859-1&quot;);
+]]></script>
+</div></div><h3 id="HTTP-Samplewithscheduledpoll">Sample with scheduled poll</h3><p>The sample polls the Google homepage every 10 seconds and write the page to the file <code>message.html</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;timer://foo?fixedRate=true&amp;delay=0&amp;period=10000&quot;)
+    .to(&quot;http://www.google.com&quot;)
+    .setHeader(FileComponent.HEADER_FILE_NAME, &quot;message.html&quot;).to(&quot;file:target/google&quot;);
+]]></script>
+</div></div><h3 id="HTTP-GettingtheResponseCode">Getting the Response Code</h3><p>You can get the HTTP response code from the HTTP component by getting the value from the Out message header with <code>Exchange.HTTP_RESPONSE_CODE</code>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   Exchange exchange = template.send(&quot;http://www.google.com/search&quot;, new Processor() {
+            public void process(Exchange exchange) throws Exception {
+                exchange.getIn().setHeader(Exchange.HTTP_QUERY, constant(&quot;hl=en&amp;q=activemq&quot;));
+            }
+   });
+   Message out = exchange.getOut();
+   int responseCode = out.getHeader(Exchange.HTTP_RESPONSE_CODE, Integer.class);
+]]></script>
+</div></div><h3 id="HTTP-UsingthrowExceptionOnFailure=falsetogetanyresponseback">Using <code>throwExceptionOnFailure=false</code> to get any response back</h3><p>In the route below we want to route a message that we <a shape="rect" href="content-enricher.html">enrich</a> with data returned from a remote HTTP call. As we want any response from the remote server, we set the <code>throwExceptionOnFailure</code> option to <code>false</code> so we get any response in the <code>AggregationStrategy</code>. As the code is based on a unit test that simulates a HTTP status code 404, there is some assertion code etc.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// We set throwExceptionOnFailure to false to let Camel return any response from the remove HTTP server without thrown
+// HttpOperationFailedException in case of failures.
+// This allows us to handle all responses in the aggregation strategy where we can check the HTTP response code
+// and decide what to do. As this is based on an unit test we assert the code is 404
+from(&quot;direct:start&quot;).enrich(&quot;http://localhost:8222/myserver?throwExceptionOnFailure=false&amp;user=Camel&quot;, new AggregationStrategy() {
+    public Exchange aggregate(Exchange original, Exchange resource) {
+        // get the response code
+        Integer code = resource.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE, Integer.class);
+        assertEquals(404, code.intValue());
+        return resource;
+    }
+}).to(&quot;mock:result&quot;);
+
+// this is our jetty server where we simulate the 404
+from(&quot;jetty://http://localhost:8222/myserver&quot;)
+        .process(new Processor() {
+            public void process(Exchange exchange) throws Exception {
+                exchange.getOut().setBody(&quot;Page not found&quot;);
+                exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 404);
+            }
+        });
+]]></script>
+</div></div><h3 id="HTTP-DisablingCookies">Disabling Cookies</h3><p>To disable cookies you can set the HTTP Client to ignore cookies by adding this URI option:<br clear="none"> <code>httpClient.cookiePolicy=ignoreCookies</code></p><h3 id="HTTP-AdvancedUsage">Advanced Usage</h3><p>If you need more control over the HTTP producer you should use the <code>HttpComponent</code> where you can set various classes to give you custom behavior.</p><h4 id="HTTP-SettingMaxConnectionsPerHost">Setting MaxConnectionsPerHost</h4><p>The <a shape="rect" href="http.html">HTTP</a> Component has a <code>org.apache.commons.httpclient.HttpConnectionManager</code> where you can configure various global configuration for the given component.<br clear="none"> By global, we mean that any endpoint the component creates has the same shared <code>HttpConnectionManager</code>. So, if we want to set a different value for the max connection per host, we need to define it on the HTTP component and <strong>not</strong> on the endpoint URI that we usually use. So here comes:</p><p>First, we define the <code>http</code> component in Spring XML. Yes, we use the same scheme name, <code>http</code>, because otherwise Camel will auto-discover and create the component with default settings. What we need is to overrule this so we can set our options. In the sample below we set the max connection to 5 instead of the default of 2.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;bean id=&quot;http&quot; class=&quot;org.apache.camel.component.http.HttpComponent&quot;&gt;
+    &lt;property name=&quot;camelContext&quot; ref=&quot;camel&quot;/&gt;
+    &lt;property name=&quot;httpConnectionManager&quot; ref=&quot;myHttpConnectionManager&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;myHttpConnectionManager&quot; class=&quot;org.apache.commons.httpclient.MultiThreadedHttpConnectionManager&quot;&gt;
+    &lt;property name=&quot;params&quot; ref=&quot;myHttpConnectionManagerParams&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;myHttpConnectionManagerParams&quot; class=&quot;org.apache.commons.httpclient.params.HttpConnectionManagerParams&quot;&gt;
+    &lt;property name=&quot;defaultMaxConnectionsPerHost&quot; value=&quot;5&quot;/&gt;
+&lt;/bean&gt;
+
+]]></script>
+</div></div>And then we can just use it as we normally do in our routes:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext id=&quot;camel&quot; xmlns=&quot;http://camel.apache.org/schema/spring&quot; trace=&quot;true&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:start&quot;/&gt;
+        &lt;to uri=&quot;http://www.google.com&quot;/&gt;
+        &lt;to uri=&quot;mock:result&quot;/&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+]]></script>
+</div></div><h4 id="HTTP-Usingpreemptiveauthentication">Using preemptive authentication</h4><p>An end user reported that he had problem with authenticating with HTTPS. The problem was eventually resolved when he discovered the HTTPS server did not return a HTTP code 401 Authorization Required. The solution was to set the following URI option: <code>httpClient.authenticationPreemptive=true</code></p><h4 id="HTTP-Acceptingselfsignedcertificatesfromremoteserver">Accepting self signed certificates from remote server</h4><p>See this <a shape="rect" class="external-link" href="http://www.nabble.com/Using-HTTPS-in-camel-http-when-remote-side-has-self-signed-cert-td25916878.html" rel="nofollow">link</a> from a mailing list discussion with some code to outline how to do this with the Apache Commons HTTP API.</p><h4 id="HTTP-SettingupSSLforHTTPClient">Setting up SSL for HTTP Client</h4><h5 id="HTTP-UsingtheJSSEConfigurationUtility">Using the JSSE Configuration Utility</h5><p>As of Camel 2.8, the HTTP4 component supports SSL/TLS configuration through the <a shape="rect" href="camel-configuration-utilities.html">Camel JSSE Configuration Utility</a>.&#160; This utility greatly decreases the amount of component specific code you need to write and is configurable at the endpoint and component levels.&#160; The following examples demonstrate how to use the utility with the HTTP4 component.</p><p>The version of the Apache HTTP client used in this component resolves SSL/TLS information from a global "protocol" registry.&#160; This component provides an implementation, <code>org.apache.camel.component.http.SSLContextParametersSecureProtocolSocketFactory</code>, of the HTTP client's protocol socket factory in order to support the use of the Camel JSSE Configuration utility.&#160; The following example demonstrates how to configure the protocol registry and use the registered protocol information in a route.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[KeyStoreParameters ksp = new KeyStoreParameters();
+ksp.setResource(&quot;/users/home/server/keystore.jks&quot;);
+ksp.setPassword(&quot;keystorePassword&quot;);
+
+KeyManagersParameters kmp = new KeyManagersParameters();
+kmp.setKeyStore(ksp);
+kmp.setKeyPassword(&quot;keyPassword&quot;);
+
+SSLContextParameters scp = new SSLContextParameters();
+scp.setKeyManagers(kmp);
+
+ProtocolSocketFactory factory =
+    new SSLContextParametersSecureProtocolSocketFactory(scp);
+
+Protocol.registerProtocol(&quot;https&quot;,
+        new Protocol(
+        &quot;https&quot;,
+        factory,
+        443));
+
+from(&quot;direct:start&quot;)
+        .to(&quot;https://mail.google.com/mail/&quot;).to(&quot;mock:results&quot;);
+]]></script>
+</div></div><h5 id="HTTP-ConfiguringApacheHTTPClientDirectly">Configuring Apache HTTP Client Directly</h5><p>Basically camel-http component is built on the top of Apache HTTP client, and you can implement a custom <code>org.apache.camel.component.http.HttpClientConfigurer</code> to do some configuration on the http client if you need full control of it.</p><p>However if you <em>just</em> want to specify the keystore and truststore you can do this with Apache HTTP <code>HttpClientConfigurer</code>, for example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[Protocol authhttps = new Protocol(&quot;https&quot;, new AuthSSLProtocolSocketFactory(
+  new URL(&quot;file:my.keystore&quot;), &quot;mypassword&quot;,
+  new URL(&quot;file:my.truststore&quot;), &quot;mypassword&quot;), 443);
+
+Protocol.registerProtocol(&quot;https&quot;, authhttps);
+]]></script>
+</div></div><p>And then you need to create a class that implements <code>HttpClientConfigurer</code>, and registers https protocol providing a keystore or truststore per example above. Then, from your camel route builder class you can hook it up like so:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[HttpComponent httpComponent = getContext().getComponent(&quot;http&quot;, HttpComponent.class);
+httpComponent.setHttpClientConfigurer(new MyHttpClientConfigurer());
+]]></script>
+</div></div><p>If you are doing this using the Spring DSL, you can specify your <code>HttpClientConfigurer</code> using the URI. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;bean id=&quot;myHttpClientConfigurer&quot;
+ class=&quot;my.https.HttpClientConfigurer&quot;&gt;
+&lt;/bean&gt;
+
+&lt;to uri=&quot;https://myhostname.com:443/myURL?httpClientConfigurerRef=myHttpClientConfigurer&quot;/&gt;
+]]></script>
+</div></div><p>As long as you implement the HttpClientConfigurer and configure your keystore and truststore as described above, it will work fine.</p><p></p><h3 id="HTTP-SeeAlso">See Also</h3>
+<ul><li><a shape="rect" href="configuring-camel.html">Configuring Camel</a></li><li><a shape="rect" href="component.html">Component</a></li><li><a shape="rect" href="endpoint.html">Endpoint</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li></ul><ul class="alternate"><li><a shape="rect" href="jetty.html">Jetty</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=54726">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=54726&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

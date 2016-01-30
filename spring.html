@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Spring
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="user-guide.html">User Guide</a>&nbsp;&gt;&nbsp;<a href="spring.html">Spring</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="Spring-SpringSupport">Spring Support</h2><p>Apache Camel is designed to work nicely with the <a shape="rect" class="external-link" href="http://www.springframework.org/" rel="nofollow">Spring Framework</a> in a number of ways.</p><ul><li>Camel uses Spring Transactions as the default transaction handling in components like <a shape="rect" href="jms.html">JMS</a> and <a shape="rect" href="jpa.html">JPA</a></li><li>Camel works with Spring 2 XML processing with the <a shape="rect" href="xml-configuration.html">Xml Configuration</a></li><li>Camel Spring XML Schema's is defined at <a shape="rect" href="xml-reference.html">Xml Reference</a></li><li>Camel supports a powerful version of <a shape="rect" href="spring-remoting.html">Spring Remoting</a> which can use powerful routing between the client and server side along with using all of the available <a shape="rect" href="components.html">Components</a> for the transport</li><li>Camel provides powerful <a shape="rect" href="bean-integration.html">Bean Integration</a> with any bean defined in a Spring ApplicationContext</li><li>Camel integrates with various Spring helper classes; such as providing <a shape="rect" href="type-converter.html">Type Converter</a> support for Spring Resources etc</li><li>Allows Spring to dependency inject <a shape="rect" href="component.html">Component</a> instances or the <a shape="rect" href="camelcontext.html">CamelContext</a> instance itself and auto-expose Spring beans as components and endpoints.</li><li>Allows you to reuse the <a shape="rect" href="spring-testing.html">Spring Testing</a> framework to simplify your unit and integration testing using <a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a> and Camel's powerful <a shape="rect" href="mock.html">Mock</a> and <a shape="rect" href="test.html">Test</a> endpoints</li><li>From&#160;<strong>Camel 2.15</strong> onwards Camel supports Spring Boot using the&#160;<code><a shape="rect" href="spring-boot.html">camel-spring-boot</a></code> component.</li></ul><h2 id="Spring-UsingSpringtoconfiguretheCamelContext">Using Spring to configure the CamelContext</h2><p>You can configure a CamelContext inside any spring.xml using the <a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-spring/apidocs/org/apache/camel/spring/CamelContextFactoryBean.html">CamelContextFactoryBean</a>. This will automatically <a shape="rect" href="lifecycle.html">start</a> the <a shape="rect" href="camelcontext.html">CamelContext</a> along with any referenced <a shape="rect" href="routes.html">Routes</a> along any referenced <a shape="rect" href="component.html">Component</a> and <a shape="rect" href="endpoint.html">Endpoint</a> instances.</p><ul><li>Adding Camel schema</li><li>Configure <a shape="rect" href="routes.html">Routes</a> in two ways:<ul><li>Using Java Code</li><li>Using Spring XML</li></ul></li></ul><h3 id="Spring-AddingCamelSchema">Adding Camel Schema</h3><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>For Camel 1.x you need to use the following namespace:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[http://activemq.apache.org/camel/schema/spring
+]]></script>
+</div></div><p>with the following schema location:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[http://activemq.apache.org/camel/schema/spring/camel-spring.xsd
+]]></script>
+</div></div></div></div><p>You need to add Camel to the <code>schemaLocation</code> declaration</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+]]></script>
+</div></div><p>So the XML file looks like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd&quot;&gt;
+]]></script>
+</div></div><h4 id="Spring-Usingcamel:namespace">Using camel: namespace</h4><p>Or you can refer to camel XSD in the XML declaration:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[xmlns:camel=&quot;http://camel.apache.org/schema/spring&quot;
+]]></script>
+</div></div><p>... so the declaration is:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:camel=&quot;http://camel.apache.org/schema/spring&quot;
+       xsi:schemaLocation=&quot;
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd&quot;&gt;
+]]></script>
+</div></div><p>... and then use the camel: namespace prefix, and you can omit the inline namespace declaration:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camel:camelContext id=&quot;camel5&quot;&gt;
+  &lt;camel:package&gt;org.apache.camel.spring.example&lt;/camel:package&gt;
+&lt;/camel:camelContext&gt;
+]]></script>
+</div></div><h4 id="Spring-AdvancedconfigurationusingSpring">Advanced configuration using Spring</h4><p>See more details at <a shape="rect" href="advanced-configuration-of-camelcontext-using-spring.html">Advanced configuration of CamelContext using Spring</a></p><h3 id="Spring-UsingJavaCode">Using Java Code</h3><p>You can use Java Code to define your <a shape="rect" href="routebuilder.html">RouteBuilder</a> implementations. These can be defined as beans in spring and then referenced in your camel context e.g.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+  &lt;camelContext id=&quot;camel5&quot; xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;routeBuilder ref=&quot;myBuilder&quot; /&gt;    
+  &lt;/camelContext&gt;
+  
+  &lt;bean id=&quot;myBuilder&quot; class=&quot;org.apache.camel.spring.example.test1.MyRouteBuilder&quot;/&gt;
+  
+&lt;/beans&gt;
+]]></script>
+</div></div><h4 id="Spring-Using&lt;package&gt;">Using &lt;package&gt;</h4><p>Camel also provides a powerful feature that allows for the automatic discovery and initialization of routes in given packages. This is configured by adding tags to the camel context in your spring context definition, specifying the packages to be recursively searched for <a shape="rect" href="routebuilder.html">RouteBuilder</a> implementations. To use this feature in 1.X, requires a &lt;package&gt;&lt;/package&gt; tag specifying a comma separated list of packages that should be searched e.g.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[  &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;package&gt;org.apache.camel.spring.config.scan.route&lt;/package&gt;
+  &lt;/camelContext&gt;
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Use caution when specifying the package name as <code>org.apache.camel</code> or a sub package of this. This causes Camel to search in its own packages for your routes which could cause problems.</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Will ignore already instantiated classes</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The &lt;package&gt; and &lt;packageScan&gt; will skip any classes which has already been created by Spring etc. So if you define a route builder as a spring bean tag then that class will be skipped. You can include those beans using <code>&lt;routeBuilder ref="theBeanId"/&gt;</code> or the <code>&lt;contextScan&gt;</code> feature.</p></div></div><h4 id="Spring-Using&lt;packageScan&gt;">Using &lt;packageScan&gt;</h4><p>In Camel 2.0 this has been extended to allow selective inclusion and exclusion of discovered route classes using Ant like path matching. In spring this is specified by adding a &lt;packageScan/&gt; tag. The tag must contain one or more 'package' elements (similar to 1.x), and optionally one or more 'includes' or 'excludes' elements specifying patterns to be applied to the fully qualified names of the discovered classes. e.g.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[  &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;packageScan&gt;
+      &lt;package&gt;org.example.routes&lt;/package&gt;
+      &lt;excludes&gt;**.*Excluded*&lt;/excludes&gt;
+      &lt;includes&gt;**.*&lt;/includes&gt;
+    &lt;/packageScan&gt;
+  &lt;/camelContext&gt;
+]]></script>
+</div></div><p>Exclude patterns are applied before the include patterns. If no include or exclude patterns are defined then all the Route classes discovered in the packages will be returned.</p><p>In the above example, camel will scan all the 'org.example.routes' package and any subpackages for RouteBuilder classes. Say the scan finds two RouteBuilders, one in org.example.routes called 'MyRoute" and another 'MyExcludedRoute' in a subpackage 'excluded'. The fully qualified names of each of the classes are extracted (org.example.routes.MyRoute, org.example.routes.excluded.MyExcludedRoute) and the include and exclude patterns are applied.</p><p>The exclude pattern **.*Excluded* is going to match the fqcn 'org.example.routes.excluded.MyExcludedRoute' and veto camel from initializing it.</p><p>Under the covers, this is using Spring's <a shape="rect" class="external-link" href="http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/util/AntPathMatcher.html" rel="nofollow">AntPatternMatcher</a> implementation, which matches as follows</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[? matches one character
+* matches zero or more characters
+** matches zero or more segments of a fully qualified name
+]]></script>
+</div></div><p>For example:</p><p>**.*Excluded* would match org.simple.Excluded, org.apache.camel.SomeExcludedRoute or org.example.RouteWhichIsExcluded</p><p>**.??cluded* would match org.simple.IncludedRoute, org.simple.Excluded but not match org.simple.PrecludedRoute</p><h4 id="Spring-UsingcontextScan">Using contextScan</h4><p><strong>Available as of Camel 2.4</strong></p><p>You can allow Camel to scan the container context, e.g. the Spring <code>ApplicationContext</code> for route builder instances. This allow you to use the Spring <code>&lt;component-scan&gt;</code> feature and have Camel pickup any RouteBuilder instances which was created by Spring in its scan process.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!-- enable Spring @Component scan --&gt;
+&lt;context:component-scan base-package=&quot;org.apache.camel.spring.issues.contextscan&quot;/&gt;
+
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;!-- and then let Camel use those @Component scanned route builders --&gt;
+    &lt;contextScan/&gt;
+&lt;/camelContext&gt;
+]]></script>
+</div></div><p>This allows you to just annotate your routes using the Spring <code>@Component</code> and have those routes included by Camel</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Component
+public class MyRoute extends SpringRouteBuilder {
+
+    @Override
+    public void configure() throws Exception {
+        from(&quot;direct:start&quot;).to(&quot;mock:result&quot;);
+    }
+}
+]]></script>
+</div></div><p>You can also use the ANT style for inclusion and exclusion, as mentioned above in the <code>&lt;packageScan&gt;</code> documentation.</p><p></p><h2 id="Spring-HowdoIimportroutesfromotherXMLfiles">How do I import routes from other XML files</h2>
+<p><strong>Available as of Camel 2.3</strong></p>
+
+<p>When defining routes in Camel using <a shape="rect" href="xml-configuration.html">Xml Configuration</a> you may want to define some routes in other XML files. For example you may have many routes and it may help to maintain the application if some of the routes are in separate XML files. You may also want to store common and reusable routes in other XML files, which you can simply import when needed.</p>
+
+<p>In <strong>Camel 2.3</strong> it is now possible to define routes outside <code>&lt;camelContext/&gt;</code> which you do in a new <code>&lt;routeContext/&gt;</code> tag.</p>
+
+<div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p><strong>Notice:</strong> When you use &lt;routeContext&gt; then they are separated, and cannot reuse existing &lt;onException&gt;, &lt;intercept&gt;, &lt;dataFormats&gt; and similar cross cutting functionality defined in the &lt;camelContext&gt;. In other words the &lt;routeContext&gt; is currently isolated. This may change in Camel 3.x.</p></div></div>
+
+<p>For example we could have a file named <code>myCoolRoutes.xml</code> which contains a couple of routes as shown:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>myCoolRoutes.xml</b></div><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    &quot;&gt;
+
+    &lt;!-- this is an included XML file where we only the the routeContext --&gt;
+    &lt;routeContext id=&quot;myCoolRoutes&quot; xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+        &lt;!-- we can have a route --&gt;
+        &lt;route id=&quot;cool&quot;&gt;
+            &lt;from uri=&quot;direct:start&quot;/&gt;
+            &lt;to uri=&quot;mock:result&quot;/&gt;
+        &lt;/route&gt;
+        &lt;!-- and another route, you can have as many your like --&gt;
+        &lt;route id=&quot;bar&quot;&gt;
+            &lt;from uri=&quot;direct:bar&quot;/&gt;
+            &lt;to uri=&quot;mock:bar&quot;/&gt;
+        &lt;/route&gt;
+    &lt;/routeContext&gt;
+
+&lt;/beans&gt;
+]]></script>
+</div></div>
+
+
+<p>Then in your XML file which contains the CamelContext you can use Spring to import the <code>myCoolRoute.xml</code> file.<br clear="none">
+And then inside <code>&lt;camelContext/&gt;</code> you can refer to the <code>&lt;routeContext/&gt;</code> by its id as shown below:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!-- import the routes from another XML file --&gt;
+&lt;import resource=&quot;myCoolRoutes.xml&quot;/&gt;
+
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+
+    &lt;!-- refer to a given route to be used --&gt;
+    &lt;routeContextRef ref=&quot;myCoolRoutes&quot;/&gt;
+
+    &lt;!-- we can of course still use routes inside camelContext --&gt;
+    &lt;route id=&quot;inside&quot;&gt;
+        &lt;from uri=&quot;direct:inside&quot;/&gt;
+        &lt;to uri=&quot;mock:inside&quot;/&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+]]></script>
+</div></div>
+
+<p>Also notice that you can mix and match, having routes inside CamelContext and also externalized in RouteContext.</p>
+
+<p>You can have as many <code>&lt;routeContextRef/&gt;</code> as you like.</p>
+
+<div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Reusable routes</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>The routes defined in <code>&lt;routeContext/&gt;</code> can be reused by multiple <code>&lt;camelContext/&gt;</code>. However its only the definition which is reused. At runtime each CamelContext will create its own instance of the route based on the definition.</p></div></div>
+<h4 id="Spring-Testtimeexclusion.">Test time exclusion.</h4><p>At test time it is often desirable to be able to selectively exclude matching routes from being initalized that are not applicable or useful to the test scenario. For instance you might a spring context file routes-context.xml and three Route builders RouteA, RouteB and RouteC in the 'org.example.routes' package. The packageScan definition would discover all three of these routes and initialize them.</p><p>Say RouteC is not applicable to our test scenario and generates a lot of noise during test. It would be nice to be able to exclude this route from this specific test. The SpringTestSupport class has been modified to allow this. It provides two methods (excludedRoute and excludedRoutes) that may be overridden to exclude a single class or an array of classes.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class RouteAandRouteBOnlyTest extends SpringTestSupport {
+    @Override      
+    protected Class excludeRoute() {
+        return RouteC.class;
+    }
+}
+]]></script>
+</div></div><p>In order to hook into the camelContext initialization by spring to exclude the MyExcludedRouteBuilder.class we need to intercept the spring context creation. When overriding createApplicationContext to create the spring context, we call the getRouteExcludingApplicationContext() method to provide a special parent spring context that takes care of the exclusion.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Override
+protected AbstractXmlApplicationContext createApplicationContext() {
+    return new ClassPathXmlApplicationContext(new String[] {&quot;routes-context.xml&quot;}, getRouteExcludingApplicationContext());
+}
+]]></script>
+</div></div><p>RouteC will now be excluded from initialization. Similarly, in another test that is testing only RouteC, we could exclude RouteB and RouteA by overriding</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Override
+protected Class[] excludeRoutes() {
+    return new Class[]{RouteA.class, RouteB.class};
+}
+]]></script>
+</div></div><h3 id="Spring-UsingSpringXML">Using Spring XML</h3><p>You can use Spring 2.0 XML configuration to specify your <a shape="rect" href="xml-configuration.html">Xml Configuration</a> for <a shape="rect" href="routes.html">Routes</a> such as in the following <a shape="rect" class="external-link" href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-spring/src/test/resources/org/apache/camel/spring/routingUsingCamelContextFactory.xml">example</a>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext id=&quot;camel-A&quot; xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+  &lt;route&gt;
+    &lt;from uri=&quot;seda:start&quot;/&gt;
+    &lt;to uri=&quot;mock:result&quot;/&gt;
+  &lt;/route&gt;
+&lt;/camelContext&gt;
+]]></script>
+</div></div><h2 id="Spring-ConfiguringComponentsandEndpoints">Configuring Components and Endpoints</h2><p>You can configure your <a shape="rect" href="component.html">Component</a> or <a shape="rect" href="endpoint.html">Endpoint</a> instances in your <a shape="rect" href="spring.html">Spring</a> XML as follows in <a shape="rect" class="external-link" href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-jms/src/test/resources/org/apache/camel/component/jms/jmsRouteUsingSpring.xml">this example</a>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext id=&quot;camel&quot; xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;jmxAgent id=&quot;agent&quot; disabled=&quot;true&quot;/&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id=&quot;activemq&quot; class=&quot;org.apache.activemq.camel.component.ActiveMQComponent&quot;&gt;
+  &lt;property name=&quot;connectionFactory&quot;&gt;
+    &lt;bean class=&quot;org.apache.activemq.ActiveMQConnectionFactory&quot;&gt;
+      &lt;property name=&quot;brokerURL&quot; value=&quot;vm://localhost?broker.persistent=false&amp;amp;broker.useJmx=false&quot;/&gt;
+    &lt;/bean&gt;
+  &lt;/property&gt;
+&lt;/bean&gt;
+]]></script>
+</div></div><p>Which allows you to configure a component using some name (activemq in the above example), then you can refer to the component using <strong>activemq:[queue:|topic:]destinationName</strong>. This works by the SpringCamelContext lazily fetching components from the spring context for the scheme name you use for <a shape="rect" href="endpoint.html">Endpoint</a> <a shape="rect" href="uris.html">URIs</a>.</p><p>For more detail see <a shape="rect" href="how-do-i-configure-endpoints.html">Configuring Endpoints and Components</a>.</p><h3 id="Spring-CamelContextAware">CamelContextAware</h3><p>If you want to be injected with the <a shape="rect" href="camelcontext.html">CamelContext</a> in your POJO just implement the <a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/CamelContextAware.html">CamelContextAware interface</a>; then when Spring creates your POJO the CamelContext will be injected into your POJO. Also see the <a shape="rect" href="bean-integration.html">Bean Integration</a> for further injections.</p><h2 id="Spring-IntegrationTesting">Integration Testing</h2><p>To avoid a hung route when testing using Spring Transactions see the note about Spring Integration Testing under&#160;<a shape="rect" href="transactional-client.html">Transactional Client</a>.</p><h3 id="Spring-Seealso">See also</h3><ul><li><a shape="rect" href="tutorial-jmsremoting.html">Spring JMS Tutorial</a></li><li><a shape="rect" href="creating-a-new-spring-based-camel-route.html">Creating a new Spring based Camel Route</a></li><li><a shape="rect" href="spring-example.html">Spring example</a></li><li><a shape="rect" href="xml-reference.html">Xml Reference</a></li><li><a shape="rect" href="advanced-configuration-of-camelcontext-using-spring.html">Advanced configuration of CamelContext using Spring</a></li><li><a shape="rect" href="how-do-i-import-routes-from-other-xml-files.html">How do I import routes from other XML files</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=52911">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=52911&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

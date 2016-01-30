@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: ActiveMQ
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="components.html">Components</a>&nbsp;&gt;&nbsp;<a href="activemq.html">ActiveMQ</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="ActiveMQ-ActiveMQComponent">ActiveMQ Component</h2><p>The ActiveMQ component allows messages to be sent to a <a shape="rect" class="external-link" href="http://java.sun.com/products/jms/" rel="nofollow">JMS</a> Queue or Topic or messages to be consumed from a JMS Queue or Topic using <a shape="rect" class="external-link" href="http://activemq.apache.org/" title="The most popular and powerful open source message broker">Apache ActiveMQ</a>.</p><p>This component is based on <a shape="rect" href="jms.html">JMS Component</a> and uses Spring's JMS support for declarative transactions, using Spring's <code>JmsTemplate</code> for sending and a <code>MessageListenerContainer</code> for consuming. All the options from the <a shape="rect" href="jms.html">JMS</a> component also applies for this component.</p><p>To use this component make sure you have the <code>activemq.jar</code> or <code>activemq-core.jar</code> on your classpath along with any Camel dependencies such as <code>camel-core.jar</code>, <code>camel-spring.jar</code> and <code>camel-jms.jar</code>.</p><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Transacted and caching</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>See section <em>Transactions and Cache Levels</em> below on <a shape="rect" href="jms.html">JMS</a> page if you are using transactions with <a shape="rect" href="jms.html">JMS</a> as it can impact performance.</p></div></div><h3 id="ActiveMQ-URIformat">URI format</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[activemq:[queue:|topic:]destinationName
+]]></script>
+</div></div><p>Where <strong>destinationName</strong> is an ActiveMQ queue or topic name. By default, the <strong>destinationName</strong> is interpreted as a queue name. For example, to connect to the queue, <code>FOO.BAR</code>, use:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[activemq:FOO.BAR
+]]></script>
+</div></div><p>You can include the optional <code>queue:</code> prefix, if you prefer:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[activemq:queue:FOO.BAR
+]]></script>
+</div></div><p>To connect to a topic, you must include the <code>topic:</code> prefix. For example, to connect to the topic, <code>Stocks.Prices</code>, use:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[activemq:topic:Stocks.Prices
+]]></script>
+</div></div><h3 id="ActiveMQ-Options">Options</h3><p>See Options on the <a shape="rect" href="jms.html">JMS</a> component as all these options also apply for this component.</p><h3 id="ActiveMQ-ConfiguringtheConnectionFactory">Configuring the Connection Factory</h3><p>This <a shape="rect" class="external-link" href="http://svn.apache.org/repos/asf/activemq/trunk/activemq-camel/src/test/java/org/apache/activemq/camel/component/ActiveMQRouteTest.java">test case</a> shows how to add an ActiveMQComponent to the <a shape="rect" href="camelcontext.html">CamelContext</a> using the <a shape="rect" class="external-link" href="http://activemq.apache.org/maven/5.5.0/activemq-camel/apidocs/org/apache/activemq/camel/component/ActiveMQComponent.html#activeMQComponent%28java.lang.String%29"><code>activeMQComponent()</code> method</a> while specifying the <a shape="rect" class="external-link" href="http://activemq.apache.org/configuring-transports.html">brokerURL</a> used to connect to ActiveMQ.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[camelContext.addComponent(&quot;activemq&quot;, activeMQComponent(&quot;vm://localhost?broker.persistent=false&quot;));
+]]></script>
+</div></div><h3 id="ActiveMQ-ConfiguringtheConnectionFactoryusingSpringXML">Configuring the Connection Factory using Spring XML</h3><p>You can configure the ActiveMQ broker URL on the ActiveMQComponent as follows</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;
+   http://www.springframework.org/schema/beans 
+   http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+   http://camel.apache.org/schema/spring 
+   http://camel.apache.org/schema/spring/camel-spring.xsd&quot;&gt;
+
+   &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+   &lt;/camelContext&gt;
+
+   &lt;bean id=&quot;activemq&quot; 
+      class=&quot;org.apache.activemq.camel.component.ActiveMQComponent&quot;&gt;
+      &lt;property name=&quot;brokerURL&quot; value=&quot;tcp://somehost:61616&quot;/&gt;
+   &lt;/bean&gt;
+
+&lt;/beans&gt;
+]]></script>
+</div></div><h3 id="ActiveMQ-Usingconnectionpooling">Using connection pooling</h3><p>When sending to an ActiveMQ broker using Camel it's recommended to use a pooled connection factory to efficiently handle pooling of JMS connections, sessions and producers. This is documented on the <a shape="rect" class="external-link" href="http://activemq.apache.org/spring-support.html">ActiveMQ Spring Support </a> page.</p><p>You can grab ActiveMQ's <code>org.apache.activemq.pool.PooledConnectionFactory</code> with Maven:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;dependency&gt;
+   &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+   &lt;artifactId&gt;activemq-pool&lt;/artifactId&gt;
+   &lt;version&gt;5.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+]]></script>
+</div></div><p>And then setup the <strong>activemq</strong> Camel component as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;bean id=&quot;jmsConnectionFactory&quot; 
+   class=&quot;org.apache.activemq.ActiveMQConnectionFactory&quot;&gt;
+   &lt;property name=&quot;brokerURL&quot; value=&quot;tcp://localhost:61616&quot; /&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;pooledConnectionFactory&quot; 
+   class=&quot;org.apache.activemq.pool.PooledConnectionFactory&quot; init-method=&quot;start&quot; destroy-method=&quot;stop&quot;&gt;
+   &lt;property name=&quot;maxConnections&quot; value=&quot;8&quot; /&gt;
+   &lt;property name=&quot;connectionFactory&quot; ref=&quot;jmsConnectionFactory&quot; /&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;jmsConfig&quot; 
+   class=&quot;org.apache.camel.component.jms.JmsConfiguration&quot;&gt;
+   &lt;property name=&quot;connectionFactory&quot; ref=&quot;pooledConnectionFactory&quot;/&gt;
+   &lt;property name=&quot;concurrentConsumers&quot; value=&quot;10&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;activemq&quot; 
+    class=&quot;org.apache.activemq.camel.component.ActiveMQComponent&quot;&gt;
+    &lt;property name=&quot;configuration&quot; ref=&quot;jmsConfig&quot;/&gt;
+
+    &lt;!-- if we are using transacted then enable CACHE_CONSUMER (if not using XA) to run faster
+         see more details at: http://camel.apache.org/jms
+    &lt;property name=&quot;transacted&quot; value=&quot;true&quot;/&gt;
+    &lt;property name=&quot;cacheLevelName&quot; value=&quot;CACHE_CONSUMER&quot; /&gt;
+    --&gt;
+&lt;/bean&gt;
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Notice the <strong>init</strong> and <strong>destroy</strong> methods on the pooled connection factory. This is important to ensure the connection pool is properly started and shutdown.</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Important information about when using transactions</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you are using transactions then see more details at <a shape="rect" href="jms.html">JMS</a>. And remember to set <code>cacheLevelName</code> to <code>CACHE_CONSUMER</code> if you are not using XA transactions. This can dramatically improve performance.</p></div></div><p>The <code>PooledConnectionFactory</code> will then create a connection pool with up to 8 connections in use at the same time. Each connection can be shared by many sessions. There is an option named <code>maximumActive</code> you can use to configure the maximum number of sessions per connection; the default value is <code>500</code>. From <strong>ActiveMQ 5.7</strong> onwards the option has been renamed to better reflect its purpose, being named as <code>maximumActiveSessionPerConnection</code>. Notice the <code>concurrentConsumers</code> is set to a higher value than <code>maxConnections</code> is. This is okay, as each consumer is using a session, and as a session can share the same connection, we are in the safe. In this example we can have 8 * 500 = 4000 active sessions at the same time.</p><h3 id="ActiveMQ-InvokingMessageListenerPOJOsinaCamelroute">Invoking MessageListener POJOs in a Camel route</h3><p>The ActiveMQ component also provides a helper <a shape="rect" href="type-converter.html">Type Converter</a> from a JMS MessageListener to a <a shape="rect" href="processor.html">Processor</a>. This means that the <a shape="rect" href="bean.html">Bean</a> component is capable of invoking any JMS MessageListener bean directly inside any route.</p><p>So for example you can create a MessageListener in JMS like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class MyListener implements MessageListener {
+   public void onMessage(Message jmsMessage) {
+       // ...
+   }
+}
+]]></script>
+</div></div><p>Then use it in your Camel route as follows</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;file://foo/bar&quot;).
+  bean(MyListener.class);
+]]></script>
+</div></div><p>That is, you can reuse any of the Camel <a shape="rect" href="components.html">Components</a> and easily integrate them into your JMS <code>MessageListener</code> POJO!</p><h3 id="ActiveMQ-UsingActiveMQDestinationOptions">Using ActiveMQ Destination Options</h3><p><strong>Available as of ActiveMQ 5.6</strong></p><p>You can configure the <a shape="rect" class="external-link" href="http://activemq.apache.org/destination-options.html">Destination Options</a> in the endpoint uri, using the "destination." prefix. For example to mark a consumer as exclusive, and set its prefetch size to 50, you can do as follows:</p><p>&#160;</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;from uri=&quot;activemq:foo?destination.consumer.exclusive=true&amp;amp;destination.consumer.prefetchSize=50&quot;/&gt;]]></script>
+</div></div><h3 id="ActiveMQ-ConsumingAdvisoryMessages">Consuming Advisory Messages</h3><p>ActiveMQ can generate <a shape="rect" class="external-link" href="http://activemq.apache.org/advisory-message.html">Advisory messages </a> which are put in topics that you can consume. Such messages can help you send alerts in case you detect slow consumers or to build statistics (number of messages/produced per day, etc.) The following Spring DSL example shows you how to read messages from a topic.</p><p>The below route starts by reading the topic <em>ActiveMQ.Advisory.Connection</em>. To watch another topic, simply change the name according to the name provided in ActiveMQ Advisory Messages documentation. The parameter mapJmsMessage=false allows for converting the org.apache.activemq.command.ActiveMqMessage object from the jms queue. Next, the body received is converted into a String for the purposes of this example and a carriage return is added. Finally, the string is added to a file</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;route&gt;
+   &lt;from uri=&quot;activemq:topic:ActiveMQ.Advisory.Connection?mapJmsMessage=false&quot; /&gt;
+   &lt;convertBodyTo type=&quot;java.lang.String&quot;/&gt;
+   &lt;transform&gt;
+      &lt;simple&gt;${in.body}&amp;#13;&lt;/simple&gt;
+   &lt;/transform&gt;
+   &lt;to uri=&quot;file://data/activemq/?fileExist=Append&amp;amp;fileName=advisoryConnection-${date:now:yyyyMMdd}.txt&quot; /&gt;
+&lt;/route&gt;
+]]></script>
+</div></div><p>If you consume a message on a queue, you should see the following files under the data/activemq folder :</p><p>advisoryConnection-20100312.txt<br clear="none"> advisoryProducer-20100312.txt</p><p>and containing string:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[ActiveMQMessage {commandId = 0, responseRequired = false, 
+messageId = ID:dell-charles-3258-1268399815140
+-1:0:0:0:221, originalDestination = null, originalTransactionId = null,
+producerId = ID:dell-charles-3258-1268399815140-1:0:0:0, 
+destination = topic://ActiveMQ.Advisory.Connection, transactionId = null, 
+expiration = 0, timestamp = 0, arrival = 0, brokerInTime = 1268403383468, 
+brokerOutTime = 1268403383468, correlationId = null, replyTo = null, 
+persistent = false, type = Advisory, priority = 0, groupID = null, groupSequence = 0, 
+targetConsumerId = null, compressed = false, userID = null, content = null, 
+marshalledProperties = org.apache.activemq.util.ByteSequence@17e2705, 
+dataStructure = ConnectionInfo {commandId = 1, responseRequired = true, 
+connectionId = ID:dell-charles-3258-1268399815140-2:50, 
+clientId = ID:dell-charles-3258-1268399815140-14:0, userName = , password = *****, 
+brokerPath = null, brokerMasterConnector = false, manageable = true, 
+clientMaster = true}, redeliveryCounter = 0, size = 0, properties = 
+{originBrokerName=master, originBrokerId=ID:dell-charles-3258-1268399815140-0:0, 
+originBrokerURL=vm://master}, readOnlyProperties = true, readOnlyBody = true, 
+droppable = false}
+]]></script>
+</div></div><h3 id="ActiveMQ-GettingComponentJAR">Getting Component JAR</h3><p>You will need this dependency</p><ul class="alternate"><li><code>activemq-camel</code></li></ul><p><a shape="rect" href="activemq.html">ActiveMQ</a> is an extension of the <a shape="rect" href="jms.html">JMS</a> component released with the <a shape="rect" class="external-link" href="http://activemq.apache.org">ActiveMQ project</a>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;
+  &lt;artifactId&gt;activemq-camel&lt;/artifactId&gt;
+  &lt;version&gt;5.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+]]></script>
+</div></div><p></p><h3 id="ActiveMQ-SeeAlso">See Also</h3>
+<ul><li><a shape="rect" href="configuring-camel.html">Configuring Camel</a></li><li><a shape="rect" href="component.html">Component</a></li><li><a shape="rect" href="endpoint.html">Endpoint</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=54646">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=54646&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: MINA
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="components.html">Components</a>&nbsp;&gt;&nbsp;<a href="mina.html">MINA</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="MINA-MINAComponent">MINA Component</h2><p><strong>Deprecated</strong></p><div class="confluence-information-macro confluence-information-macro-warning"><p class="title">Deprecated</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This component is deprecated as the Apache Mina 1.x project is EOL. Instead use <a shape="rect" href="mina2.html">MINA2</a> or <a shape="rect" href="netty.html">Netty</a> instead.</p></div></div><p>The <strong>mina:</strong> component is a transport for working with <a shape="rect" class="external-link" href="http://mina.apache.org/">Apache MINA</a></p><p>Maven users will need to add the following dependency to their <code>pom.xml</code> for this component:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-mina&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;
+]]></script>
+</div></div><h3 id="MINA-URIformat">URI format</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[mina:tcp://hostname[:port][?options]
+mina:udp://hostname[:port][?options]
+mina:vm://hostname[:port][?options]
+]]></script>
+</div></div><p>You can specify a codec in the <a shape="rect" href="registry.html">Registry</a> using the <strong>codec</strong> option. If you are using TCP and no codec is specified then the <code>textline</code> flag is used to determine if text line based codec or object serialization should be used instead. By default the object serialization is used.</p><p>For UDP if no codec is specified the default uses a basic <code>ByteBuffer</code> based codec.</p><p>The VM protocol is used as a direct forwarding mechanism in the same JVM. See the <a shape="rect" class="external-link" href="http://mina.apache.org/report/1.1/apidocs/org/apache/mina/transport/vmpipe/package-summary.html">MINA VM-Pipe API documentation</a> for details.</p><p>A Mina producer has a default timeout value of 30 seconds, while it waits for a response from the remote server.</p><p>In normal use, <code>camel-mina</code> only supports marshalling the body content&#8212;message headers and exchange properties are not sent.<br clear="none"> However, the option, <strong>transferExchange</strong>, does allow you to transfer the exchange itself over the wire. See options below.</p><p>You can append query options to the URI in the following format, <code>?option=value&amp;option=value&amp;...</code></p><h3 id="MINA-Options">Options</h3><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Option</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default Value</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>codec</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>You can refer to a named <code>ProtocolCodecFactory</code> instance in your <a shape="rect" href="registry.html">Registry</a> such as your Spring <code>ApplicationContext</code>, which is then used for the marshalling.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>codec</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>You must use the <code>#</code> notation to look up your codec in the <a shape="rect" href="registry.html">Registry</a>. For example, use <code>#myCodec</code> to look up a bean with the <code>id</code> value, <code>myCodec</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>disconnect</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> Whether or not to disconnect(close) from Mina session right after use. Can be used for both consumer and producer.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>textline</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Only used for TCP. If no codec is specified, you can use this flag to indicate a text line based codec; if not specified or the value is <code>false</code>, then Object Serialization is assumed over TCP.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>textlineDelimiter</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>DEFAULT</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Only used for TCP and if <strong>textline=true</strong>. Sets the text line delimiter to use. Possible values are: <code>DEFAULT</code>, <code>AUTO</code>, <code>WINDOWS</code>, <code>UNIX</code> or <code>MAC</code>. If none provided, Camel will use <code>DEFAULT</code>. This delimiter is used to mark the end of text.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>sync</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>true</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Setting to set endpoint as one-way or request-response.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>lazySessionCreation</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>true</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Sessions can be lazily created to avoid exceptions, if the remote server is not up and running when the Camel producer is started.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>timeout</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>30000</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>You can configure the timeout that specifies how long to wait for a response from a remote server. The timeout unit is in milliseconds, so 60000 is 60 seconds. The timeout is only used for Mina producer.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>encoding</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><em>JVM Default</em></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>You can configure the encoding (a <a shape="rect" class="external-link" href="http://java.sun.com/j2se/1.5.0/docs/api/java/nio/charset/Charset.html" rel="nofollow">charset name</a>) to use for the TCP textline codec and the UDP protocol. If not provided, Camel will use the <a shape="rect" class="external-link" href="http://java.sun.com/j2se/1.5.0/docs/api/java/nio/charset/Charset.html#defaultCharset()" rel="nofollow">JVM default Charset</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>transferExchange</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Only used for TCP. You can transfer the exchange over the wire instead of just the body. The following fields are transferred: In body, Out body, fault body, In headers, Out headers, fault headers, exchange properties, exchange exception. This requires that the objects are <em>serializable</em>. Camel will exclude any non-serializable objects and log it at <code>WARN</code> level.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>minaLogger</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>You can enable the Apache MINA logging filter. Apache MINA uses <code>slf4j</code> logging at <code>INFO</code> level to log all input and output.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>filters</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>You can set a list of <a shape="rect" class="external-link" href="http://mina.apache.org/iofilter.html">Mina IoFilters</a> to register. The <code>filters</code> value must be one of the following:</p><ul><li><strong>Camel 2.2:</strong> comma-separated list of bean references (e.g. <code>#filterBean1,#filterBean2</code>) where each bean must be of type <code>org.apache.mina.common.IoFilter</code>.</li><li><strong>before Camel 2.2:</strong> a reference to a bean of type <code>List&lt;org.apache.mina.common.IoFilter&gt;</code>.</li></ul></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>encoderMaxLineLength</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>-1</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>As of 2.1, you can set the textline protocol encoder max line length. By default the default value of Mina itself is used which are <code>Integer.MAX_VALUE</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>decoderMaxLineLength</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>-1</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>As of 2.1, you can set the textline protocol decoder max line length. By default the default value of Mina itself is used which are 1024.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>producerPoolSize</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>16</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The TCP producer is thread safe and supports concurrency much better. This option allows you to configure the number of threads in its thread pool for concurrent producers. <strong>Note:</strong> Camel has a pooled service which ensured it was already thread safe and supported concurrency already.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>allowDefaultCodec</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>true</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The mina component installs a default codec if both, <code>codec</code> is <code>null</code> and <code>textline</code> is <code>false</code>. Setting <code>allowDefaultCodec</code> to <code>false</code> prevents the mina component from installing a default codec as the first element in the filter chain. This is useful in scenarios where another filter must be the first in the filter chain, like the SSL filter.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>disconnectOnNoReply</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>true</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> If sync is enabled then this option dictates MinaConsumer if it should disconnect where there is no reply to send back.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>noReplyLogLevel</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>WARN</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> If sync is enabled this option dictates MinaConsumer which logging level to use when logging a there is no reply to send back. Values are: <code>FATAL, ERROR, INFO, DEBUG, OFF</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>clientMode</code></td><td colspan="1" rowspan="1" class="confluenceTd"><code>false</code></td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.15:</strong> Consumer only. If the <code>clientMode</code> is true, mina consumer will connect the address as a TCP client.</td></tr></tbody></table></div></div><h3 id="MINA-Usingacustomcodec">Using a custom codec</h3><p>See the <a shape="rect" class="external-link" href="http://mina.apache.org/tutorial-on-protocolcodecfilter.html">Mina documentation</a> how to write your own codec. To use your custom codec with <code>camel-mina</code>, you should register your codec in the <a shape="rect" href="registry.html">Registry</a>; for example, by creating a bean in the Spring XML file. Then use the <code>codec</code> option to specify the bean ID of your codec. See <a shape="rect" href="hl7.html">HL7</a> that has a custom codec.</p><h3 id="MINA-Samplewithsync=false">Sample with sync=false</h3><p>In this sample, Camel exposes a service that listens for TCP connections on port 6200. We use the <strong>textline</strong> codec. In our route, we create a Mina consumer endpoint that listens on port 6200:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;mina:tcp://localhost:&quot; + port1 + &quot;?textline=true&amp;sync=false&quot;).to(&quot;mock:result&quot;);
+]]></script>
+</div></div><p>As the sample is part of a unit test, we test it by sending some data to it on port 6200.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+MockEndpoint mock = getMockEndpoint(&quot;mock:result&quot;);
+mock.expectedBodiesReceived(&quot;Hello World&quot;);
+
+template.sendBody(&quot;mina:tcp://localhost:&quot; + port1 + &quot;?textline=true&amp;sync=false&quot;, &quot;Hello World&quot;);
+
+assertMockEndpointsSatisfied();
+]]></script>
+</div></div><h3 id="MINA-Samplewithsync=true">Sample with sync=true</h3><p>In the next sample, we have a more common use case where we expose a TCP service on port 6201 also use the textline codec. However, this time we want to return a response, so we set the <code>sync</code> option to <code>true</code> on the consumer.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;mina:tcp://localhost:&quot; + port2 + &quot;?textline=true&amp;sync=true&quot;).process(new Processor() {
+    public void process(Exchange exchange) throws Exception {
+        String body = exchange.getIn().getBody(String.class);
+        exchange.getOut().setBody(&quot;Bye &quot; + body);
+    }
+});
+]]></script>
+</div></div><p>Then we test the sample by sending some data and retrieving the response using the <code>template.requestBody()</code> method. As we know the response is a <code>String</code>, we cast it to <code>String</code> and can assert that the response is, in fact, something we have dynamically set in our processor code logic.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+String response = (String)template.requestBody(&quot;mina:tcp://localhost:&quot; + port2 + &quot;?textline=true&amp;sync=true&quot;, &quot;World&quot;);
+assertEquals(&quot;Bye World&quot;, response);
+]]></script>
+</div></div><h3 id="MINA-SamplewithSpringDSL">Sample with Spring DSL</h3><p>Spring DSL can, of course, also be used for <a shape="rect" href="mina.html">MINA</a>. In the sample below we expose a TCP server on port 5555:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   &lt;route&gt;
+     &lt;from uri=&quot;mina:tcp://localhost:5555?textline=true&quot;/&gt;
+     &lt;to uri=&quot;bean:myTCPOrderHandler&quot;/&gt;
+  &lt;/route&gt;
+]]></script>
+</div></div><p>In the route above, we expose a TCP server on port 5555 using the textline codec. We let the Spring bean with ID, <code>myTCPOrderHandler</code>, handle the request and return a reply. For instance, the handler bean could be implemented as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    public String handleOrder(String payload) {
+        ...
+        return &quot;Order: OK&quot;
+   }
+]]></script>
+</div></div><h3 id="MINA-ConfiguringMinaendpointsusingSpringbeanstyle">Configuring Mina endpoints using Spring bean style</h3><p>Configuration of Mina endpoints is possible using regular Spring bean style configuration in the Spring DSL.</p><p>However, in the underlying Apache Mina toolkit, it is relatively difficult to set up the acceptor and the connector, because you can <em>not</em> use simple setters. To resolve this difficulty, we leverage the <code>MinaComponent</code> as a Spring factory bean to configure this for us. If you really need to configure this yourself, there are setters on the <code>MinaEndpoint</code> to set these when needed.</p><p>The sample below shows the factory approach:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!-- Creating mina endpoints is a bit complex so we reuse MinaComponnet
+     as a factory bean to create our endpoint, this is the easiest to do --&gt;
+&lt;bean id=&quot;myMinaFactory&quot; class=&quot;org.apache.camel.component.mina.MinaComponent&quot;&gt;
+    &lt;!-- we must provide a camel context so we refer to it by its id --&gt;
+    &lt;constructor-arg index=&quot;0&quot; ref=&quot;myCamel&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- This is our mina endpoint configured with spring, we will use the factory above
+     to create it for us. The goal is to invoke the createEndpoint method with the
+     mina configuration parameter we defined using the constructor-arg option --&gt;
+&lt;bean id=&quot;myMinaEndpoint&quot;
+      factory-bean=&quot;myMinaFactory&quot;
+      factory-method=&quot;createEndpoint&quot;&gt;
+    &lt;!-- and here we can pass it our configuration --&gt;
+    &lt;constructor-arg index=&quot;0&quot; ref=&quot;myMinaConfig&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- this is our mina configuration with plain properties --&gt;
+&lt;bean id=&quot;myMinaConfig&quot; class=&quot;org.apache.camel.component.mina.MinaConfiguration&quot;&gt;
+    &lt;property name=&quot;protocol&quot; value=&quot;tcp&quot;/&gt;
+    &lt;property name=&quot;host&quot; value=&quot;localhost&quot;/&gt;
+    &lt;property name=&quot;port&quot; ref=&quot;port&quot;/&gt;
+    &lt;property name=&quot;sync&quot; value=&quot;false&quot;/&gt;
+&lt;/bean&gt;
+]]></script>
+</div></div><p>And then we can refer to our endpoint directly in the route, as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;route&gt;
+    &lt;!-- here we route from or mina endpoint we have defined above --&gt;
+    &lt;from ref=&quot;myMinaEndpoint&quot;/&gt;
+    &lt;to uri=&quot;mock:result&quot;/&gt;
+&lt;/route&gt;
+]]></script>
+</div></div><h3 id="MINA-ClosingSessionWhenComplete">Closing Session When Complete</h3><p>When acting as a server you sometimes want to close the session when, for example, a client conversion is finished. To instruct Camel to close the session, you should add a header with the key <code>CamelMinaCloseSessionWhenComplete</code> set to a boolean <code>true</code> value.</p><p>For instance, the example below will close the session after it has written the <code>bye</code> message back to the client:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[        from(&quot;mina:tcp://localhost:8080?sync=true&amp;textline=true&quot;).process(new Processor() {
+            public void process(Exchange exchange) throws Exception {
+                String body = exchange.getIn().getBody(String.class);
+                exchange.getOut().setBody(&quot;Bye &quot; + body);
+                exchange.getOut().setHeader(MinaConstants.MINA_CLOSE_SESSION_WHEN_COMPLETE, true);
+            }
+        });
+]]></script>
+</div></div><h3 id="MINA-GettheIoSessionformessage">Get the IoSession for message</h3><p><strong>Available since Camel 2.1</strong><br clear="none"> You can get the IoSession from the message header with this key MinaEndpoint.HEADER_MINA_IOSESSION, and also get the local host address with the key MinaEndpoint.HEADER_LOCAL_ADDRESS and remote host address with the key MinaEndpoint.HEADER_REMOTE_ADDRESS.</p><h3 id="MINA-ConfiguringMinafilters">Configuring Mina filters</h3><p>Filters permit you to use some Mina Filters, such as <code>SslFilter</code>. You can also implement some customized filters. Please note that <code>codec</code> and <code>logger</code> are also implemented as Mina filters of type, <code>IoFilter</code>. Any filters you may define are appended to the end of the filter chain; that is, after <code>codec</code> and <code>logger</code>.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If using the <code>SslFilter</code> you need to add the <code>mina-filter-ssl</code> JAR to the classpath.</p></div></div><p>For instance, the example below will send a keep-alive message after 10 seconds of inactivity:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class KeepAliveFilter extends IoFilterAdapter {
+    @Override
+    public void sessionCreated(NextFilter nextFilter, IoSession session)
+            throws Exception {
+        session.setIdleTime(IdleStatus.BOTH_IDLE, 10);
+
+        nextFilter.sessionCreated(session);
+    }
+
+    @Override
+    public void sessionIdle(NextFilter nextFilter, IoSession session,
+            IdleStatus status) throws Exception {
+        session.write(&quot;NOOP&quot;); // NOOP is a FTP command for keep alive
+        nextFilter.sessionIdle(session, status);
+    }
+}
+]]></script>
+</div></div><p>As Camel Mina may use a request-reply scheme, the endpoint as a client would like to drop some message, such as greeting when the connection is established. For example, when you connect to an FTP server, you will get a <code>220</code> message with a greeting (<code>220 Welcome to Pure-FTPd</code>). If you don't drop the message, your request-reply scheme will be broken.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class DropGreetingFilter extends IoFilterAdapter {
+
+    @Override
+    public void messageReceived(NextFilter nextFilter, IoSession session,
+            Object message) throws Exception {
+        if (message instanceof String) {
+            String ftpMessage = (String) message;
+            // &quot;220&quot; is given as greeting. &quot;200 Zzz&quot; is given as a response to &quot;NOOP&quot; (keep alive)
+            if (ftpMessage.startsWith(&quot;220&quot;) || or ftpMessage.startsWith(&quot;200 Zzz&quot;)) {
+                // Dropping greeting
+                return;
+            }
+        }
+        nextFilter.messageReceived(session, message);
+    }
+}
+]]></script>
+</div></div><p>Then, you can configure your endpoint using Spring DSL:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;bean id=&quot;myMinaFactory&quot; class=&quot;org.apache.camel.component.mina.MinaComponent&quot;&gt;
+    &lt;constructor-arg index=&quot;0&quot; ref=&quot;camelContext&quot; /&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;myMinaEndpoint&quot;
+      factory-bean=&quot;myMinaFactory&quot;
+      factory-method=&quot;createEndpoint&quot;&gt;
+    &lt;constructor-arg index=&quot;0&quot; ref=&quot;myMinaConfig&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;myMinaConfig&quot; class=&quot;org.apache.camel.component.mina.MinaConfiguration&quot;&gt;
+    &lt;property name=&quot;protocol&quot; value=&quot;tcp&quot; /&gt;
+    &lt;property name=&quot;host&quot; value=&quot;localhost&quot; /&gt;
+    &lt;property name=&quot;port&quot; value=&quot;2121&quot; /&gt;
+    &lt;property name=&quot;sync&quot; value=&quot;true&quot; /&gt;
+    &lt;property name=&quot;minaLogger&quot; value=&quot;true&quot; /&gt;
+    &lt;property name=&quot;filters&quot; ref=&quot;listFilters&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;listFilters&quot; class=&quot;java.util.ArrayList&quot; &gt;
+    &lt;constructor-arg&gt;
+        &lt;list value-type=&quot;org.apache.mina.common.IoFilter&quot;&gt;
+            &lt;bean class=&quot;com.example.KeepAliveFilter&quot;/&gt;
+            &lt;bean class=&quot;com.example.DropGreetingFilter&quot;/&gt;
+        &lt;/list&gt;
+    &lt;/constructor-arg&gt;
+&lt;/bean&gt;
+]]></script>
+</div></div><p></p><h3 id="MINA-SeeAlso">See Also</h3>
+<ul><li><a shape="rect" href="configuring-camel.html">Configuring Camel</a></li><li><a shape="rect" href="component.html">Component</a></li><li><a shape="rect" href="endpoint.html">Endpoint</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li></ul><ul class="alternate"><li><a shape="rect" href="mina2.html">MINA2</a></li><li><a shape="rect" href="netty.html">Netty</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=52097">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=52097&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+
