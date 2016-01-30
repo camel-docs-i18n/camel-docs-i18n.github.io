@@ -1,7 +1,7 @@
 About camel-docs-i18n
 =====================
 
-camel-docs-i18n is a unofficial translation project that aims to provide
+camel-docs-i18n is an unofficial translation project that aims to provide
 translation of the documentation on camel.apache.org.
 
 Goal
@@ -17,7 +17,7 @@ If you want to join us as a translator or a reviewer, please send a request on
 [Transifex](https://www.transifex.com/). The project name is "Apache Camel
 Documentation".
 
-If you want to contribute in other area, please contact on GitHub.
+If you want to contribute in other area, please contact us on GitHub.
 
 Note that all your contributions to this project will be licensed under Apache
 License 2.0, and they would be contibuted to the official project.
