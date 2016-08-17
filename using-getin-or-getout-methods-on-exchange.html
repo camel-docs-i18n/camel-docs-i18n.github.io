@@ -40,8 +40,6 @@
   <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
   <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
   <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
-  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
-  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
   
   <script type="text/javascript">
   SyntaxHighlighter.defaults['toolbar'] = false;
@@ -49,7 +47,7 @@
   </script>
 
     <title>
-    Apache Camel: Data Format
+    Apache Camel: Using getIn or getOut methods on Exchange
     </title>
 <script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
 <body>
@@ -75,7 +73,7 @@
         <div class="top_red_bar">
           <div id="site-breadcrumbs">
                 <!-- Breadcrumbs -->
-<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="architecture.html">Architecture</a>&nbsp;&gt;&nbsp;<a href="data-format.html">Data Format</a>
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="community.html">Community</a>&nbsp;&gt;&nbsp;<a href="faq.html">FAQ</a>&nbsp;&gt;&nbsp;<a href="using-camel-questions.html">Using Camel Questions</a>&nbsp;&gt;&nbsp;<a href="using-getin-or-getout-methods-on-exchange.html">Using getIn or getOut methods on Exchange</a>
           </div>
           <!-- Quicklinks -->
 <div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
@@ -86,98 +84,41 @@
 	<tbody>
         <tr>
         <td valign="top" width="100%">
-<div class="wiki-content maincontent"><h2 id="DataFormat-DataFormat">Data Format</h2>
-
-<p>Camel supports a pluggable DataFormat to allow messages to be marshalled to and from binary or text formats to support a kind of <a shape="rect" href="message-translator.html">Message Translator</a>.</p>
-
-<p>The following data formats are currently supported:</p>
-
-<ul><li>Standard JVM object marshalling<ul><li><a shape="rect" href="serialization.html">Serialization</a></li><li><a shape="rect" href="string.html">String</a></li></ul></li></ul><ul><li>Object marshalling<ul><li><a shape="rect" href="avro.html">Avro</a></li><li><a shape="rect" href="boon.html">Boon</a></li><li><a shape="rect" href="hessian.html">Hessian</a></li><li><a shape="rect" href="json.html">JSON</a></li><li><a shape="rect" href="protobuf.html">Protobuf</a></li><li><a shape="rect" href="yaml-data-format.html">YAML</a></li></ul></li></ul><ul><li>Object/XML marshalling<ul><li><a shape="rect" href="castor.html">Castor</a></li><li><a shape="rect" href="jaxb.html">JAXB</a></li><li><a shape="rect" href="xmlbeans.html">XmlBeans</a></li><li><a shape="rect" href="xstream.html">XStream</a></li><li><a shape="rect" href="jibx.html">JiBX</a></li><li><a shape="rect" href="jackson-xml.html">Jackson XML</a></li></ul></li></ul><ul><li>Object/XML/Webservice marshalling<ul><li><a shape="rect" href="soap.html">SOAP</a></li></ul></li></ul><ul><li>Direct JSON / XML marshalling<ul><li><a shape="rect" href="xmljson.html">XmlJson</a></li></ul></li></ul><ul><li>Flat data structure marshalling<ul><li><a shape="rect" href="beanio.html">BeanIO</a></li><li><a shape="rect" href="bindy.html">Bindy</a></li><li><a shape="rect" href="csv.html">CSV</a></li><li><a shape="rect" href="edi.html">EDI</a></li><li><a shape="rect" href="flatpack-dataformat.html">Flatpack DataFormat</a></li><li><a shape="rect" href="univocity-parsers-formats.html">uniVocity-parsers formats</a></li></ul></li></ul><ul><li>Domain specific marshalling<ul><li><a shape="rect" href="hl7-dataformat.html">HL7 DataFormat</a></li></ul></li></ul><ul><li>Compression<ul><li><a shape="rect" href="gzip-data-format.html">GZip data format</a></li><li><a shape="rect" href="zip-dataformat.html">Zip DataFormat</a></li><li><a shape="rect" href="zip-file-dataformat.html">Zip File DataFormat</a></li><li><a shape="rect" href="lzf-data-format.html">LZF Data Format</a></li></ul></li></ul><ul><li>Security<ul><li><a shape="rect" href="crypto.html">Crypto</a></li><li><a shape="rect" href="crypto.html">PGP</a></li><li><a shape="rect" href="xmlsecurity-dataformat.html">XMLSecurity DataFormat</a></li></ul></li></ul><ul><li>Misc.<ul><li><a shape="rect" href="base64.html">Base64</a></li><li><a shape="rect" href="custom-dataformat.html">Custom DataFormat</a> - to use your own custom implementation</li><li><a shape="rect" href="mime-multipart.html">MIME-Multipart</a></li><li><a shape="rect" href="rss.html">RSS</a></li><li><a shape="rect" href="tidymarkup.html">TidyMarkup</a></li><li><a shape="rect" href="syslog.html">Syslog</a></li><li><a shape="rect" href="ical.html">ICal</a></li><li><a shape="rect" href="barcode-data-format.html">Barcode </a>- to read and generate barcodes (QR-Code, PDF417, ...)</li></ul></li></ul>
-
-<p>And related is the following:</p>
-<ul class="alternate"><li><a shape="rect" href="dataformat-component.html">DataFormat Component</a> for working with <a shape="rect" href="data-format.html">Data Format</a>s as if it was a regular <a shape="rect" href="component.html">Component</a> supporting <a shape="rect" href="endpoint.html">Endpoint</a>s and <a shape="rect" href="uris.html">URIs</a>.</li><li><a shape="rect" href="dozer-type-conversion.html">Dozer Type Conversion</a> using Dozer for type converting POJOs</li></ul>
-
-
-<h3 id="DataFormat-Unmarshalling">Unmarshalling</h3>
-
-<p>If you receive a message from one of the Camel <a shape="rect" href="components.html">Components</a> such as <a shape="rect" href="file2.html">File</a>, <a shape="rect" href="http.html">HTTP</a> or <a shape="rect" href="jms.html">JMS</a> you often want to unmarshal the payload into some bean so that you can process it using some <a shape="rect" href="bean-integration.html">Bean Integration</a> or perform <a shape="rect" href="predicate.html">Predicate</a> evaluation and so forth. To do this use the <strong>unmarshal</strong> word in the <a shape="rect" href="dsl.html">DSL</a> in Java or the <a shape="rect" href="xml-configuration.html">Xml Configuration</a>.</p>
-
-<p>For example</p>
-
-<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-DataFormat jaxb = new JaxbDataFormat(&quot;com.acme.model&quot;);
-
-from(&quot;activemq:My.Queue&quot;).
-  unmarshal(jaxb).
-  to(&quot;mqseries:Another.Queue&quot;);
+<div class="wiki-content maincontent"><h2 id="UsinggetInorgetOutmethodsonExchange-MessageexchangepatternsandtheExchangeobject">Message exchange patterns and the Exchange object</h2><p>The Camel API is influenced by APIs such as <a shape="rect" class="external-link" href="http://en.wikipedia.org/wiki/Java_Business_Integration" rel="nofollow">JBI specification</a>, <a shape="rect" href="http://cxf.apache.org/">CXF</a> which defines a concept called Message Exchange Patterns (MEP for short).</p><p>The MEP defines the messaging style used such as one-way (<a shape="rect" href="event-message.html">InOnly</a>) or request-reply (<a shape="rect" href="request-reply.html">InOut</a>),<br clear="none"> which means you have IN and optionally OUT messages. This closely maps to other APIs such as WS, WSDL, REST, JBI and the likes.</p><p>The <a shape="rect" href="exchange.html">Exchange</a> API provides two methods to get a message, either <code>getIn</code> or <code>getOut</code>.<br clear="none"> Obviously the <code>getIn</code> gets the IN message, and the <code>getOut</code> gets the OUT message.</p><h2 id="UsinggetInorgetOutmethodsonExchange-Flowofanexchangethrougharoute">Flow of an exchange through a route</h2><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="using-getin-or-getout-methods-on-exchange.data/Message%20flow%20in%20Route.png" data-image-src="/confluence/download/attachments/23338837/Message%20flow%20in%20Route.png?version=6&amp;modificationDate=1434874475000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="24347145" data-linked-resource-version="6" data-linked-resource-type="attachment" data-linked-resource-default-alias="Message flow in Route.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="23338837" data-linked-resource-container-version="19"></span></p><ul class="alternate"><li>The out message from each step is used as the in message for the next step</li><li>if there is no out message then the in message is used instead</li><li>For the InOut MEP the out from the last step in the route is returned to the producer. In case of InOnly the last out is thrown away</li></ul><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Beware of getOut to check if there is an out message</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>exchange.getOut creates an out message if there is none. So if you want to check if there is an out message then you should use exchange.hasOut instead</p></div></div><h2 id="UsinggetInorgetOutmethodsonExchange-UsinggetInorgetOutmethodsonExchange">Using getIn or getOut methods on Exchange</h2><p>Now suppose you want to use a Camel <a shape="rect" href="processor.html">Processor</a> to adjust a message. This can be done as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public void process(Exchange exchange) throws Exception {
+   String body = exchange.getIn().getBody(String.class);
+   // change the message to say Hello
+   exchange.getOut().setBody(&quot;Hello &quot; + body);
+}
 ]]></script>
-</div></div>
-
-<p>The above uses a named DataFormat of <em>jaxb</em> which is configured with a number of Java package names. You can if you prefer use a named reference to a data format which can then be defined in your <a shape="rect" href="registry.html">Registry</a> such as via your <a shape="rect" href="spring.html">Spring</a> XML file.</p>
-
-<p>You can also use the DSL itself to define the data format as you use it. For example the following uses Java serialization to unmarshal a binary file then send it as an ObjectMessage to <a shape="rect" href="activemq.html">ActiveMQ</a></p>
-
-<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-from(&quot;file://foo/bar&quot;).
-  unmarshal().serialization().
-  to(&quot;activemq:Some.Queue&quot;);
+</div></div><p>This seems intuitive and is what you would expect is the <em>right</em> approach to change a message from a <a shape="rect" href="processor.html">Processor</a>.<br clear="none"> However there is an big issue - the <code>getOut</code> method will create a new <a shape="rect" href="message.html">Message</a>, which means any other information<br clear="none"> from the IN message will not be propagated; which means you will lose that data.<br clear="none"> To remedy this we'll have to copy the data which is done as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public void process(Exchange exchange) throws Exception {
+   String body = exchange.getIn().getBody(String.class);
+   // change the message to say Hello
+   exchange.getOut().setBody(&quot;Hello &quot; + body);
+   // copy headers from IN to OUT to propagate them
+   exchange.getOut().setHeaders(exchange.getIn().getHeaders());
+}
 ]]></script>
-</div></div>
-
-<h3 id="DataFormat-Marshalling">Marshalling</h3>
-
-<p>Marshalling is the opposite of unmarshalling, where a bean is marshalled into some binary or textual format for transmission over some transport via a Camel <a shape="rect" href="component.html">Component</a>. Marshalling is used in the same way as unmarshalling above; in the <a shape="rect" href="dsl.html">DSL</a> you can use a DataFormat instance, you can configure the DataFormat dynamically using the DSL or you can refer to a named instance of the format in the <a shape="rect" href="registry.html">Registry</a>.</p>
-
-<p>The following example unmarshals via serialization then marshals using a named JAXB data format to perform a kind of <a shape="rect" href="message-translator.html">Message Translator</a></p>
-
-<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-from(&quot;file://foo/bar&quot;).
-  unmarshal().serialization(). 
-  marshal(&quot;jaxb&quot;).
-  to(&quot;activemq:Some.Queue&quot;);
+</div></div><p>Well that is not all, a <a shape="rect" href="message.html">Message</a> can also contain attachments so to be sure you need to propagate those as well:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public void process(Exchange exchange) throws Exception {
+   String body = exchange.getIn().getBody(String.class);
+   // change the message to say Hello
+   exchange.getOut().setBody(&quot;Hello &quot; + body);
+   // copy headers from IN to OUT to propagate them
+   exchange.getOut().setHeaders(exchange.getIn().getHeaders();
+   // copy attachements from IN to OUT to propagate them
+   exchange.getOut().setAttachments(exchange.getIn().getAttachments());
+}
 ]]></script>
-</div></div>
-
-
-<h3 id="DataFormat-UsingSpringXML">Using Spring XML</h3>
-
-<p>This example shows how to configure the data type just once and reuse it on multiple routes</p>
-
-<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-&lt;camelContext id=&quot;camel&quot; xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
-  &lt;dataFormats&gt;
-    &lt;jaxb id=&quot;myJaxb&quot; prettyPrint=&quot;true&quot; contextPath=&quot;org.apache.camel.example&quot;/&gt;
-  &lt;/dataFormats&gt;
-
-  &lt;route&gt;
-    &lt;from uri=&quot;direct:start&quot;/&gt;
-    &lt;marshal ref=&quot;myJaxb&quot;/&gt;
-    &lt;to uri=&quot;direct:marshalled&quot;/&gt;
-  &lt;/route&gt;
-  &lt;route&gt;
-    &lt;from uri=&quot;direct:marshalled&quot;/&gt;
-    &lt;unmarshal ref=&quot;myJaxb&quot;/&gt;
-    &lt;to uri=&quot;mock:result&quot;/&gt;
-  &lt;/route&gt;
-
-&lt;/camelContext&gt;
+</div></div><p>Now we ensure that all additional data is propagated on the new OUT message. But its a shame we need 2 code lines to ensure data is propagated.<br clear="none"> What you can do instead is to change the IN message instead, as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public void process(Exchange exchange) throws Exception {
+   String body = exchange.getIn().getBody(String.class);
+   // change the existing message to say Hello
+   exchange.getIn().setBody(&quot;Hello &quot; + body);
+}
 ]]></script>
-</div></div>
-
-<p>You can also define reusable data formats as Spring beans </p>
-
-<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
-<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
-&lt;bean id=&quot;myJaxb&quot; class=&quot;org.apache.camel.model.dataformat.JaxbDataFormat&quot;&gt;
-  &lt;property name=&quot;prettyPrint&quot; value=&quot;true&quot;/&gt;
-  &lt;property name=&quot;contextPath&quot; value=&quot;org.apache.camel.example&quot;/&gt;
-&lt;/bean&gt;  
-]]></script>
-</div></div></div>
+</div></div><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Consider using getIn</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>As shown above you most often need to alter the existing IN message, than creating a totally new OUT message.<br clear="none"> And therefore it's often easier just to adjust the IN message directly.</p></div></div><p>Changing the IN message directly is possible in Camel as it doesn't mind. Camel will detect that the <a shape="rect" href="exchange.html">Exchange</a> has no OUT message<br clear="none"> and therefore use the IN message instead.</p><h3 id="UsinggetInorgetOutmethodsonExchange-AboutMessageExchangePatternandgetOut">About Message Exchange Pattern and getOut</h3><p>If the <a shape="rect" href="exchange.html">Exchange</a> is using <code>InOnly</code> as the MEP, then you may think that the <a shape="rect" href="exchange.html">Exchange</a> has no OUT message.<br clear="none"> But you can still invoke the <code>getOut</code> method on <a shape="rect" href="exchange.html">Exchange</a>; Camel will not barf.</p><p>So the example code above is possible for any kind of MEP. The MEP is <em>just</em> a flag on the <a shape="rect" href="exchange.html">Exchange</a> which the Consumer and Producer adhere to.<br clear="none"> You can change the MEP on the <a shape="rect" href="exchange.html">Exchange</a> using the <code>setPattern</code> method. And likewise there is DSL to change it as well.</p></div>
         </td>
         <td valign="top">
           <div class="navigation">
@@ -212,8 +153,8 @@ from(&quot;file://foo/bar&quot;).
     <div class="footer_r">
       <div>
         <a href="$base/privacy-policy.html">Privacy Policy</a> -
-        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=68406">edit page</a>)
-   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=68406&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=23338837">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=23338837&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
       </div>
     </div>
   </div>

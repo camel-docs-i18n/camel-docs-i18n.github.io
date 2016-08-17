@@ -36,9 +36,19 @@
     <![endif]-->
 
 
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
 
     <title>
-    Apache Camel: User Guide
+    Apache Camel: How to avoid sending some or all message headers
     </title>
 <script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
 <body>
@@ -64,7 +74,7 @@
         <div class="top_red_bar">
           <div id="site-breadcrumbs">
                 <!-- Breadcrumbs -->
-<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="user-guide.html">User Guide</a>
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="community.html">Community</a>&nbsp;&gt;&nbsp;<a href="faq.html">FAQ</a>&nbsp;&gt;&nbsp;<a href="using-camel-questions.html">Using Camel Questions</a>&nbsp;&gt;&nbsp;<a href="how-to-avoid-sending-some-or-all-message-headers.html">How to avoid sending some or all message headers</a>
           </div>
           <!-- Quicklinks -->
 <div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
@@ -75,7 +85,68 @@
 	<tbody>
         <tr>
         <td valign="top" width="100%">
-<div class="wiki-content maincontent"><h2 id="UserGuide-UserGuide">User Guide</h2><p>If you want to get more familiar with what Apache Camel has to offer, please try the following resources:</p><p></p><div class="toc-macro client-side-toc-macro" data-headerelements="H3,H4,H5,H6,H7"></div><h3 id="UserGuide-Wikipages">Wiki pages</h3><ul><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="book-getting-started.html">Longer Getting Started Guide</a></li><li><a shape="rect" href="camel-jar-dependencies.html">Camel jar dependencies</a></li><li><a shape="rect" href="camel-boot.html">Camel Boot</a></li><li><a shape="rect" href="cdi.html">Working with Camel and CDI</a></li><li><a shape="rect" href="spring.html">Working with Camel and Spring</a></li><li><a shape="rect" href="guice.html">Working with Camel and Guice</a></li><li><a shape="rect" href="karaf.html">Working with Camel and Karaf</a></li><li><a shape="rect" href="how-do-i-configure-endpoints.html">How do I configure endpoints</a></li><li><a shape="rect" href="bean-integration.html">Bean Integration</a></li><li><a shape="rect" href="configuring-camel.html">Configuring Camel</a></li><li><a shape="rect" href="configuring-route-startup-ordering-and-autostartup.html">Configuring route startup ordering and autostartup</a></li><li><a shape="rect" href="graceful-shutdown.html">Graceful Shutdown</a></li><li><a shape="rect" href="asyncprocessorawaitmanager.html">AsyncProcessorAwaitManager</a> for insight into the routing engine when it has been forced to block threads while exchanges are being processed asynchronous.</li><li><a shape="rect" href="error-handling-in-camel.html">Error handling in Camel</a></li><li><a shape="rect" href="using-propertyplaceholder.html">How to use Camel property placeholders</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="testing.html">Testing</a></li><li><a shape="rect" href="xml-configuration.html">Xml Configuration</a></li><li><a shape="rect" href="using-camelproxy.html">Using CamelProxy</a> for how to use proxies for clients to easily invoke camel routes without them knowing</li><li><a shape="rect" href="camel-maven-plugin.html">Camel Maven Plugin</a> for running Camel from a Maven goal</li><li><a shape="rect" href="guice-maven-plugin.html">Guice Maven Plugin</a> for working with <a shape="rect" href="guice.html">Guice</a></li><li><a shape="rect" href="camel-maven-archetypes.html">Camel Maven Archetypes</a></li><li><a shape="rect" href="creating-a-new-spring-based-camel-route.html">Creating a new Spring based Camel Route</a></li><li><a shape="rect" href="camel-jmx.html">Camel JMX</a></li><li><a shape="rect" href="how-to-run-camel-in-a-osgi-container.html">How to run Camel in a osgi container</a></li><li><a shape="rect" href="using-osgi-blueprint-with-camel.html">Using OSGi blueprint with Camel</a></li><li><a shape="rect" href="karaf.html">Karaf</a> for working with <a shape="rect" class="external-link" href="http://karaf.apache.org/">Apache Karaf</a></li><li><a shape="rect" href="camel-and-scr.html">Working with Camel and SCR</a></li><li>Working with REST and&#160;<a shape="rect" href="rest-dsl.html">Rest DSL</a></li></ul><h3 id="UserGuide-PDF">PDF</h3><p>You can try the <a shape="rect" href="manual.html">Manual</a> if you want to get a PDF of this documentation.</p><h3 id="UserGuide-OtherResources.">Other Resources.</h3><p>The <a shape="rect" class="external-link" href="http://architects.dzone.com/articles/apache-camel-integration" rel="nofollow">Apache Camel: Integration Nirvana</a> article by Jonathan Anstey, a great place to start your journey.</p><p>The <a shape="rect" href="books.html">Camel in Action</a> book.</p><p>The Camel Components Poster - <a shape="rect" class="external-link" href="http://gliesian.com/camel/ApacheCamelComponents.pdf" rel="nofollow">Free PDF</a>, <a shape="rect" class="external-link" href="http://fineartamerica.com/featured/apache-camel-2122-components-poster-robert-liguori.html" rel="nofollow">36"x24" Print</a></p><p>Try these online <a shape="rect" href="articles.html">Articles</a> and <a shape="rect" href="tutorials.html">Tutorials</a>.</p></div>
+<div class="wiki-content maincontent"><h2 id="Howtoavoidsendingsomeorallmessageheaders-Howtoavoidsendingsomeorallmessageheaders?">How to avoid sending some or all message headers?</h2>
+
+<p>When I send a message to a Camel endpoint such as the <a shape="rect" href="mail.html">Mail</a> component, then the mail include some message headers I do not want.<br clear="none">
+How can I avoid this?</p>
+
+<h4 id="Howtoavoidsendingsomeorallmessageheaders-UseremoveHeadersintheroute">Use removeHeaders in the route</h4>
+<p>This is a gotcha more people encounter. However it's very easy to solve. To remove all headers use a wildcard expression:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(...).removeHeaders(&quot;*&quot;).to(&quot;smtp://....&quot;)
+]]></script>
+</div></div>
+
+<p>Similarly to remove all headers except some of your own (myheader1 and myheader2) use a wildcard with a vararg:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(...).removeHeaders(&quot;*&quot;, &quot;myheader1&quot;, &quot;myheader2&quot;).to(&quot;smtp://....&quot;)
+]]></script>
+</div></div>
+
+<p>To do (a similar thing) in XML DSL you simply do:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;route&gt;
+  &lt;from uri=&quot;...&quot;/&gt;
+  &lt;removeHeaders pattern=&quot;*&quot; excludePattern=&quot;header1|header2&quot;/&gt;
+  &lt;to uri=&quot;smtp://...&quot;/&gt;
+&lt;/route&gt;
+]]></script>
+</div></div>
+
+<div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>At present, the <code>excludePattern</code> only supports one header name (which can be include wild cards or regular expressions). We tackle this limitation with <a shape="rect" class="external-link" href="https://issues.apache.org/jira/browse/CAMEL-6445">CAMEL-6445</a>.</p></div></div>
+
+<p>Again to remove only Camel headers but no other transport headers:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(...).removeHeaders(&quot;Camel*&quot;).to(&quot;smtp://....&quot;)
+]]></script>
+</div></div>
+
+<p>To do this in XML DSL you simply do:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;route&gt;
+  &lt;from uri=&quot;...&quot;/&gt;
+  &lt;removeHeaders pattern=&quot;Camel*&quot;/&gt;
+  &lt;to uri=&quot;smtp://...&quot;/&gt;
+&lt;/route&gt;
+]]></script>
+</div></div>
+
+<div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>There is also a removeHeader in the DSL to remove a single header. But it does not support patterns, so you can only remove a single header by its name.</p></div></div>
+
+<h4 id="Howtoavoidsendingsomeorallmessageheaders-UseHeaderFilterStrategy">Use HeaderFilterStrategy</h4>
+
+<p>An alternative is that some of the Camel <a shape="rect" href="components.html">Components</a> supports configuring a custom header filter strategy.<br clear="none">
+This allows you to implement the <code>org.apache.camel.spi.HeaderFilterStrategy</code> interface, where you can filter unwanted headers.<br clear="none">
+Though its often easier to use the removeHeaders in the Camel route as shown above.</p>
+</div>
         </td>
         <td valign="top">
           <div class="navigation">
@@ -110,8 +181,8 @@
     <div class="footer_r">
       <div>
         <a href="$base/privacy-policy.html">Privacy Policy</a> -
-        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=49366">edit page</a>)
-   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=49366&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=30746836">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=30746836&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
       </div>
     </div>
   </div>
