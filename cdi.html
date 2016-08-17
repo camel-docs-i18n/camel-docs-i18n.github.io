@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushBash.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: CDI
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="components.html">Components</a>&nbsp;&gt;&nbsp;<a href="cdi.html">CDI</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="CDI-CamelCDI">Camel CDI</h2><p>The Camel CDI component provides auto-configuration for Apache Camel using CDI as dependency injection framework based on&#160;<em>convention-over-configuration</em>. It auto-detects Camel routes available in the application and provides beans for common Camel primitives like <code>Endpoint</code>,&#160;<code>ProducerTemplate</code> or&#160;<code>TypeConverter</code>. It implements standard <a shape="rect" href="bean-integration.html">Camel bean integration</a> so that Camel annotations like&#160;<code>@Consume</code>,&#160;<code>@Produce</code> and&#160;<span style="color: rgb(0,0,0);"><code>@PropertyInject</code> can be used seamlessly in CDI beans</span>. Besides, it bridges Camel events (e.g. <code>RouteAddedEvent</code>, <code>CamelContextStartedEvent</code>,&#160;<code>ExchangeCompletedEvent</code>, ...) as CDI events and provides a CDI events endpoint that can be used to consume / produce CDI events from / to Camel routes.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>While the Camel CDI component is available as of <strong>Camel 2.10</strong>, it's been rewritten in <strong>Camel 2.17</strong> to better fit into the CDI programming model. Hence some of the features like the Camel events to CDI events bridge and the CDI events endpoint only apply starting Camel 2.17.</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>More details on how to test Camel CDI applications are available in <a shape="rect" href="cdi-testing.html">Camel CDI testing</a>.</p></div></div><h3 id="CDI-Auto-configuredCamelcontext">Auto-configured Camel context</h3><p>Camel CDI automatically deploys and configures a&#160;<code>CamelContext</code> bean. That <code>CamelContext</code> bean is automatically instantiated, configured and started (resp. stopped) when the CDI container initialises (resp. shuts down). It can be injected in the application, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+CamelContext context;]]></script>
+</div></div><p>That default <code>CamelContext</code> bean is qualified with the built-in&#160;<code>@Default</code> qualifier, is scoped&#160;<code>@ApplicationScoped</code> and is of type <code>DefaultCamelContext</code>.</p><p>Note that this bean can be customised programmatically and other Camel context beans can be deployed in the application as well.</p><h3 id="CDI-Auto-detectingCamelroutes">Auto-detecting Camel routes</h3><p>Camel CDI automatically&#160;collects all the&#160;<code>RoutesBuilder</code> beans in the application, instantiates and add them to the <code>CamelContext</code> bean instance when the CDI container initialises. For example, adding a Camel route is as simple as declaring a class, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[class MyRouteBean extends RouteBuilder {
+ 
+	@Override
+    public void configure() {
+        from(&quot;jms:invoices&quot;).to(&quot;file:/invoices&quot;);
+    }
+}]]></script>
+</div></div><p>Note that you can declare as many&#160;<code>RoutesBuilder</code> beans as you want. Besides,&#160;<code>RouteContainer</code> beans are also automatically collected, instantiated and added to the&#160;<code>CamelContext</code> bean instance managed by Camel CDI when the container initialises.</p><h3 id="CDI-Auto-configuredCamelprimitives">Auto-configured Camel primitives</h3><p>Camel CDI provides beans for common Camel primitives that can be injected in any CDI beans, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@Uri(&quot;direct:inbound&quot;)
+ProducerTemplate producerTemplate;
+
+@Inject
+MockEndpoint outbound; // URI defaults to the member name, i.e. mock:outbound
+
+@Inject
+@Uri(&quot;direct:inbound&quot;)
+Endpoint endpoint;
+
+@Inject
+TypeConverter converter;]]></script>
+</div></div><h3 id="CDI-Camelcontextconfiguration">Camel context configuration</h3><p>If you just want to change the name of the default <code>CamelContext</code> bean, you can used the <code>@ContextName</code> qualifier&#160;provided by Camel CDI, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@ContextName(&quot;camel-context&quot;)
+class MyRouteBean extends RouteBuilder {
+ 
+	@Override
+    public void configure() {
+        from(&quot;jms:invoices&quot;).to(&quot;file:/invoices&quot;);
+    }
+}]]></script>
+</div></div><p>Else, if more customisation is needed, any&#160;<code>CamelContext</code>&#160;class can be used to declare a custom Camel context bean. Then, the&#160;<code>@PostConstruct</code>&#160;and&#160;<code>@PreDestroy</code>&#160;lifecycle callbacks can be done to do the customisation, e.g.:</p><div class="highlight highlight-source-java"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@ApplicationScoped
+class CustomCamelContext extends DefaultCamelContext {
+
+    @PostConstruct
+    void customize() {
+        // Set the Camel context name
+        setName(&quot;custom&quot;);
+        // Disable JMX
+        disableJMX();
+    }
+
+    @PreDestroy
+    void cleanUp() {
+        // ...
+    }
+}]]></script>
+</div></div><p><a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#producer_method" rel="nofollow">Producer</a>&#160;and&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#disposer_method" rel="nofollow">disposer</a>&#160;methods can also be used as well to customize the Camel context bean, e.g.:</p></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[class CamelContextFactory {
+
+    @Produces
+    @ApplicationScoped
+    CamelContext customize() {
+        DefaultCamelContext context = new DefaultCamelContext();
+        context.setName(&quot;custom&quot;);
+        return context;
+    }
+
+    void cleanUp(@Disposes CamelContext context) {
+        // ...
+    }
+}]]></script>
+</div></div><p>Similarly,&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#producer_field" rel="nofollow">producer fields</a>&#160;can be used, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Produces
+@ApplicationScoped
+CamelContext context = new CustomCamelContext();
+
+class CustomCamelContext extends DefaultCamelContext {
+
+    CustomCamelContext() {
+        setName(&quot;custom&quot;);
+    }
+}]]></script>
+</div></div><p>This pattern can be used for example to avoid having the Camel context routes started automatically when the container initialises by calling the&#160;<code>setAutoStartup</code>&#160;method, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@ApplicationScoped
+class ManualStartupCamelContext extends DefaultCamelContext {
+
+    @PostConstruct
+    void manual() {
+        setAutoStartup(false);
+    }
+}]]></script>
+</div></div><h3 id="CDI-MultipleCamelcontexts">Multiple Camel contexts</h3><p>Any number of <code>CamelContext</code> beans can actually be declared in the application as documented above. In that case, the CDI qualifiers declared on these <code>CamelContext</code> beans are used to bind the Camel routes and other Camel primitives to the corresponding Camel contexts. From example, if the following beans get declared:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@ApplicationScoped
+@ContextName(&quot;foo&quot;)
+class FooCamelContext extends DefaultCamelContext {
+}
+
+@ApplicationScoped
+@BarContextQualifier
+class BarCamelContext extends DefaultCamelContext {
+}
+ 
+@ContextName(&quot;foo&quot;)
+class RouteAdddedToFooCamelContext extends RouteBuilder {
+ 
+	@Override
+    public void configure() {
+        // ...
+    }
+}
+ 
+@BarContextQualifier
+class RouteAdddedToBarCamelContext extends RouteBuilder {
+ 
+	@Override
+    public void configure() {
+        // ...
+    }
+}
+ 
+@ContextName(&quot;baz&quot;)
+class RouteAdddedToBazCamelContext extends RouteBuilder {
+ 
+	@Override
+    public void configure() {
+        // ...
+    }
+}
+ 
+@MyOtherQualifier
+class RouteNotAddedToAnyCamelContext extends RouteBuilder {
+ 
+	@Override
+    public void configure() {
+        // ...
+    }
+}]]></script>
+</div></div><p>The&#160;<code>RoutesBuilder</code> beans qualified with&#160;<code>@ContextName</code> are automatically added to the corresponding <code>CamelContext</code> beans by Camel CDI. If no such <code>CamelContext</code> bean exists, it gets automatically created, as for the <code>RouteAddedToBazCamelContext</code> bean. Note this only happens for the&#160;<code>@ContextName</code>&#160;qualifier provided by Camel CDI. Hence the&#160;<code>RouteNotAddedToAnyCamelContext</code> bean qualified with the user-defined&#160;<code>@MyOtherQualifier</code>&#160;qualifier does not get added to any Camel contexts. That may be useful, for example, for Camel routes that may be required to be added later during the application execution.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Since Camel version 2.17.0, Camel CDI is capable of managing any kind of <code>CamelContext</code> beans. In previous versions, it is only capable of managing beans of type <code>CdiCamelContext</code> so it is required to extend it.</p></div></div><p>The CDI qualifiers declared on the&#160;<code>CamelContext</code>&#160;beans are also used to bind the corresponding Camel primitives, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@ContextName(&quot;foo&quot;)
+@Uri(&quot;direct:inbound&quot;)
+ProducerTemplate producerTemplate;
+
+@Inject
+@BarContextQualifier
+MockEndpoint outbound; // URI defaults to the member name, i.e. mock:outbound
+
+@Inject
+@ContextName(&quot;baz&quot;)
+@Uri(&quot;direct:inbound&quot;)
+Endpoint endpoint;]]></script>
+</div></div><h3 id="CDI-Configurationproperties">Configuration properties</h3><p>To configure the sourcing of the configuration properties used by Camel to resolve properties placeholders, you can declare a&#160;<code>PropertiesComponent</code>&#160;bean qualified with <code>@Named("properties")</code>, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Produces
+@ApplicationScoped
+@Named(&quot;properties&quot;)
+PropertiesComponent propertiesComponent() {
+    Properties properties = new Properties();
+    properties.put(&quot;property&quot;, &quot;value&quot;);
+    PropertiesComponent component = new PropertiesComponent();
+    component.setInitialProperties(properties);
+    component.setLocation(&quot;classpath:placeholder.properties&quot;);
+    return component;
+}]]></script>
+</div></div><p>If you want to use&#160;<a shape="rect" class="external-link" href="http://deltaspike.apache.org/documentation/configuration.html">DeltaSpike configuration mechanism</a>&#160;you can declare the following&#160;<code>PropertiesComponent</code> bean:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Produces
+@ApplicationScoped
+@Named(&quot;properties&quot;)
+PropertiesComponent properties(PropertiesParser parser) {
+    PropertiesComponent component = new PropertiesComponent();
+    component.setPropertiesParser(parser);
+    return component;
+}
+
+// PropertiesParser bean that uses DeltaSpike to resolve properties
+static class DeltaSpikeParser extends DefaultPropertiesParser {
+    @Override
+    public String parseProperty(String key, String value, Properties properties) {
+        return ConfigResolver.getPropertyValue(key);
+    }
+}]]></script>
+</div></div><div class="highlight highlight-source-java"><p>You can see the&#160;<span><code>camel-example-cdi-properties</code> example for a working example of a Camel CDI application using DeltaSpike configuration mechanism.</span></p></div><h3 id="CDI-Auto-configuredtypeconverters">Auto-configured type converters</h3><p>CDI beans annotated with the&#160;<code>@Converter</code>&#160;annotation are automatically registered into the deployed Camel contexts, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Converter
+public class MyTypeConverter {
+
+    @Converter
+    public Output convert(Input input) {
+        //...
+    }
+}]]></script>
+</div></div><p>Note that CDI injection is supported within the type converters.</p><h3 id="CDI-Camelbeanintegration">Camel bean integration</h3><h4 id="CDI-Camelannotations">Camel annotations</h4><p>As part of the Camel&#160;<a shape="rect" class="external-link" href="http://camel.apache.org/bean-integration.html">bean integration</a>,&#160;Camel comes with a set of&#160;<a shape="rect" class="external-link" href="http://camel.apache.org/bean-integration.html#BeanIntegration-Annotations">annotations</a>&#160;that are seamlessly supported by Camel CDI. So you can use any of these annotations in your CDI beans, e.g.:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh">&#160;</th><th colspan="1" rowspan="1" class="confluenceTh">Camel annotation</th><th colspan="1" rowspan="1" class="confluenceTh">CDI equivalent</th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Configuration property</td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@PropertyInject(&quot;key&quot;)
+String value;
+]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><p>If using <a shape="rect" class="external-link" href="http://deltaspike.apache.org/documentation/configuration.html">DeltaSpike configuration mechanism</a>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@ConfigProperty(name = &quot;key&quot;)
+String value;]]></script>
+</div></div><p>See <a shape="rect" href="#CDI-Configurationproperties">configuration properties</a> for more details.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Producer template injection (default Camel context)</td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Produce(uri = &quot;mock:outbound&quot;)
+ProducerTemplate producer;]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@Uri(&quot;direct:outbound&quot;)
+ProducerTemplate producer;]]></script>
+</div></div></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Endpoint injection (default Camel context)</td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@EndpointInject(uri = &quot;direct:inbound&quot;)
+Endpoint endpoint;]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@Uri(&quot;direct:inbound&quot;)
+Endpoint endpoint;]]></script>
+</div></div></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Endpoint injection (Camel context by name)</td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@EndpointInject(uri = &quot;direct:inbound&quot;, context = &quot;foo&quot;)
+Endpoint contextEndpoint;]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@ContextName(&quot;foo&quot;)
+@Uri(&quot;direct:inbound&quot;)
+Endpoint contextEndpoint;]]></script>
+</div></div></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Bean injection (by type)</td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@BeanInject
+MyBean bean;]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+MyBean bean;
+]]></script>
+</div></div></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Bean injection (by name)</td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@BeanInject(&quot;foo&quot;)
+MyBean bean;]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@Named(&quot;foo&quot;)
+MyBean bean;
+]]></script>
+</div></div></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">POJO consuming</td><td colspan="1" rowspan="1" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Consume(uri = &quot;seda:inbound&quot;)
+void consume(@Body String body) {
+    //...
+}]]></script>
+</div></div></td><td colspan="1" rowspan="1" class="confluenceTd">&#160;</td></tr></tbody></table></div><h4 id="CDI-Beancomponent">Bean component</h4><p>You can refer to CDI beans, either by type or name, From the Camel DSL, e.g. with the Java Camel DSL:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[class MyBean {
+	//...
+}
+ 
+from(&quot;direct:inbound&quot;).bean(MyBean.class);]]></script>
+</div></div><p>Or to lookup a CDI bean by name from the Java DSL:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Named(&quot;foo&quot;)
+class MyNamedBean {
+	//...
+}
+ 
+from(&quot;direct:inbound&quot;).bean(&quot;foo&quot;);]]></script>
+</div></div><h4 id="CDI-ReferringbeansfromEndpointURIs">Referring beans from Endpoint URIs</h4><p><span style="color: rgb(0,0,0);">When configuring endpoints using the URI syntax you can refer to beans in the&#160;</span><a shape="rect" href="registry.html">Registry</a><span style="color: rgb(0,0,0);">&#160;using the <code>#</code> notation.</span><span>&#160;</span><span style="color: rgb(0,0,0);">If the URI parameter value starts with a&#160;</span><code>#</code><span style="color: rgb(0,0,0);">&#160;sign then Camel CDI will lookup</span><span style="color: rgb(0,0,0);">&#160;for a bean of the given type by name, e.g.:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;jms:queue:{{destination}}?transacted=true&amp;transactionManager=#jtaTransactionManager&quot;).to(&quot;...&quot;);]]></script>
+</div></div><p>Having the following CDI bean qualified with&#160;<code>@Named("jtaTransactionManager")</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Produces
+@Named(&quot;jtaTransactionManager&quot;)
+PlatformTransactionManager createTransactionManager(TransactionManager transactionManager, UserTransaction userTransaction) {
+    JtaTransactionManager jtaTransactionManager = new JtaTransactionManager();
+    jtaTransactionManager.setUserTransaction(userTransaction);
+    jtaTransactionManager.setTransactionManager(transactionManager);
+    jtaTransactionManager.afterPropertiesSet();
+    return jtaTransactionManager;
+}]]></script>
+</div></div><h3 id="CDI-CameleventstoCDIevents">Camel events to CDI events</h3><p><strong>Available as of Camel 2.17</strong></p><p>Camel provides a set of&#160;<a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/management/event/package-summary.html">management events</a>&#160;that can be subscribed to for listening to Camel context, service, route and exchange events. Camel CDI seamlessly translates these Camel events into CDI events that can be observed using CDI&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#observer_methods" rel="nofollow">observer methods</a>, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[void onContextStarting(@Observes CamelContextStartingEvent event) {
+    // Called before the default Camel context is about to start
+}]]></script>
+</div></div><p>As of Camel 2.18, it is possible to observe events for a particular route (<code>RouteAddedEvent</code>, <code>RouteStartedEvent</code>, <code>RouteStoppedEvent</code> and <code>RouteRemovedEvent</code>) should it have an explicit defined, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;...&quot;).routeId(&quot;foo&quot;).to(&quot;...&quot;);
+ 
+void onRouteStarted(@Observes @Named(&quot;foo&quot;) RouteStartedEvent event) {
+    // Called after the route &quot;foo&quot; has started
+}]]></script>
+</div></div><p>When multiple Camel contexts exist in the CDI container, the Camel context bean qualifiers, like&#160;<code>@ContextName</code>,&#160;can be used to refine the observer method resolution to a particular Camel context as specified in&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#observer_resolution" rel="nofollow">observer resolution</a>, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[void onRouteStarted(@Observes @ContextName(&quot;foo&quot;) RouteStartedEvent event) {
+    // Called after the route &#39;event.getRoute()&#39; for the Camel context &#39;foo&#39; has started
+}
+ 
+void onContextStarted(@Observes @Manual CamelContextStartedEvent event) {
+    // Called after the the Camel context qualified with &#39;@Manual&#39; has started
+}]]></script>
+</div></div><p>Similarly, the&#160;<code>@Default</code>&#160;qualifier can be used to observe Camel events for the&#160;<em>default</em>&#160;Camel context if multiples contexts exist, e.g.:</p><div class="highlight highlight-source-java"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[void onExchangeCompleted(@Observes @Default ExchangeCompletedEvent event) {
+    // Called after the exchange &#39;event.getExchange()&#39; processing has completed
+}]]></script>
+</div></div><p>In that example, if no qualifier is specified, the&#160;<code>@Any</code>&#160;qualifier is implicitly assumed, so that corresponding events for all the Camel contexts get received.</p></div><p>Note that the support for Camel events translation into CDI events is only activated if observer methods listening for Camel events are detected in the deployment, and that per Camel context.</p><h3 id="CDI-CDIeventsendpoint">CDI events endpoint</h3><p><strong>Available as of Camel 2.17</strong></p><p>The CDI event endpoint bridges the&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#events" rel="nofollow">CDI events</a>&#160;with the Camel routes so that CDI events can be seamlessly observed / consumed (resp. produced / fired) from Camel consumers (resp. by Camel producers).</p><p>The&#160;<code>CdiEventEndpoint&lt;T&gt;</code>&#160;bean provided by Camel CDI can be used to observe / consume CDI events whose&#160;<em>event type</em>&#160;is&#160;<code>T</code>, for example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+CdiEventEndpoint&lt;String&gt; cdiEventEndpoint;
+
+from(cdiEventEndpoint).log(&quot;CDI event received: ${body}&quot;);]]></script>
+</div></div><p>This is equivalent to writing:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@Uri(&quot;direct:event&quot;)
+ProducerTemplate producer;
+
+void observeCdiEvents(@Observes String event) {
+    producer.sendBody(event);
+}
+
+from(&quot;direct:event&quot;).log(&quot;CDI event received: ${body}&quot;);]]></script>
+</div></div><p>Conversely, the&#160;<code>CdiEventEndpoint&lt;T&gt;</code>&#160;bean can be used to produce / fire CDI events whose&#160;<em>event type</em>&#160;is&#160;<code>T</code>, for example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+CdiEventEndpoint&lt;String&gt; cdiEventEndpoint;
+
+from(&quot;direct:event&quot;).to(cdiEventEndpoint).log(&quot;CDI event sent: ${body}&quot;);]]></script>
+</div></div><p>This is equivalent to writing:</p><div class="highlight highlight-source-java"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+Event&lt;String&gt; event;
+
+from(&quot;direct:event&quot;).process(new Processor() {
+    @Override
+    public void process(Exchange exchange) {
+        event.fire(exchange.getBody(String.class));
+    }
+}).log(&quot;CDI event sent: ${body}&quot;);]]></script>
+</div></div><p>Or using a Java 8 lambda expression:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+Event&lt;String&gt; event;
+
+from(&quot;direct:event&quot;)
+    .process(exchange -&gt; event.fire(exchange.getIn().getBody(String.class)))
+    .log(&quot;CDI event sent: ${body}&quot;);]]></script>
+</div></div><p>The type variable&#160;<code>T</code> (resp. the qualifiers) of a particular&#160;<code>CdiEventEndpoint&lt;T&gt;</code>&#160;injection point are automatically translated into the parameterized&#160;<em>event type</em>&#160;(resp. into the&#160;<em>event qualifiers</em>)&#160;e.g.:</p></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@FooQualifier
+CdiEventEndpoint&lt;List&lt;String&gt;&gt; cdiEventEndpoint;
+
+from(&quot;direct:event&quot;).to(cdiEventEndpoint);
+
+void observeCdiEvents(@Observes @FooQualifier List&lt;String&gt; event) {
+    logger.info(&quot;CDI event: {}&quot;, event);
+}]]></script>
+</div></div><p>When multiple Camel contexts exist in the CDI container, the Camel context bean qualifiers, like&#160;<code>@ContextName</code>,&#160;can be used to qualify the&#160;<code>CdiEventEndpoint&lt;T&gt;</code>&#160;injection points, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@ContextName(&quot;foo&quot;)
+CdiEventEndpoint&lt;List&lt;String&gt;&gt; cdiEventEndpoint;
+// Only observes / consumes events having the @ContextName(&quot;foo&quot;) qualifier
+from(cdiEventEndpoint).log(&quot;Camel context (foo) &gt; CDI event received: ${body}&quot;);
+// Produces / fires events with the @ContextName(&quot;foo&quot;) qualifier
+from(&quot;...&quot;).to(cdiEventEndpoint);
+
+void observeCdiEvents(@Observes @ContextName(&quot;foo&quot;) List&lt;String&gt; event) {
+    logger.info(&quot;Camel context (foo) &gt; CDI event: {}&quot;, event);
+}]]></script>
+</div></div><p>Note that the CDI event Camel endpoint dynamically adds an&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#observer_methods" rel="nofollow">observer method</a>&#160;for each unique combination of&#160;<em>event type</em>&#160;and&#160;<em>event qualifiers</em>&#160;and solely relies on the container typesafe&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#observer_resolution" rel="nofollow">observer resolution</a>, which leads to an implementation as efficient as possible.</p><p>Besides, as the impedance between the&#160;<em>typesafe</em>&#160;nature of CDI and the&#160;<em>dynamic</em>&#160;nature of the&#160;<a shape="rect" class="external-link" href="http://camel.apache.org/component.html">Camel component</a>&#160;model is quite high, it is not possible to create an instance of the CDI event Camel endpoint via&#160;<a shape="rect" class="external-link" href="http://camel.apache.org/uris.html">URIs</a>. Indeed, the URI format for the CDI event component is:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: text; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[cdi-event://PayloadType&lt;T1,...,Tn&gt;[?qualifiers=QualifierType1[,...[,QualifierTypeN]...]]]]></script>
+</div></div><p>With the authority&#160;<code>PayloadType</code>&#160;(resp. the&#160;<code>QualifierType</code>) being the URI escaped fully qualified name of the payload (resp. qualifier) raw type followed by the type parameters section delimited by angle brackets for payload parameterized type. Which leads to&#160;<em>unfriendly</em>&#160;URIs, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: text; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[cdi-event://org.apache.camel.cdi.example.EventPayload%3Cjava.lang.Integer%3E?qualifiers=org.apache.camel.cdi.example.FooQualifier%2Corg.apache.camel.cdi.example.BarQualifier]]></script>
+</div></div><p>But more fundamentally, that would prevent efficient binding between the endpoint instances and the observer methods as the CDI container doesn't have any ways of discovering the Camel context model during the deployment phase.</p><h3 id="CDI-CamelXMLconfigurationimport">Camel XML configuration import</h3><p><strong>Available as of Camel 2.18</strong></p><p>While CDI favors a typesafe dependency injection mechanism, it may be useful&#160;to reuse existing Camel XML configuration files into a Camel CDI application.&#160;In other use cases, it might be handy to rely on the Camel XML DSL to configure&#160;its Camel context(s).</p><p>You can use the&#160;<code>@ImportResource</code> annotation that's provided by Camel CDI on any CDI beans and Camel CDI will automatically load the Camel XML configuration at the specified locations, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@ImportResource(&quot;camel-context.xml&quot;)
+class MyBean {
+}]]></script>
+</div></div><p>Camel CDI will load the resources at the specified locations from the classpath (other protocols may be added in the future).</p><p>Every <code>CamelContext</code> elements and other Camel primitives from the imported resources are automatically deployed as CDI beans during the container bootstrap so that they benefit from the auto-configuration provided by Camel CDI and become available for injection at runtime. If such an element has an explicit <code>id</code> attribute set, the corresponding CDI bean is qualified with the <code>@Named</code> qualifier, e.g., given the following Camel XML configuration:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;camelContext id=&quot;foo&quot;&gt;
+    &lt;endpoint id=&quot;bar&quot; uri=&quot;seda:inbound&quot;&gt;
+        &lt;property key=&quot;queue&quot; value=&quot;#queue&quot;/&gt;
+        &lt;property key=&quot;concurrentConsumers&quot; value=&quot;10&quot;/&gt;
+    &lt;/endpoint&gt;
+&lt;camelContext/&gt;]]></script>
+</div></div><p>The&#160;<span style="color: rgb(71,71,71);">corresponding CDI beans are automatically deployed and can be injected, e.g.:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Inject
+@ContextName(&quot;foo&quot;)
+CamelContext context;
+
+@Inject
+@Named(&quot;bar&quot;)
+Endpoint endpoint;]]></script>
+</div></div><p><span style="color: rgb(71,71,71);"><span style="color: rgb(71,71,71);">Note that the&#160;</span><code>CamelContext</code><span style="color: rgb(71,71,71);">&#160;beans are automatically qualified with both the&#160;</span><code>Named</code><span style="color: rgb(71,71,71);">&#160;and&#160;</span><code>ContextName</code><span style="color: rgb(71,71,71);">&#160;qualifiers. If the imported&#160;</span><code>CamelContext</code><span style="color: rgb(71,71,71);">&#160;element doesn't have an&#160;</span><code>id</code><span style="color: rgb(71,71,71);">&#160;attribute, the corresponding bean is deployed with the built-in&#160;</span><code>Default</code><span style="color: rgb(71,71,71);">&#160;qualifier.</span></span></p><p>Conversely, CDI beans deployed in the application can be referred to from the Camel XML configuration, usually using the&#160;<code>ref</code>&#160;attribute, e.g., given the following bean declared:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Produces
+@Named(&quot;baz&quot;)
+Processor processor = exchange -&gt; exchange.getIn().setHeader(&quot;qux&quot;, &quot;quux&quot;);]]></script>
+</div></div><p><span style="color: rgb(71,71,71);">A reference to that bean can be declared in the imported Camel XML configuration, e.g.:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;camelContext id=&quot;foo&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;...&quot;/&gt;
+        &lt;process ref=&quot;baz&quot;/&gt;
+    &lt;/route&gt;
+&lt;camelContext/&gt;]]></script>
+</div></div><h3 id="CDI-Auto-configuredOSGiintegration">Auto-configured OSGi integration</h3><p><strong>Available as of Camel 2.17</strong></p><p>The Camel context beans are automatically adapted by Camel CDI so that they are registered as OSGi services and the various resolvers (like&#160;<code>ComponentResolver</code> and&#160;<code>DataFormatResolver</code>) integrate with the OSGi registry. That means that the <a shape="rect" href="karaf.html#Karaf-Karafcommands">Karaf Camel commands</a> can be used to operate the Camel contexts auto-configured by Camel CDI, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: text; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[karaf@root()&gt; camel:context-list
+ Context        Status              Total #       Failed #     Inflight #   Uptime        
+ -------        ------              -------       --------     ----------   ------        
+ camel-cdi      Started                   1              0              0   1 minute  ]]></script>
+</div></div><p>See the&#160;<span><code>camel-example-cdi-osgi</code> example for a working example of the Camel CDI OSGi integration.</span></p><h3 id="CDI-LazyInjection/ProgrammaticLookup">Lazy Injection / Programmatic Lookup</h3><p><strong>Available as of Camel 2.17</strong></p><p>While the CDI programmatic model favors a&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#typesafe_resolution" style="text-decoration: underline;" rel="nofollow">type-safe resolution</a>&#160;mechanism that occurs at application initialization time, it is possible to perform dynamic / lazy injection later during the application execution using the&#160;<a shape="rect" class="external-link" href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#programmatic_lookup" style="text-decoration: underline;" rel="nofollow">programmatic lookup</a>&#160;mechanism.</p><p>Camel CDI provides for convenience the annotation literals corresponding to the CDI qualifiers that you can use for standard injection of Camel primitives. These annotation literals can be used in conjunction with the<code>javax.enterprise.inject.Instance</code>&#160;interface which is the CDI entry point to perform lazy injection / programmatic lookup.</p><p>For example, you can use the provided annotation literal for the&#160;<code>@Uri</code>qualifier to lazily lookup for Camel primitives, e.g. for&#160;<code>ProducerTemplate</code>beans:</p><div class="listingblock"><div class="content"><div class="line"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Any
+@Inject
+Instance&lt;ProducerTemplate&gt; producers;
+ 
+ProducerTemplate inbound = producers
+    .select(Uri.Literal.of(&quot;direct:inbound&quot;))
+    .get();]]></script>
+</div></div></div><div class="line">Or for&#160;<code>Endpoint</code>&#160;beans, e.g.:</div></div></div><div class="paragraph"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Any
+@Inject
+Instance&lt;Endpoint&gt; endpoints;
+ 
+MockEndpoint outbound = endpoints
+    .select(MockEndpoint.class, Uri.Literal.of(&quot;mock:outbound&quot;))
+    .get();]]></script>
+</div></div></div><div class="paragraph"><p>Similarly, you can use the provided annotation literal for the<code>@ContextName</code>&#160;qualifier to lazily lookup for&#160;<code>CamelContext</code>&#160;beans, e.g.:</p></div><div class="listingblock"><div class="content"><div class="line"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Any
+@Inject
+Instance&lt;CamelContext&gt; contexts;
+ 
+CamelContext context = contexts
+    .select(ContextName.Literal.of(&quot;foo&quot;))
+    .get();]]></script>
+</div></div></div></div></div><div class="paragraph"><p>You can also refined the selection based on the Camel context type, e.g.:</p></div><div class="listingblock"><div class="content"><div class="line"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Any
+@Inject
+Instance&lt;CamelContext&gt; contexts;
+ 
+// Refine the selection by type 
+Instance&lt;DefaultCamelContext&gt; context = contexts.select(DefaultCamelContext.class);
+ 
+// Check if such a bean exists then retrieve a reference 
+if (!context.isUnsatisfied())
+    context.get();]]></script>
+</div></div></div></div></div><div class="paragraph"><p>Or even iterate over a selection of Camel contexts, e.g.:</p></div><div class="listingblock"><div class="content"><div class="line"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Any
+@Inject
+Instance&lt;CamelContext&gt; contexts;
+ 
+for (CamelContext context : contexts)
+    context.setUseBreadcrumb(true);]]></script>
+</div></div></div></div></div><h3 id="CDI-MavenArchetype">Maven Archetype</h3><p>Among the available&#160;<a shape="rect" href="camel-maven-archetypes.html">Camel Maven archetypes</a>, you can use the provided&#160;<code>camel-archetype-cdi</code>&#160;to generate a Camel CDI Maven project, e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: bash; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[mvn archetype:generate -DarchetypeGroupId=org.apache.camel.archetypes -DarchetypeArtifactId=camel-archetype-cdi]]></script>
+</div></div><h3 id="CDI-Supportedcontainers">Supported containers</h3><p>The Camel CDI component is compatible with any CDI 1.0, CDI 1.1 and CDI 1.2 compliant runtime. It's been successfully tested against the following runtimes:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh">Container</th><th colspan="1" rowspan="1" class="confluenceTh">Version</th><th colspan="1" rowspan="1" class="confluenceTh">Runtime</th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Weld SE</td><td colspan="1" rowspan="1" class="confluenceTd"><code>1.1.28.Final</code></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.0 / Java SE 7</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">OpenWebBeans</td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>1.2.7</code></p></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.0 / Java SE 7</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Weld SE</td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>2.3.4.Final</code></p></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.2 / Java SE 7</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">OpenWebBeans</td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>1.6.3</code></p></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.2 / Java SE 7</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">WildFly</td><td colspan="1" rowspan="1" class="confluenceTd"><code>8.2.1.Final</code></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.2 / Java EE 7</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">WildFly</td><td colspan="1" rowspan="1" class="confluenceTd"><code>9.0.1.Final</code></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.2 / Java EE 7</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">WildFly</td><td colspan="1" rowspan="1" class="confluenceTd"><code>10.0.0.Final</code></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.2 / Java EE 7</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Karaf</td><td colspan="1" rowspan="1" class="confluenceTd"><code>2.4.4</code></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.2 / <span>OSGi 4 / PAX CDI</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Karaf</td><td colspan="1" rowspan="1" class="confluenceTd"><code>3.0.5</code></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.2 / <span>OSGi 5 / PAX CDI</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Karaf</td><td colspan="1" rowspan="1" class="confluenceTd"><code>4.0.4</code></td><td colspan="1" rowspan="1" class="confluenceTd">CDI 1.2 / <span>OSGi 6 / PAX CDI</span></td></tr></tbody></table></div><h3 id="CDI-Examples">Examples</h3><p>The following examples are available in the <code>examples</code> directory of the Camel project:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh">Example</th><th colspan="1" rowspan="1" class="confluenceTh">Description</th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code><span>camel-example-cdi</span></code></td><td colspan="1" rowspan="1" class="confluenceTd">Illustrates how to work with Camel using CDI to configure components, endpoints and beans</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code><span>camel-example-cdi-metrics</span></code></td><td colspan="1" rowspan="1" class="confluenceTd">Illustrates the integration between Camel, Dropwizard Metrics and CDI</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code><span>camel-example-cdi-properties</span></code></td><td colspan="1" rowspan="1" class="confluenceTd">Illustrates the integration between Camel, DeltaSpike and CDI for configuration properties</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code><span>camel-example-cdi-osgi</span></code></td><td colspan="1" rowspan="1" class="confluenceTd">A&#160;CDI application using the SJMS component that can be executed inside an OSGi container using PAX CDI</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code><span>camel-example-cdi-test</span></code></td><td colspan="1" rowspan="1" class="confluenceTd">Demonstrates the testing features that are provided as part of the integration between Camel and CDI</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code><span>camel-example-cdi-rest-servlet</span></code></td><td colspan="1" rowspan="1" class="confluenceTd">Illustrates the Camel REST DSL being used in a Web application that uses CDI as dependency injection framework</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>camel-example-cdi-xml</code></td><td colspan="1" rowspan="1" class="confluenceTd"><span>Illustrates the use of Camel XML configuration files into a Camel CDI application</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code><span>camel-example-widget-gadget-cdi</span></code></td><td colspan="1" rowspan="1" class="confluenceTd">The Widget and Gadget use-case from the EIP book implemented in Java with CDI dependency injection</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code><span>camel-example-swagger-cdi</span></code></td><td colspan="1" rowspan="1" class="confluenceTd">An example using REST DSL and Swagger Java with CDI</td></tr></tbody></table></div><h3 id="CDI-SeeAlso">See Also</h3><ul><li><a shape="rect" href="cdi-testing.html">Camel CDI Testing</a></li><li><a shape="rect" class="external-link" href="http://www.cdi-spec.org" rel="nofollow">CDI Web site</a></li><li><a shape="rect" class="external-link" href="http://www.cdi-spec.org/ecosystem/" rel="nofollow">CDI ecosystem</a></li><li><a shape="rect" class="external-link" href="https://github.com/astefanutti/further-cdi" rel="nofollow">Going further with CDI</a> (See Camel CDI section)</li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=27846495">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27846495&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

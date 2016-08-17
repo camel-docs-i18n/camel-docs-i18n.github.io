@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Simple
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="architecture.html">Architecture</a>&nbsp;&gt;&nbsp;<a href="languages.html">Languages</a>&nbsp;&gt;&nbsp;<a href="simple.html">Simple</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="Simple-SimpleExpressionLanguage">Simple Expression Language</h2><p>The Simple Expression Language was a really simple language when it was created, but has since grown more powerful. It is primarily intended for being a really small and simple language for evaluating <a shape="rect" href="expression.html">Expression</a>s and <a shape="rect" href="predicate.html">Predicate</a>s without requiring any new dependencies or knowledge of <a shape="rect" href="xpath.html">XPath</a>; so it is ideal for testing in camel-core. The idea was to cover 95% of the common use cases when you need a little bit of expression based script in your Camel routes.</p><p>However for much more complex use cases you are generally recommended to choose a more expressive and powerful language such as:</p><ul><li><a shape="rect" href="spel.html">SpEL</a></li><li><a shape="rect" href="mvel.html">Mvel</a></li><li><a shape="rect" href="groovy.html">Groovy</a></li><li><a shape="rect" href="javascript.html">JavaScript</a></li><li><a shape="rect" href="el.html">EL</a></li><li><a shape="rect" href="ognl.html">OGNL</a></li><li>one of the supported <a shape="rect" href="scripting-languages.html">Scripting Languages</a></li></ul><p>The simple language uses <code>${body</code>} placeholders for complex expressions where the expression contains constant literals. The ${ } placeholders can be omitted if the expression is only the token itself.</p><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Alternative syntax</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>From Camel 2.5 onwards you can also use the alternative syntax which uses $simple{ } as placeholders.<br clear="none"> This can be used in situations to avoid clashes when using for example Spring property placeholder together with Camel.</p></div></div><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Configuring result type</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>From Camel 2.8 onwards you can configure the result type of the <a shape="rect" href="simple.html">Simple</a> expression. For example to set the type as a <code>java.lang.Boolean</code> or a <code>java.lang.Integer</code> etc.</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><p class="title">File language is now merged with Simple language</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>From Camel 2.2 onwards, the <a shape="rect" href="file-language.html">File Language</a> is now merged with <a shape="rect" href="simple.html">Simple</a> language which means you can use all the file syntax directly within the simple language.</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Simple Language Changes in Camel 2.9 onwards</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The <a shape="rect" href="simple.html">Simple</a> language have been improved from Camel 2.9 onwards to use a better syntax parser, which can do index precise error messages, so you know exactly what is wrong and where the problem is. For example if you have made a typo in one of the operators, then previously the parser would not be able to detect this, and cause the evaluation to be true. There are a few changes in the syntax which are no longer backwards compatible. When using <a shape="rect" href="simple.html">Simple</a> language as a <a shape="rect" href="predicate.html">Predicate</a> then the literal text <strong>must</strong> be enclosed in either single or double quotes. For example: <code>"${body} == 'Camel'"</code>. Notice how we have single quotes around the literal. The old style of using <code>"body"</code> and <code>"header.foo"</code> to refer to the message body and header is @deprecated, and it is encouraged to always use ${ } tokens for the built-in functions.<br clear="none"> The range operator now requires the range to be in single quote as well as shown: <code>"${header.zip} between '30000..39999'"</code>.</p></div></div><p>To get the body of the in message: <code>"body"</code>, or <code>"in.body"</code> or <code>"${body}"</code>.</p><p>A complex expression must use ${ } placeholders, such as: <code>"Hello ${in.header.name} how are you?"</code>.</p><p>You can have multiple functions in the same expression: <code>"Hello ${in.header.name} this is ${in.header.me} speaking"</code>.<br clear="none"> However you can <strong>not</strong> nest functions in Camel 2.8.x or older (i.e. having another ${ } placeholder in an existing, is not allowed).<br clear="none"> From <strong>Camel 2.9</strong> onwards you can nest functions.</p><h3 id="Simple-Variables">Variables</h3><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Variable</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Type</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>camelId</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.10:</strong> the <a shape="rect" href="camelcontext.html">CamelContext</a> name</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>camelContext.<strong>OGNL</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> the CamelContext invoked using a Camel OGNL expression.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">exchange</td><td colspan="1" rowspan="1" class="confluenceTd">Exchange</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.16:</strong> the <a shape="rect" href="exchange.html">Exchange</a></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">exchange.<strong>OGNL</strong></td><td colspan="1" rowspan="1" class="confluenceTd">Object</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.16:</strong><span> the </span><a shape="rect" href="exchange.html">Exchange</a><span> invoked using a Camel OGNL expression.</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>exchangeId</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> the exchange id</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>id</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>the input message id</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>body</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>the input body</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.body</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>the input body</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>body.<strong>OGNL</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> the input body invoked using a Camel OGNL expression.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.body.<strong>OGNL</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> the input body invoked using a Camel OGNL expression.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>bodyAs(<em>type</em>)</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Type</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> Converts the body to the given type determined by its classname. The converted body can be null.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><span>bodyAs(</span><em>type</em><span>).<strong>OGNL</strong></span></td><td colspan="1" rowspan="1" class="confluenceTd">Object</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.18:</strong><span> Converts the body to the given type determined by its classname and then invoke methods using a Camel OGNL expression. The converted body can be null.</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>mandatoryBodyAs(<em>type</em>)</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Type</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.5:</strong> Converts the body to the given type determined by its classname, and expects the body to be not null.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><span>mandatoryBodyAs(</span><em>type</em><span>).<strong>OGNL</strong></span></td><td colspan="1" rowspan="1" class="confluenceTd">Object</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.18:</strong><span> Converts the body to the given type determined by its classname and then invoke methods using a Camel OGNL expression.</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>out.body</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>the output body</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>header.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>refer to the input foo header</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>header[foo]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9.2:</strong> refer to the input foo header</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>headers.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>refer to the input foo header</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>headers[foo]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9.2:</strong> refer to the input foo header</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.header.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>refer to the input foo header</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.header[foo]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9.2:</strong> refer to the input foo header</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.headers.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>refer to the input foo header</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.headers[foo]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9.2:</strong> refer to the input foo header</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>header.foo[bar]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> regard input foo header as a map and perform lookup on the map with bar as key</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.header.foo[bar]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> regard input foo header as a map and perform lookup on the map with bar as key</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.headers.foo[bar]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> regard input foo header as a map and perform lookup on the map with bar as key</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>header.foo.<strong>OGNL</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> refer to the input foo header and invoke its value using a Camel OGNL expression.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.header.foo.<strong>OGNL</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> refer to the input foo header and invoke its value using a Camel OGNL expression.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.headers.foo.<strong>OGNL</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> refer to the input foo header and invoke its value using a Camel OGNL expression.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>out.header.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>refer to the out header foo</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>out.header[foo]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9.2:</strong> refer to the out header foo</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>out.headers.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>refer to the out header foo</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>out.headers[foo]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9.2:</strong> refer to the out header foo</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>headerAs(<em>key</em>,<em>type</em>)</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Type</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.5:</strong> Converts the header to the given type determined by its classname</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>headers</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Map</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> refer to the input headers</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in.headers</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Map</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> refer to the input headers</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>property.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Deprecated:</strong> refer to the foo property on the exchange</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">exchangeProperty.foo</td><td colspan="1" rowspan="1" class="confluenceTd">Object</td><td colspan="1" rowspan="1" class="confluenceTd"><span><strong>Camel 2.15:</strong> refer to the foo property on the exchange</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>property[foo]</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Deprecated:</strong> refer to the foo property on the exchange</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><span>exchangeProperty[foo]</span></td><td colspan="1" rowspan="1" class="confluenceTd">Object</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.15:</strong><span> refer to the foo property on the exchange</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>property.foo.<strong>OGNL</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Deprecated:</strong> refer to the foo property on the exchange and invoke its value using a Camel OGNL expression.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><span>exchangeProperty.foo.</span><strong>OGNL</strong></td><td colspan="1" rowspan="1" class="confluenceTd">Object</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.15:</strong><span> refer to the foo property on the exchange and invoke its value using a Camel OGNL expression.</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>sys.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>refer to the system property</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>sysenv.foo</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> refer to the system environment</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>exception</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.4:</strong> Refer to the exception object on the exchange, is <strong>null</strong> if no exception set on exchange. Will fallback and grab caught exceptions (<code>Exchange.EXCEPTION_CAUGHT</code>) if the Exchange has any.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>exception.<strong>OGNL</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.4:</strong> Refer to the exchange exception invoked using a Camel OGNL expression object</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>exception.message</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Refer to the exception.message on the exchange, is <strong>null</strong> if no exception set on exchange. Will fallback and grab caught exceptions (<code>Exchange.EXCEPTION_CAUGHT</code>) if the Exchange has any.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>exception.stacktrace</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.6.</strong> Refer to the exception.stracktrace on the exchange, is <strong>null</strong> if no exception set on exchange. Will fallback and grab caught exceptions (<code>Exchange.EXCEPTION_CAUGHT</code>) if the Exchange has any.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>date:<em>command:pattern</em></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Date formatting using the <code>java.text.SimpleDataFormat</code> patterns. Supported commands are: <strong>now</strong> for current timestamp, <strong>in.header.xxx</strong> or <strong>header.xxx</strong> to use the Date object in the IN header with the key xxx. <strong>out.header.xxx</strong> to use the Date object in the OUT header with the key xxx.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>bean:<em>bean expression</em></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Invoking a bean expression using the <a shape="rect" href="bean.html">Bean</a> language. Specifying a method name you must use dot as separator. We also support the ?method=methodname syntax that is used by the <a shape="rect" href="bean.html">Bean</a> component.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>properties:<em>locations:key</em></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Deprecated (use properties-location instead) Camel 2.3:</strong> Lookup a property with the given key. The <code>locations</code> option is optional. See more at <a shape="rect" href="using-propertyplaceholder.html">Using PropertyPlaceholder</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>properties-location:<em><a shape="rect" class="external-link" href="http://locationskey" rel="nofollow">locations:key</a></em></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.14.1:</strong> Lookup a property with the given key. The <code>locations</code> option is optional. See more at <a shape="rect" href="using-propertyplaceholder.html">Using PropertyPlaceholder</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">properties:key:default</td><td colspan="1" rowspan="1" class="confluenceTd">String</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.14.1</strong>: Lookup a property with the given key. If the key does not exists or has no value, then an optional default value can be specified.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>routeId</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> Returns the id of the current route the <a shape="rect" href="exchange.html">Exchange</a> is being routed.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>threadName</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3:</strong> Returns the name of the current thread. Can be used for logging purpose.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ref:xxx</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.6:</strong> To lookup a bean from the <a shape="rect" href="registry.html">Registry</a> with the given id.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>type:name.field</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> To refer to a type or field by its FQN name. To refer to a field you can append .FIELD_NAME. For example you can refer to the constant field from Exchange as: <code>org.apache.camel.Exchange.FILE_NAME</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>null</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>null</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.12.3:</strong> represents a <strong>null</strong></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>random<em>(value)</em></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Integer</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.16.0: </strong>returns a random Integer between 0 (included) and <em>value</em> (excluded)</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>random<em>(min,max)</em></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Integer</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.16.0: </strong>returns a random Integer between <em>min</em> (included) and <em>max</em> (excluded)</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">collate(group)</td><td colspan="1" rowspan="1" class="confluenceTd">List</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.17:</strong> The collate function iterates the message body and groups the data into sub lists of specified size. This can be used with the <a shape="rect" href="splitter.html">Splitter</a> EIP to split a message body and group/batch the splitted sub message into a group of N sub lists. This method works similar to the collate method in Groovy.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">messageHistory</td><td colspan="1" rowspan="1" class="confluenceTd">String</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.17:</strong> The message history of the current exchange how it has been routed. This is similar to the route stack-trace message history the error handler logs in case of an unhandled exception.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><span>messageHistory(false)</span></td><td colspan="1" rowspan="1" class="confluenceTd">String</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.17:</strong><span>&#160;</span>As messageHistory but without the exchange details (only includes the route strack-trace). This can be used if you do not want to log sensitive data from the message itself.</td></tr></tbody></table></div></div><h3 id="Simple-OGNLexpressionsupport">OGNL expression support</h3><p><strong>Available as of Camel 2.3</strong></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Camel's OGNL support is for invoking methods only. You cannot access fields.<br clear="none"> From <strong>Camel 2.11.1</strong> onwards we added special support for accessing the length field of Java arrays.</p></div></div><p>The <a shape="rect" href="simple.html">Simple</a> and <a shape="rect" href="bean.html">Bean</a> language now supports a Camel OGNL notation for invoking beans in a chain like fashion.<br clear="none"> Suppose the Message IN body contains a POJO which has a <code>getAddress()</code> method.</p><p>Then you can use Camel OGNL notation to access the address object:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body.address}&quot;)
+simple(&quot;${body.address.street}&quot;)
+simple(&quot;${body.address.zip}&quot;)
+]]></script>
+</div></div><p>Camel understands the shorthand names for getters, but you can invoke any method or use the real name such as:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body.address}&quot;)
+simple(&quot;${body.getAddress.getStreet}&quot;)
+simple(&quot;${body.address.getZip}&quot;)
+simple(&quot;${body.doSomething}&quot;)
+]]></script>
+</div></div><p>You can also use the null safe operator (<code>?.</code>) to avoid NPE if for example the body does NOT have an address</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body?.address?.street}&quot;)
+]]></script>
+</div></div><p>It is also possible to index in <code>Map</code> or <code>List</code> types, so you can do:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body[foo].name}&quot;)
+]]></script>
+</div></div><p>To assume the body is <code>Map</code> based and lookup the value with <code>foo</code> as key, and invoke the <code>getName</code> method on that value.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If the key has space, then you <strong>must</strong> enclose the key with quotes, for example 'foo bar':</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body[&#39;foo bar&#39;].name}&quot;)
+]]></script>
+</div></div></div></div><p>You can access the <code>Map</code> or <code>List</code> objects directly using their key name (with or without dots) :</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body[foo]}&quot;)
+simple(&quot;${body[this.is.foo]}&quot;)
+]]></script>
+</div></div><p>Suppose there was no value with the key <code>foo</code> then you can use the null safe operator to avoid the NPE as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body[foo]?.name}&quot;)
+]]></script>
+</div></div><p>You can also access <code>List</code> types, for example to get lines from the address you can do:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body.address.lines[0]}&quot;)
+simple(&quot;${body.address.lines[1]}&quot;)
+simple(&quot;${body.address.lines[2]}&quot;)
+]]></script>
+</div></div><p>There is a special <code>last</code> keyword which can be used to get the last value from a list.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body.address.lines[last]}&quot;)
+]]></script>
+</div></div><p>And to get the 2nd last you can subtract a number, so we can use <code>last-1</code> to indicate this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body.address.lines[last-1]}&quot;)
+]]></script>
+</div></div><p>And the 3rd last is of course:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body.address.lines[last-2]}&quot;)
+]]></script>
+</div></div><p>And you can call the size method on the list with</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body.address.lines.size}&quot;)
+]]></script>
+</div></div><p>From <strong>Camel 2.11.1</strong> onwards we added support for the length field for Java arrays as well, eg:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[String[] lines = new String[]{&quot;foo&quot;, &quot;bar&quot;, &quot;cat&quot;};
+exchange.getIn().setBody(lines);
+
+simple(&quot;There are ${body.length} lines&quot;)
+]]></script>
+</div></div><p>And yes you can combine this with the operator support as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${body.address.zip} &gt; 1000&quot;)
+]]></script>
+</div></div><h3 id="Simple-Operatorsupport">Operator support</h3><p>The parser is limited to only support a single operator.</p><p>To enable it the left value must be enclosed in ${ }. The syntax is:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[${leftValue} OP rightValue
+]]></script>
+</div></div><p>Where the <code>rightValue</code> can be a String literal enclosed in <code>' '</code>, <code>null</code>, a constant value or another expression enclosed in ${ }.</p><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Important</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>There <strong>must</strong> be spaces around the operator.</p></div></div><p>Camel will automatically type convert the rightValue type to the leftValue type, so it is able to eg. convert a string into a numeric so you can use &gt; comparison for numeric values.</p><p>The following operators are supported:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Operator</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>==</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>equals</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">=~</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.16:</strong> equals ignore case (will ignore case when comparing String values)</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>&gt;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>greater than</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>&gt;=</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>greater than or equals</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>&lt;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>less than</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>&lt;=</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>less than or equals</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>!=</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>not equals</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>contains</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For testing if contains in a string based value</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>not contains</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For testing if not contains in a string based value</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>regex</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For matching against a given regular expression pattern defined as a String value</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>not regex</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For not matching against a given regular expression pattern defined as a String value</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>in</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For matching if in a set of values, each element must be separated by comma.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>not in</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For matching if not in a set of values, each element must be separated by comma.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>is</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For matching if the left hand side type is an instanceof the value.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>not is</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For matching if the left hand side type is not an instanceof the value.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>range</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For matching if the left hand side is within a range of values defined as numbers: <code>from..to</code>. From <strong>Camel 2.9</strong> onwards the range values must be enclosed in single quotes.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>not range</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>For matching if the left hand side is not within a range of values defined as numbers: <code>from..to</code>. From <strong>Camel 2.9</strong> onwards the range values must be enclosed in single quotes.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">starts with</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.17.1, 2.18</strong><span>: For testing if the left hand side string starts with the right hand string.</span></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">ends with</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.17.1, 2.18</strong>: For testing if the left hand side string ends with the right hand string.</td></tr></tbody></table></div><p>And the following unary operators can be used:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Operator</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>++</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> To increment a number by one. The left hand side must be a function, otherwise parsed as literal.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>--</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> To decrement a number by one. The left hand side must be a function, otherwise parsed as literal.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>\</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9.3 to 2.10.x</strong> To escape a value, eg \$, to indicate a $ sign. Special: Use \n for new line, \t for tab, and \r for carriage return. <strong>Notice:</strong> Escaping is <strong>not</strong> supported using the <a shape="rect" href="file-language.html">File Language</a>. <strong>Notice:</strong> From Camel 2.11 onwards the escape character is no longer support, but replaced with the following three special escaping.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>\n</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> To use newline character.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>\t</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> To use tab character.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>\r</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> To use carriage return character.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">\}</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.18:</strong> To use the } character as text</td></tr></tbody></table></div><p>And the following logical operators can be used to group expressions:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Operator</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>and</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>deprecated</strong> use &amp;&amp; instead. The logical and operator is used to group two expressions.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>or</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>deprecated</strong> use || instead. The logical or operator is used to group two expressions.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>&amp;&amp;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> The logical and operator is used to group two expressions.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>||</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> The logical or operator is used to group two expressions.</p></td></tr></tbody></table></div><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Using and,or operators</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In <strong>Camel 2.4 or older</strong> the <code>and</code> or <code>or</code> can only be used <strong>once</strong> in a simple language expression. From <strong>Camel 2.5</strong> onwards you can use these operators multiple times.</p></div></div><p>The syntax for AND is:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[${leftValue} OP rightValue and ${leftValue} OP rightValue 
+]]></script>
+</div></div><p>And the syntax for OR is:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[${leftValue} OP rightValue or ${leftValue} OP rightValue 
+]]></script>
+</div></div><p>Some examples:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[// exact equals match
+simple(&quot;${in.header.foo} == &#39;foo&#39;&quot;)
+ 
+// ignore case when comparing, so if the header has value FOO this will match
+simple(&quot;${in.header.foo} =~ &#39;foo&#39;&quot;)
+
+// here Camel will type convert &#39;100&#39; into the type of in.header.bar and if it is an Integer &#39;100&#39; will also be converter to an Integer
+simple(&quot;${in.header.bar} == &#39;100&#39;&quot;)
+
+simple(&quot;${in.header.bar} == 100&quot;)
+
+// 100 will be converter to the type of in.header.bar so we can do &gt; comparison
+simple(&quot;${in.header.bar} &gt; 100&quot;)
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Comparing with different types</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>When you compare with different types such as String and int, then you have to take a bit care. Camel will use the type from the left hand side as 1st priority. And fallback to the right hand side type if both values couldn't be compared based on that type.<br clear="none"> This means you can flip the values to enforce a specific type. Suppose the bar value above is a String. Then you can flip the equation:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;100 &lt; ${in.header.bar}&quot;)
+]]></script>
+</div></div><p>which then ensures the int type is used as 1st priority.</p><p>This may change in the future if the Camel team improves the binary comparison operations to prefer numeric types over String based. It's most often the String type which causes problem when comparing with numbers.</p></div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[// testing for null
+simple(&quot;${in.header.baz} == null&quot;)
+
+// testing for not null
+simple(&quot;${in.header.baz} != null&quot;)
+]]></script>
+</div></div><p>And a bit more advanced example where the right value is another expression</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.date} == ${date:now:yyyyMMdd}&quot;)
+
+simple(&quot;${in.header.type} == ${bean:orderService?method=getOrderType}&quot;)
+]]></script>
+</div></div><p>And an example with contains, testing if the title contains the word Camel</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.title} contains &#39;Camel&#39;&quot;)
+]]></script>
+</div></div><p>And an example with regex, testing if the number header is a 4 digit value:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.number} regex &#39;\\d{4}&#39;&quot;)
+]]></script>
+</div></div><p>And finally an example if the header equals any of the values in the list. Each element must be separated by comma, and no space around.<br clear="none"> This also works for numbers etc, as Camel will convert each element into the type of the left hand side.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.type} in &#39;gold,silver&#39;&quot;)
+]]></script>
+</div></div><p>And for all the last 3 we also support the negate test using not:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.type} not in &#39;gold,silver&#39;&quot;)
+]]></script>
+</div></div><p>And you can test if the type is a certain instance, eg for instance a String</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.type} is &#39;java.lang.String&#39;&quot;)
+]]></script>
+</div></div><p>We have added a shorthand for all <code>java.lang</code> types so you can write it as:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.type} is &#39;String&#39;&quot;)
+]]></script>
+</div></div><p>Ranges are also supported. The range interval requires numbers and both from and end are inclusive. For instance to test whether a value is between 100 and 199:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.number} range 100..199&quot;)
+]]></script>
+</div></div><p>Notice we use <code>..</code> in the range without spaces. It is based on the same syntax as Groovy.</p><p>From <strong>Camel 2.9</strong> onwards the range value must be in single quotes</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.number} range &#39;100..199&#39;&quot;)
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Can be used in Spring XML</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>As the Spring XML does not have all the power as the Java DSL with all its various builder methods, you have to resort to use some other languages<br clear="none"> for testing with simple operators. Now you can do this with the simple language. In the sample below we want to test if the header is a widget order:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    &lt;from uri=&quot;seda:orders&quot;&gt;
+       &lt;filter&gt;
+           &lt;simple&gt;${in.header.type} == &#39;widget&#39;&lt;/simple&gt;
+           &lt;to uri=&quot;bean:orderService?method=handleWidget&quot;/&gt;
+       &lt;/filter&gt;
+    &lt;/from&gt;
+]]></script>
+</div></div></div></div><h4 id="Simple-Usingand/or">Using and / or</h4><p>If you have two expressions you can combine them with the <code>and</code> or <code>or</code> operator.</p><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Camel 2.9 onwards</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Use &amp;&amp; or || from Camel 2.9 onwards.</p></div></div><p>For instance:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.title} contains &#39;Camel&#39; and ${in.header.type&#39;} == &#39;gold&#39;&quot;)
+]]></script>
+</div></div><p>And of course the <code>or</code> is also supported. The sample would be:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.title} contains &#39;Camel&#39; or ${in.header.type&#39;} == &#39;gold&#39;&quot;)
+]]></script>
+</div></div><p><strong>Notice:</strong> Currently <code>and</code> or <code>or</code> can only be used <strong>once</strong> in a simple language expression. This might change in the future.<br clear="none"> So you <strong>cannot</strong> do:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[simple(&quot;${in.header.title} contains &#39;Camel&#39; and ${in.header.type&#39;} == &#39;gold&#39; and ${in.header.number} range 100..200&quot;)
+]]></script>
+</div></div><h3 id="Simple-Samples">Samples</h3><p>In the Spring XML sample below we filter based on a header value:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    &lt;from uri=&quot;seda:orders&quot;&gt;
+       &lt;filter&gt;
+           &lt;simple&gt;${in.header.foo}&lt;/simple&gt;
+           &lt;to uri=&quot;mock:fooOrders&quot;/&gt;
+       &lt;/filter&gt;
+    &lt;/from&gt;
+]]></script>
+</div></div><p>The Simple language can be used for the predicate test above in the <a shape="rect" href="message-filter.html">Message Filter</a> pattern, where we test if the in message has a <code>foo</code> header (a header with the key <code>foo</code> exists). If the expression evaluates to <strong>true</strong> then the message is routed to the <code>mock:fooOrders</code> endpoint, otherwise it is lost in the deep blue sea <img class="emoticon emoticon-wink" src="https://cwiki.apache.org/confluence/s/en_GB/5982/f2b47fb3d636c8bc9fd0b11c0ec6d0ae18646be7.1/_/images/icons/emoticons/wink.png" data-emoticon-name="wink" alt="(wink)">.</p><p>The same example in Java DSL:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    from(&quot;seda:orders&quot;)
+        .filter().simple(&quot;${in.header.foo}&quot;).to(&quot;seda:fooOrders&quot;);
+]]></script>
+</div></div><p>You can also use the simple language for simple text concatenations such as:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   from(&quot;direct:hello&quot;).transform().simple(&quot;Hello ${in.header.user} how are you?&quot;).to(&quot;mock:reply&quot;);
+]]></script>
+</div></div><p>Notice that we must use ${ } placeholders in the expression now to allow Camel to parse it correctly.</p><p>And this sample uses the date command to output current date.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   from(&quot;direct:hello&quot;).transform().simple(&quot;The today is ${date:now:yyyyMMdd} and it is a great day.&quot;).to(&quot;mock:reply&quot;);
+]]></script>
+</div></div><p>And in the sample below we invoke the bean language to invoke a method on a bean to be included in the returned string:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   from(&quot;direct:order&quot;).transform().simple(&quot;OrderId: ${bean:orderIdGenerator}&quot;).to(&quot;mock:reply&quot;);
+]]></script>
+</div></div><p>Where <code>orderIdGenerator</code> is the id of the bean registered in the <a shape="rect" href="registry.html">Registry</a>. If using Spring then it is the Spring bean id.</p><p>If we want to declare which method to invoke on the order id generator bean we must prepend <code>.method name</code> such as below where we invoke the <code>generateId</code> method.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   from(&quot;direct:order&quot;).transform().simple(&quot;OrderId: ${bean:orderIdGenerator.generateId}&quot;).to(&quot;mock:reply&quot;);
+]]></script>
+</div></div><p>We can use the <code>?method=methodname</code> option that we are familiar with the <a shape="rect" href="bean.html">Bean</a> component itself:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[   from(&quot;direct:order&quot;).transform().simple(&quot;OrderId: ${bean:orderIdGenerator?method=generateId}&quot;).to(&quot;mock:reply&quot;);
+]]></script>
+</div></div><p>And from Camel 2.3 onwards you can also convert the body to a given type, for example to ensure that&#160;it is a String you can do:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[  &lt;transform&gt;
+    &lt;simple&gt;Hello ${bodyAs(String)} how are you?&lt;/simple&gt;
+  &lt;/transform&gt;
+]]></script>
+</div></div><p>There are a few types which have a shorthand notation, so we can use <code>String</code> instead of <code>java.lang.String</code>. These are: <code>byte[], String, Integer, Long</code>. All other types must use their FQN name, e.g. <code>org.w3c.dom.Document</code>.</p><p>It is&#160;also possible to lookup a value from a header <code>Map</code> in <strong>Camel 2.3</strong> onwards:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[  &lt;transform&gt;
+    &lt;simple&gt;The gold value is ${header.type[gold]}&lt;/simple&gt;
+  &lt;/transform&gt;
+]]></script>
+</div></div><p>In the code above we lookup the header with name <code>type</code> and regard it as a <code>java.util.Map</code> and we then lookup with the key <code>gold</code> and return the value.<br clear="none"> If the header is not convertible to Map an exception is thrown. If the header with name <code>type</code> does not exist <code>null</code> is returned.</p><p>From Camel 2.9 onwards you can nest functions, such as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;setHeader headerName=&quot;myHeader&quot;&gt;
+  &lt;simple&gt;${properties:${header.someKey}}&lt;/simple&gt;
+&lt;/setHeader&gt;
+]]></script>
+</div></div><h4 id="Simple-Referringtoconstantsorenums">Referring to constants or enums</h4><p><strong>Available as of Camel 2.11</strong></p><p>Suppose you have an enum for customers</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+public enum Customer {
+
+    GOLD, SILVER, BRONZE
+}
+]]></script>
+</div></div>And in a <a shape="rect" href="content-based-router.html">Content Based Router</a> we can use the <a shape="rect" href="simple.html">Simple</a> language to refer to this enum, to check the message which enum it matches.<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    .choice()
+        .when().simple(&quot;${header.customer} == ${type:org.apache.camel.processor.Customer.GOLD}&quot;)
+            .to(&quot;mock:gold&quot;)
+        .when().simple(&quot;${header.customer} == ${type:org.apache.camel.processor.Customer.SILVER}&quot;)
+            .to(&quot;mock:silver&quot;)
+        .otherwise()
+            .to(&quot;mock:other&quot;);
+]]></script>
+</div></div><h3 id="Simple-UsingnewlinesortabsinXMLDSLs">Using new lines or tabs in XML DSLs</h3><p><strong>Available as of Camel 2.9.3</strong></p><p>From Camel 2.9.3 onwards it is easier to specify new lines or tabs in XML DSLs as you can escape the value now</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;transform&gt;
+  &lt;simple&gt;The following text\nis on a new line&lt;/simple&gt;
+&lt;/transform&gt;
+]]></script>
+</div></div><h3 id="Simple-Leadingandtrailingwhitespacehandling">Leading and trailing whitespace handling</h3><p><strong>Available as of Camel 2.10.0</strong></p><p>From Camel 2.10.0 onwards, the trim attribute of the expression can be used to control whether the leading and trailing whitespace characters are removed or preserved. The default value is true, which removes the whitespace characters.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;setBody&gt;
+  &lt;simple trim=&quot;false&quot;&gt;You get some trailing whitespace characters.     &lt;/simple&gt;
+&lt;/setBody&gt;
+]]></script>
+</div></div><h3 id="Simple-Settingresulttype">Setting result type</h3><p><strong>Available as of Camel 2.8</strong></p><p>You can now provide a result type to the <a shape="rect" href="simple.html">Simple</a> expression, which means the result of the evaluation will be converted to the desired type. This is most useable to define types such as booleans, integers, etc.</p><p>For example to set a header as a boolean type you can do:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[.setHeader(&quot;cool&quot;, simple(&quot;true&quot;, Boolean.class))
+]]></script>
+</div></div><p>And in XML DSL</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[      &lt;setHeader headerName=&quot;cool&quot;&gt;
+        &lt;!-- use resultType to indicate that the type should be a java.lang.Boolean --&gt;
+        &lt;simple resultType=&quot;java.lang.Boolean&quot;&gt;true&lt;/simple&gt;
+      &lt;/setHeader&gt;
+]]></script>
+</div></div><h3 id="Simple-Changingfunctionstartandendtokens">Changing function start and end tokens</h3><p><strong>Available as of Camel 2.9.1</strong></p><p>You can configure the function start and end tokens - ${ } using the setters <code>changeFunctionStartToken</code> and <code>changeFunctionEndToken</code> on <code>SimpleLanguage</code>, using Java code. From Spring XML you can define a &lt;bean&gt; tag with the new changed tokens in the properties as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    &lt;!-- configure Simple to use custom prefix/suffix tokens --&gt;
+    &lt;bean id=&quot;simple&quot; class=&quot;org.apache.camel.language.simple.SimpleLanguage&quot;&gt;
+      &lt;property name=&quot;functionStartToken&quot; value=&quot;[&quot;/&gt;
+      &lt;property name=&quot;functionEndToken&quot; value=&quot;]&quot;/&gt;
+    &lt;/bean&gt;
+]]></script>
+</div></div><p>In the example above we use [ ] as the changed tokens.</p><p>Notice by changing the start/end token you change those in all the Camel applications which share the same <strong>camel-core</strong> on their classpath.<br clear="none"> For example in an OSGi server this may affect many applications, where as a Web Application as a WAR file it only affects the Web Application.</p><h3 id="Simple-Loadingscriptfromexternalresource">Loading script from external resource</h3><p><strong>Available as of Camel 2.11</strong></p><p>You can externalize the script and have Camel load it from a resource such as <code>"classpath:"</code>, <code>"file:"</code>, or <code>"http:"</code>.<br clear="none"> This is done using the following syntax: <code>"resource:scheme:location"</code>, eg to refer to a file on the classpath you can do:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[.setHeader(&quot;myHeader&quot;).simple(&quot;resource:classpath:mysimple.txt&quot;)
+]]></script>
+</div></div><h3 id="Simple-SettingSpringbeanstoExchangeproperties">Setting Spring beans to Exchange properties</h3><p><strong>Available as of Camel 2.6</strong></p><p>You can set a spring bean into an exchange property as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;bean id=&quot;myBeanId&quot; class=&quot;my.package.MyCustomClass&quot; /&gt;
+...
+&lt;route&gt;
+  ...
+  &lt;setProperty propertyName=&quot;monitoring.message&quot;&gt;
+    &lt;simple&gt;ref:myBeanId&lt;/simple&gt;
+  &lt;/setProperty&gt;
+  ...
+&lt;/route&gt;
+]]></script>
+</div></div><h3 id="Simple-Dependencies">Dependencies</h3><p>The <a shape="rect" href="simple.html">Simple</a> language is part of <strong>camel-core</strong>.</p></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=70160">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=70160&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+
