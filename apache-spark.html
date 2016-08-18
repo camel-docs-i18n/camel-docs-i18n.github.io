@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Apache Spark
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="components.html">Components</a>&nbsp;&gt;&nbsp;<a href="apache-spark.html">Apache Spark</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="ApacheSpark-ApacheSparkcomponent">Apache Spark component</h2><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>&#160;Apache Spark component is available starting from Camel <strong>2.17</strong>.</p></div></div><p>&#160;</p><p><span style="line-height: 1.5625;font-size: 16.0px;">This documentation page covers the <a shape="rect" class="external-link" href="http://spark.apache.org/">Apache Spark</a> component for the Apache Camel. The main purpose of the Spark integration with Camel is to provide a bridge between Camel connectors and Spark tasks. In particular Camel connector provides a way to route message from various transports, dynamically choose a task to execute, use incoming message as input data for that task and finally deliver the results of the execution back to the Camel pipeline.</span></p><h3 id="ApacheSpark-Supportedarchitecturalstyles"><span>Supported architectural styles</span></h3><p><span style="line-height: 1.5625;font-size: 16.0px;">Spark component can be used as a driver application deployed into an application server (or executed as a fat jar).</span></p><p><span style="line-height: 1.5625;font-size: 16.0px;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="250" src="apache-spark.data/camel_spark_driver.png" data-image-src="/confluence/download/attachments/61331559/camel_spark_driver.png?version=2&amp;modificationDate=1449478362000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="61331563" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="camel_spark_driver.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="61331559" data-linked-resource-container-version="16"></span><br clear="none"></span></p><p><span style="line-height: 1.5625;font-size: 16.0px;">Spark component can also be submitted as a job directly into the Spark cluster.</span></p><p><span style="line-height: 1.5625;font-size: 16.0px;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="250" src="apache-spark.data/camel_spark_cluster.png" data-image-src="/confluence/download/attachments/61331559/camel_spark_cluster.png?version=1&amp;modificationDate=1449478393000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="61331565" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="camel_spark_cluster.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="61331559" data-linked-resource-container-version="16"></span><br clear="none"></span></p><p><span style="line-height: 1.5625;font-size: 16.0px;">While Spark component is primary designed to work as a <em>long running job</em>&#160;serving as an bridge between Spark cluster and the other endpoints, you can also use it as a <em>fire-once</em> short job. &#160;</span>&#160;</p><h3 id="ApacheSpark-RunningSparkinOSGiservers"><span>Running Spark in OSGi servers</span></h3><p>Currently the Spark component doesn't support execution in the OSGi container. Spark has been designed to be executed as a fat jar, usually submitted as a job to a cluster. For those reasons running Spark in an OSGi server is at least challenging and is not support by Camel as well.</p><h3 id="ApacheSpark-URIformat">URI format</h3><p>Currently the Spark component supports only producers - it it intended to invoke a Spark job and return results. You can call RDD, data frame or Hive SQL job.</p><div><p>&#160;</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark URI format</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[spark:{rdd|dataframe|hive}]]></script>
+</div></div><p>&#160;</p></div><h3 id="ApacheSpark-RDDjobs">RDD jobs&#160;</h3><p>&#160;</p><div>To invoke an RDD job, use the following URI:</div><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD producer</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[spark:rdd?rdd=#testFileRdd&amp;rddCallback=#transformation]]></script>
+</div></div><p>&#160;Where <code>rdd</code> option refers to the name of an RDD instance (subclass of <code>org.apache.spark.api.java.JavaRDDLike</code>) from a Camel registry, while <code>rddCallback</code> refers to the implementation of&#160;<code>org.apache.camel.component.spark.RddCallback</code> interface (also from a registry). RDD callback provides a single method used to apply incoming messages against the given RDD. Results of callback computations are saved as a body to an exchange.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD callback</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public interface RddCallback&lt;T&gt; {
+    T onRdd(JavaRDDLike rdd, Object... payloads);
+}]]></script>
+</div></div><p>The following snippet demonstrates how to send message as an input to the job and return results:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Calling spark job</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[String pattern = &quot;job input&quot;;
+long linesCount = producerTemplate.requestBody(&quot;spark:rdd?rdd=#myRdd&amp;rddCallback=#countLinesContaining&quot;, pattern, long.class);]]></script>
+</div></div><p>The RDD callback for the snippet above registered as Spring bean could look as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD callback</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Bean
+RddCallback&lt;Long&gt; countLinesContaining() {
+    return new RddCallback&lt;Long&gt;() {
+        Long onRdd(JavaRDDLike rdd, Object... payloads) {
+            String pattern = (String) payloads[0];
+            return rdd.filter({line -&gt; line.contains(pattern)}).count();
+        }
+    }
+}]]></script>
+</div></div><p>The RDD definition in Spring could looks as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD definition</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Bean
+JavaRDDLike myRdd(JavaSparkContext sparkContext) {
+  return sparkContext.textFile(&quot;testrdd.txt&quot;);
+}]]></script>
+</div></div><p>&#160;</p><h4 id="ApacheSpark-RDDjobsoptions">RDD jobs options</h4><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh">Option</th><th colspan="1" rowspan="1" class="confluenceTh">Description</th><th colspan="1" rowspan="1" class="confluenceTh">Default value</th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>rdd</code></td><td colspan="1" rowspan="1" class="confluenceTd">RDD instance (subclass of&#160;<code>org.apache.spark.api.java.JavaRDDLike</code>).</td><td colspan="1" rowspan="1" class="confluenceTd"><code>null</code></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>rddCallback</code></td><td colspan="1" rowspan="1" class="confluenceTd">Instance of&#160;<code>org.apache.camel.component.spark.RddCallback</code>&#160;interface.</td><td colspan="1" rowspan="1" class="confluenceTd"><code><span style="color: rgb(0,51,102);">null</span></code></td></tr></tbody></table></div><h4 id="ApacheSpark-VoidRDDcallbacks">Void RDD callbacks</h4><p>If your RDD callback doesn't return any value back to a Camel pipeline, you can either return <code>null</code> value or use&#160;<code>VoidRddCallback</code> base class:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD definition</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Bean
+RddCallback&lt;Void&gt; rddCallback() {
+  return new VoidRddCallback() {
+        @Override
+        public void doOnRdd(JavaRDDLike rdd, Object... payloads) {
+            rdd.saveAsTextFile(output.getAbsolutePath());
+        }
+    };
+}]]></script>
+</div></div><h4 id="ApacheSpark-ConvertingRDDcallbacks">Converting RDD callbacks</h4><p>If you know what type of the input data will be sent to the RDD callback, you can use&#160;<code>ConvertingRddCallback</code> and let Camel to automatically convert incoming messages before inserting those into the callback:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD definition</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Bean
+RddCallback&lt;Long&gt; rddCallback(CamelContext context) {
+  return new ConvertingRddCallback&lt;Long&gt;(context, int.class, int.class) {
+            @Override
+            public Long doOnRdd(JavaRDDLike rdd, Object... payloads) {
+                return rdd.count() * (int) payloads[0] * (int) payloads[1];
+            }
+        };
+    };
+}]]></script>
+</div></div><h4 id="ApacheSpark-AnnotatedRDDcallbacks">Annotated RDD callbacks</h4><p>Probably the easiest way to work with the RDD callbacks is to provide class with method marked with&#160;<code>@RddCallback</code> annotation:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Annotated RDD callback definition</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[import static org.apache.camel.component.spark.annotations.AnnotatedRddCallback.annotatedRddCallback;
+ 
+@Bean
+RddCallback&lt;Long&gt; rddCallback() {
+    return annotatedRddCallback(new MyTransformation());
+}
+ 
+...
+ 
+import org.apache.camel.component.spark.annotation.RddCallback;
+ 
+public class MyTransformation {
+ 
+    @RddCallback
+    long countLines(JavaRDD&lt;String&gt; textFile, int first, int second) {
+        return textFile.count() * first * second;
+    }
+ 
+}]]></script>
+</div></div><p>If you will pass CamelContext to the annotated RDD callback factory method, the created callback will be able to convert incoming payloads to match the parameters of the annotated method:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Body conversions for annotated RDD callbacks</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[import static org.apache.camel.component.spark.annotations.AnnotatedRddCallback.annotatedRddCallback;
+ 
+@Bean
+RddCallback&lt;Long&gt; rddCallback(CamelContext camelContext) {
+    return annotatedRddCallback(new MyTransformation(), camelContext);
+}
+ 
+...
+
+ 
+import org.apache.camel.component.spark.annotation.RddCallback;
+ 
+public class MyTransformation {
+ 
+    @RddCallback
+    long countLines(JavaRDD&lt;String&gt; textFile, int first, int second) {
+        return textFile.count() * first * second;
+    }
+ 
+}
+ 
+...
+ 
+// Convert String &quot;10&quot; to integer
+long result = producerTemplate.requestBody(&quot;spark:rdd?rdd=#rdd&amp;rddCallback=#rddCallback&quot; Arrays.asList(10, &quot;10&quot;), long.class);]]></script>
+</div></div><p>&#160;</p><h3 id="ApacheSpark-DataFramejobs">DataFrame jobs</h3><p>&#160;</p><p>Instead of working with RDDs Spark component can work with DataFrames as well.&#160;</p><div>To invoke an DataFrame job, use the following URI:</div><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD producer</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[spark:dataframe?dataFrame=#testDataFrame&amp;dataFrameCallback=#transformation]]></script>
+</div></div><p>&#160;Where&#160;<code>dataFrame</code>&#160;option refers to the name of an DataFrame instance (<code>instance of of&#160;org.apache.spark.<span style="line-height: 1.42857;">sql</span><code style="line-height: 1.42857;">.DataFrame</code></code>) from a Camel registry, while&#160;<code style="line-height: 1.42857;">dataFrameCallback</code>&#160;refers to the implementation of&#160;<code style="line-height: 1.42857;">org.apache.camel.component.spark.DataFrameCallback</code>&#160;interface (also from a registry). DataFrame callback provides a single method used to apply incoming messages against the given DataFrame. Results of callback computations are saved as a body to an exchange.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD callback</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public interface DataFrameCallback&lt;T&gt; {
+    T onDataFrame(DataFrame dataFrame, Object... payloads);
+}]]></script>
+</div></div><p>The following snippet demonstrates how to send message as an input to a job and return results:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Calling spark job</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[String model = &quot;Micra&quot;;
+long linesCount = producerTemplate.requestBody(&quot;spark:dataFrame?dataFrame=#cars&amp;dataFrameCallback=#findCarWithModel&quot;, model, long.class);]]></script>
+</div></div><p>The DataFrame callback for the snippet above registered as Spring bean could look as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD callback</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Bean
+RddCallback&lt;Long&gt; findCarWithModel() {
+    return new DataFrameCallback&lt;Long&gt;() {
+    	@Override
+    	public Long onDataFrame(DataFrame dataFrame, Object... payloads) {
+        	String model = (String) payloads[0];
+        	return dataFrame.where(dataFrame.col(&quot;model&quot;).eqNullSafe(model)).count();
+    	}
+	};
+}]]></script>
+</div></div><p>The DataFrame definition in Spring could looks as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD definition</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Bean
+DataFrame cars(HiveContext hiveContext) {
+  	DataFrame jsonCars = hiveContext.read().json(&quot;/var/data/cars.json&quot;);
+ 	jsonCars.registerTempTable(&quot;cars&quot;);
+	return jsonCars;
+}]]></script>
+</div></div><p>&#160;</p><h4 id="ApacheSpark-DataFramejobsoptions">DataFrame jobs options</h4><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh">Option</th><th colspan="1" rowspan="1" class="confluenceTh">Description</th><th colspan="1" rowspan="1" class="confluenceTh">Default value</th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>dataFrame</code></td><td colspan="1" rowspan="1" class="confluenceTd">DataFrame instance (subclass of&#160;<code><span>org.apache.spark.</span><span>sql</span>.DataFrame</code>).</td><td colspan="1" rowspan="1" class="confluenceTd"><code>null</code></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>dataFrameCallback</code></td><td colspan="1" rowspan="1" class="confluenceTd">Instance of&#160;<code>org.apache.camel.component.spark.DataFrameCallback</code>&#160;interface.</td><td colspan="1" rowspan="1" class="confluenceTd"><code><span style="color: rgb(0,51,102);">null </span></code></td></tr></tbody></table></div><p>&#160;</p><h3 id="ApacheSpark-Hivejobs">Hive jobs</h3><p>&#160;Instead of working with RDDs or DataFrame Spark component can also receive Hive SQL queries as payloads.&#160;To send Hive query to Spark component, use the following URI:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD producer</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[spark:hive]]></script>
+</div></div><p>The following snippet demonstrates how to send message as an input to a job and return results:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Calling spark job</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[long carsCount = template.requestBody(&quot;spark:hive?collect=false&quot;, &quot;SELECT * FROM cars&quot;, Long.class);
+List&lt;Row&gt; cars = template.requestBody(&quot;spark:hive&quot;, &quot;SELECT * FROM cars&quot;, List.class);]]></script>
+</div></div><p>The table we want to execute query against should be registered in a HiveContext before we query it. For example in Spring such registration could look as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spark RDD definition</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Bean
+DataFrame cars(HiveContext hiveContext) {
+  	DataFrame jsonCars = hiveContext.read().json(&quot;/var/data/cars.json&quot;);
+ 	jsonCars.registerTempTable(&quot;cars&quot;);
+	return jsonCars;
+}]]></script>
+</div></div><p>&#160;</p><h4 id="ApacheSpark-Hivejobsoptions">Hive jobs options</h4><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh">Option</th><th colspan="1" rowspan="1" class="confluenceTh">Description</th><th colspan="1" rowspan="1" class="confluenceTh">Default value</th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>collect</code></td><td colspan="1" rowspan="1" class="confluenceTd">Indicates if results should be collected (as a list of <code>org.apache.spark.sql.Row</code> instances) or if <code>count()</code> should be called against those.</td><td colspan="1" rowspan="1" class="confluenceTd"><code>true</code></td></tr></tbody></table></div><p>&#160;</p><p></p><h3 id="ApacheSpark-SeeAlso">See Also</h3>
+<ul><li><a shape="rect" href="configuring-camel.html">Configuring Camel</a></li><li><a shape="rect" href="component.html">Component</a></li><li><a shape="rect" href="endpoint.html">Endpoint</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=61331559">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=61331559&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

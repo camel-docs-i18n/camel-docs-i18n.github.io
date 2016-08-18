@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Async
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="architecture.html">Architecture</a>&nbsp;&gt;&nbsp;<a href="async.html">Async</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="Async-Async">Async</h2><p><strong>Available as of Camel 2.0</strong></p><p>The asynchronous API in Camel have been rewritten for Camel 2.0, and the information on this page applies for Camel 2.0 and later.</p><p>The <a shape="rect" href="async.html">Async</a> API in Camel is primarily divided in two areas<br clear="none"> 1. Initiating an <a shape="rect" href="async.html">Async</a> messaging from the client<br clear="none"> 2. Turning a route into <a shape="rect" href="async.html">Async</a> using the <strong>threads</strong> <a shape="rect" href="dsl.html">DSL</a></p><p>Before we look at these two areas we start with a bit of background information and looks at the concept from at a higher level using diagrams.<br clear="none"> Then we check out the first area how a client can initiate an <a shape="rect" href="async.html">Async</a> message exchange and we also throw in the synchronous message exchange in the mix as well so we can compare and distill the difference.<br clear="none"> And finally we turn our attention towards the last area the new <strong>threads</strong> DSL and what it can be used for.</p><h2 id="Async-Background">Background</h2><p>The new <a shape="rect" href="async.html">Async</a> API in Camel 2.0 leverages in much greater detail the Java Concurrency API and its support for executing tasks asynchronous.<br clear="none"> Therefore the Camel <a shape="rect" href="async.html">Async</a> API should be familiar for users with knowledge of the Java Concurrency API.</p><h3 id="Async-Afewconceptstomaster">A few concepts to master</h3><p>When doing messaging there are a few aspects to keep in mind.</p><p>First of all a caller can initiate a message exchange as either:</p><ul class="alternate"><li><a shape="rect" href="event-message.html">Request only</a></li><li><a shape="rect" href="request-reply.html">Request Reply</a></li></ul><p><a shape="rect" href="event-message.html">Request only</a> is when the caller sends a message but do <strong>not</strong> expect any reply. This is also known as fire and forget or event message.</p><p>The <a shape="rect" href="request-reply.html">Request Reply</a> is when the caller sends a message and then <strong>waits for a reply</strong>. This is like the <a shape="rect" href="http.html">HTTP</a> protocol that we use every day when we surf the web.<br clear="none"> We send a request to fetch a web page and wait until the reply message comes with the web content.</p><p>In Camel a message is labeled with a Message <a shape="rect" href="exchange-pattern.html">Exchange Pattern</a> that labels whether its a request only or request reply message. Camel uses the <a shape="rect" href="jbi.html">JBI</a> term for this an uses <code>InOnly</code> for the request only, and <code>InOut</code> for the request reply.</p><p>For all message exchange they can be executed either:</p><ul class="alternate"><li>synchronous</li><li>asynchronous</li></ul><h4 id="Async-SynchronousRequestReply">Synchronous Request Reply</h4><p>A synchronous exchange is defined as the caller sends a message and waits until its complete before continuing. This is illustrated in the diagram below:</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="async.data/camel_sync_request_reply.png" data-image-src="/confluence/download/attachments/117116/camel_sync_request_reply.png?version=1&amp;modificationDate=1241917552000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="10641" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="camel_sync_request_reply.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="117116" data-linked-resource-container-version="49"></span></p><p>1. The client sends a sync <a shape="rect" href="request-reply.html">Request Reply</a> message over <a shape="rect" href="http.html">HTTP</a> to Camel. The client application will wait for the response that Camel routes and processes.<br clear="none"> 2. The message invokes an external <a shape="rect" href="mina.html">TCP</a> service using synchronous <a shape="rect" href="request-reply.html">Request Reply</a>. The client application still waits for the response.<br clear="none"> 3. The response is send back to the client.</p><h4 id="Async-AsynchronousRequestReply">Asynchronous Request Reply</h4><p>On the other hand the asynchronous version is where the caller sends a message to an <a shape="rect" href="endpoint.html">Endpoint</a> and then returns immediately back to the caller. The message however is processed in another thread, the asynchronous thread. Then the caller can continue doing other work and at the same time the asynchronous thread is processing the message. This is illustrated in the diagram below:</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="async.data/camel_async_request_reply.png" data-image-src="/confluence/download/attachments/117116/camel_async_request_reply.png?version=2&amp;modificationDate=1241928088000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="10640" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="camel_async_request_reply.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="117116" data-linked-resource-container-version="49"></span></p><p>1. The client sends an <a shape="rect" href="async.html">Async</a> <a shape="rect" href="request-reply.html">Request Reply</a> message over <a shape="rect" href="http.html">HTTP</a> to Camel. The control is immediately returned to the client application, that can continue and do other work while Camel routes the message.<br clear="none"> 2. Camel invokes an external <a shape="rect" href="mina.html">TCP</a> service using synchronous <a shape="rect" href="request-reply.html">Request Reply</a>. The client application can do other work simultaneously.<br clear="none"> 3. The client wants to get the reply so it uses the Future handle it got as <em>response</em> from step 1. With this handle it retrieves the reply, wait if nessasary if the reply is not ready.</p><h3 id="Async-SynchronousRequestOnly">Synchronous Request Only</h3><p>You can also do synchronous <a shape="rect" href="event-message.html">Request only</a> with Camel. The client sends a message to Camel in which a reply is not expected. However the client still waits until the message is processed completely. This is illustrated in the diagram below:</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="async.data/camel_sync_request_only.png" data-image-src="/confluence/download/attachments/117116/camel_sync_request_only.png?version=1&amp;modificationDate=1241923637000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="10642" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="camel_sync_request_only.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="117116" data-linked-resource-container-version="49"></span></p><p>1. The client sends a <a shape="rect" href="event-message.html">Request only</a> and we can still use <a shape="rect" href="http.html">HTTP</a> despite http being <a shape="rect" href="request-reply.html">Request Reply</a> by nature.<br clear="none"> 2. Camel invokes an external <a shape="rect" href="mina.html">TCP</a> service using synchronous <a shape="rect" href="request-reply.html">Request Reply</a>. The client application is still waiting.<br clear="none"> 3. The message is processed completely and the control is returned to the client.</p><p>So why do you want to use synchronous <a shape="rect" href="event-message.html">Request Only</a>? Well if you want to know whether the message was processed successfully or not before continuing. With synchronous it allows you to wait while the message is being processed. In case the processing was succesful the control is returned to the client with no notion of error. In case of failure the client can detect this as an exception is thrown. (and <code>exchange.isFailed()</code> returns <code>true</code>).</p><h3 id="Async-AsynchronousRequestOnly">Asynchronous Request Only</h3><p>As opposed to the synchronous <a shape="rect" href="event-message.html">Request Only</a> the <a shape="rect" href="async.html">Async</a> counter part will <strong>not</strong> wait for the processing of the message to complete. In this case the client can immediately continue doing other work while the message is being routed and processed in Camel. This is illustrated in the diagram below:</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="async.data/camel_async_request_only.png" data-image-src="/confluence/download/attachments/117116/camel_async_request_only.png?version=1&amp;modificationDate=1241928107000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="10644" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="camel_async_request_only.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="117116" data-linked-resource-container-version="49"></span></p><p>1. The client sends a <a shape="rect" href="event-message.html">Request only</a> and we can still use <a shape="rect" href="http.html">HTTP</a> despite http being <a shape="rect" href="request-reply.html">Request Reply</a> by nature. The control is immediately returned to the client application, that can continue and do other work while Camel routes the message.<br clear="none"> 2. Camel invokes an external <a shape="rect" href="mina.html">TCP</a> service using synchronous <a shape="rect" href="request-reply.html">Request Reply</a>. The client application can do other work simultaneously.<br clear="none"> 3. The message completes but no result is returned to the client.</p><p><strong>Notice:</strong> As Camel always returns a <code>Future</code> handle for <a shape="rect" href="async.html">Async</a> messaging to the client. The client can use this handler to get hold of the status of the processing whether the task is complete or an Exception occured during processing. Note that the client is not required to do so, its perfect valid to just ignore the Future handle.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In case you want to know whether the <a shape="rect" href="async.html">Async</a> <a shape="rect" href="event-message.html">Request Only</a> failed, then you can use the <code>Future</code> handle and invoke <code>get()</code> and if it throws a <code>ExecutionException</code> then the processing failed. The caused exception is wrapped. You can invoke <code>isDone()</code> first to test whether the task is done or still in progress. Otherwise invoking <code>get()</code> will wait until the task is done.</p></div></div><p>With these diagrams in mind lets turn out attention to the <a shape="rect" href="async.html">Async</a> API and how to use it with Camel.</p><h2 id="Async-1)TheClientAPI">1) The <a shape="rect" href="async.html">Async</a> Client API</h2><p>Camel provides the <a shape="rect" href="async.html">Async</a> Client API in the <a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/ProducerTemplate.html">ProducerTemplate</a> where we have added about 10 new methods to Camel 2.0. We have listed the most important in the table below:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Method</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Returns</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>setExecutorService</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>void</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Is used to set the Java ExecutorService. Camel will by default provide a ScheduledExecutorService with 5 thread in the pool.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>asyncSend</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Future&lt;Exchange&gt;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Is used to send an async exchange to a Camel <a shape="rect" href="endpoint.html">Endpoint</a>. Camel will imeddiately return control to the caller thread after the task has been submitted to the executor service. This allows you to do other work while Camel processes the exchange in the other async thread.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>asyncSendBody</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Future&lt;Object&gt;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>As above but for sending body only. This is a request only messaging style so no reply is expected. Uses the <code>InOnly</code> exchange pattern.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>asyncRequestBody</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Future&lt;Object&gt;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>As above but for sending body only. This is a <a shape="rect" href="request-reply.html">Request Reply</a> messaging style so a reply is expected. Uses the <code>InOut</code> exchange pattern.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>extractFutureBody</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>T</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Is used to get the result from the asynchronous thread using the Java Concurrency Future handle.</p></td></tr></tbody></table></div><p>The <code>asyncSend</code> and <code>asyncRequest</code> methods return a Future handle. This handle is what the caller must use later to retrieve the asynchronous response. You can do this by using the <code>extractFutureBody</code> method, or just use plain Java but invoke <code>get()</code> on the <code>Future</code> handle.</p><h3 id="Async-TheClientAPIwithcallbacks">The <a shape="rect" href="async.html">Async</a> Client API with callbacks</h3><p>In addition to the Client API from above Camel provides a variation that uses <a shape="rect" href="oncompletion.html">callbacks</a> when the message <a shape="rect" href="exchange.html">Exchange</a> is done.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Method</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Returns</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>asyncCallback</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Future&lt;Exchange&gt;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>In addition a callback is passed in as a parameter using the <code>org.apache.camel.spi.Synchronization</code> Callback. The callback is invoked when the message exchange is done.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>asyncCallbackSendBody</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Future&lt;Object&gt;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>As above but for sending body only. This is a request only messaging style so no reply is expected. Uses the <code>InOnly</code> exchange pattern.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>asyncCallbackRequestBody</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Future&lt;Object&gt;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>As above but for sending body only. This is a <a shape="rect" href="request-reply.html">Request Reply</a> messaging style so a reply is expected. Uses the <code>InOut</code> exchange pattern.</p></td></tr></tbody></table></div><p>These methods also returns the Future handle in case you need them. The difference is that they invokes the callback as well when the <a shape="rect" href="exchange.html">Exchange</a> is done being routed.</p><h4 id="Async-TheFutureAPI">The Future API</h4><p>The <code>java.util.concurrent.Future</code> API have among others the following methods:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Method</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Returns</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>isDone</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>boolean</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Returns a boolean whether the task is done or not. Will even return <code>true</code> if the tasks failed due to an exception thrown.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>get()</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Object</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Gets the response of the task. In case of an exception was thrown the <code>java.util.concurrent.ExecutionException</code> is thrown with the caused exception.</p></td></tr></tbody></table></div><h3 id="Async-Example:AsynchronousRequestReply">Example: Asynchronous Request Reply</h3><p>Suppose we want to call a <a shape="rect" href="http.html">HTTP</a> service but it is usually slow and thus we do not want to block and wait for the response, as we can do other important computation. So we can initiate an <a shape="rect" href="async.html">Async</a> exchange to the <a shape="rect" href="http.html">HTTP</a> endpoint and then do other stuff while the slow <a shape="rect" href="http.html">HTTP</a> service is processing our request. And then a bit later we can use the <code>Future</code> handle to get the response from the <a shape="rect" href="http.html">HTTP</a> service. Yeah nice so lets do it:</p><p>First we define some routes in Camel. One for the <a shape="rect" href="http.html">HTTP</a> service where we simulate a slow server as it takes at least 1 second to reply. And then other route that we want to invoke while the <a shape="rect" href="http.html">HTTP</a> service is on route. This allows you to be able to process the two routes simultaneously:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// The mocks are here for unit test
+
+// Some other service to return a name, this is invoked synchronously
+from(&quot;direct:name&quot;).transform(constant(&quot;Claus&quot;)).to(&quot;mock:result&quot;);
+
+// Simulate a slow http service (delaying 1 sec) we want to invoke async
+fromF(&quot;jetty:http://0.0.0.0:%s/myservice&quot;, getPort())
+    .delay(1000)
+    .transform(constant(&quot;Bye World&quot;))
+    .to(&quot;mock:result&quot;);
+]]></script>
+</div></div><p>And then we have the client API where we call the two routes and we can get the responses from both of them. As the code is based on unit test there is a bit of mock in there as well:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+MockEndpoint mock = getMockEndpoint(&quot;mock:result&quot;);
+// We expect the name job to be faster than the async job even though the async job
+// was started first
+mock.expectedBodiesReceived(&quot;Claus&quot;, &quot;Bye World&quot;);
+
+// Send a async request/reply message to the http endpoint
+Future&lt;Object&gt; future = template.asyncRequestBody(&quot;http://0.0.0.0:&quot; + getPort() + &quot;/myservice&quot;, &quot;Hello World&quot;);
+
+// We got the future so in the meantime we can do other stuff, as this is Camel
+// so lets invoke another request/reply route but this time is synchronous
+String name = template.requestBody(&quot;direct:name&quot;, &quot;Give me a name&quot;, String.class);
+assertEquals(&quot;Claus&quot;, name);
+
+// Okay we got a name and we have done some other work at the same time
+// the async route is running, but now its about time to wait and get
+// get the response from the async task
+
+// We use the extract future body to get the response from the future
+// (waiting if needed) and then return a string body response.
+// This allows us to do this in a single code line instead of using the
+// JDK Future API to get hold of it, but you can also use that if you want
+// Adding the (String) To make the CS happy
+String response = template.extractFutureBody(future, String.class);
+assertEquals(&quot;Bye World&quot;, response);
+
+assertMockEndpointsSatisfied();
+]]></script>
+</div></div><p>All together it should give you the basic idea how to use this <a shape="rect" href="async.html">Async</a> API and what it can do.</p><h3 id="Async-Example:SynchronousRequestReply">Example: Synchronous Request Reply</h3><p>This example is just to a pure synchronous version of the example from above that was <a shape="rect" href="async.html">Async</a> based.</p><p>The route is the same, so its just how the client initiate and send the messages that differs:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+MockEndpoint mock = getMockEndpoint(&quot;mock:result&quot;);
+// We expect the http job to complete before the name job
+mock.expectedBodiesReceived(&quot;Bye World&quot;, &quot;Claus&quot;);
+
+// Send a sync request/reply message to the http endpoint
+String response = template.requestBody(&quot;http://0.0.0.0:&quot; + getPort() + &quot;/myservice&quot;, &quot;Hello World&quot;, String.class);
+assertEquals(&quot;Bye World&quot;, response);
+
+// Send a sync request/reply message to the direct endpoint
+String name = template.requestBody(&quot;direct:name&quot;, &quot;Give me a name&quot;, String.class);
+assertEquals(&quot;Claus&quot;, name);
+
+assertMockEndpointsSatisfied();
+]]></script>
+</div></div><h3 id="Async-UsingtheAPIwithcallbacks">Using the <a shape="rect" href="async.html">Async</a> API with callbacks</h3><p>Suppose we want to call a <a shape="rect" href="http.html">HTTP</a> service but it is usually slow and thus we do not want to block and wait for the response, but instead let a callback gather the response. This allows us to send multiple requests without waiting for the replies before we can send the next request.</p><p>First we define a route in Camel for the <a shape="rect" href="http.html">HTTP</a> service where we simulate a slow server as it takes at least 1 second to reply.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// The mocks are here for unit test
+// Simulate a slow http service (delaying a bit) we want to invoke async
+from(&quot;jetty:http://0.0.0.0:&quot; + getPort() + &quot;/myservice&quot;)
+    .delay(300)
+    .transform(body().prepend(&quot;Hello &quot;))
+    .to(&quot;mock:result&quot;);
+]]></script>
+</div></div><p>Then we define our callback where we gather the responses. As this is based on an unit test it just gathers the responses in a list. This is a shared callback we use for every request we send in, but you can use your own individual or use an anonymous callback. The callback supports different methods, but we use <code>onDone</code> that is invoked regardless if the <a shape="rect" href="exchange.html">Exchange</a> was processed successfully or failed. The <code>org.apache.camel.spi.Synchronization</code> API provides fine grained methods for <code>onCompletion</code> and <code>onFailure</code> for the two situations.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+/**
+ * Our own callback that will gather all the responses.
+ * We extend the SynchronizationAdapter class as we then only need to override the onComplete method.
+ */
+private static class MyCallback extends SynchronizationAdapter {
+
+    // below the String elements are added in the context of different threads so that we should make
+    // sure that this&#39;s done in a thread-safe manner, that&#39;s no two threads should call the data.add()
+    // method below concurrently, so why we use Vector here and not e.g. ArrayList
+    private final List&lt;String&gt; data = new Vector&lt;String&gt;();
+
+    @Override
+    public void onComplete(Exchange exchange) {
+        // this method is invoked when the exchange was a success and we can get the response
+        String body = exchange.getOut().getBody(String.class);
+        data.add(body);
+
+        // the latch is used for testing purposes
+        LATCH.countDown();
+    }
+
+    public List&lt;String&gt; getData() {
+        return data;
+    }
+}
+]]></script>
+</div></div><p>And then we have the client API where we call the <a shape="rect" href="http.html">HTTP</a> service using <code>asyncCallback</code> 3 times with different input. As the invocation is <a shape="rect" href="async.html">Async</a> the client will send 3 requests right after each other, so we have 3 concurrent exchanges in progress. The response is gathered by our callback so we do not have to care how to get the response.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+MyCallback callback = new MyCallback();
+
+// Send 3 async request/reply message to the http endpoint
+// where we let the callback handle gathering the responses
+String url = &quot;http://localhost:&quot; + getPort() + &quot;/myservice&quot;;
+template.asyncCallbackRequestBody(url, &quot;Claus&quot;, callback);
+template.asyncCallbackRequestBody(url, &quot;Hadrian&quot;, callback);
+template.asyncCallbackRequestBody(url, &quot;Willem&quot;, callback);
+
+]]></script>
+</div></div><h3 id="Async-UsingtheAPIwiththeCamelclassicAPI">Using the <a shape="rect" href="async.html">Async</a> API with the Camel classic API</h3><p>When using the Camel API to create a producer and send an <a shape="rect" href="exchange.html">Exchange</a> we do it like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[Endpoint endpoint = context.getEndpoint(&quot;http://slowserver.org/myservice&quot;);
+Exchange exchange = endpoint.createExchange();
+exchange.getIn().setBody(&quot;Order ABC&quot;);
+// create a regular producer
+Producer producer = endpoint.createProducer();
+// send the exchange and wait for the reply as this is synchronous
+producer.process(exchange);
+]]></script>
+</div></div><p>But to do the same with <a shape="rect" href="async.html">Async</a> we need a little help from a helper class, so the code is:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[Endpoint endpoint = context.getEndpoint(&quot;http://slowserver.org/myservice&quot;);
+Exchange exchange = endpoint.createExchange();
+exchange.getIn().setBody(&quot;Order ABC&quot;);
+// create a regular producer
+Producer producer = endpoint.createProducer();
+// normally you will use a shared exectutor service with pools
+ExecutorService executor = Executors.newSingleThreadExecutor();
+// send it async with the help of this helper
+Future&lt;Exchange&gt; future = AsyncProcessorHelper.asyncProcess(executor, producer, exchange);
+// here we got the future handle and we can do other stuff while the exchange is being routed in the other asynchronous thread
+...
+// and to get the response we use regular Java Concurrency API
+Exchange response = future.get();
+]]></script>
+</div></div><h2 id="Async-2)UsingtheThreadsDSL">2) Using the Threads DSL</h2><p>In Camel 2.0 the <code>threads</code> DSL replaces the old <code>thread</code> DSL.</p><h3 id="Async-Camel2.0to2.3behavior">Camel 2.0 to 2.3 behavior</h3><p>The <code>threads</code> DSL leverages the JDK concurrency framework for multi threading. It can be used to turn a synchronous route into <a shape="rect" href="async.html">Async</a>. What happens is that from the point forwards from <code>threads</code> the messages is routed asynchronous in a new thread. The caller will either wait for a reply if a reply is expected, such as when we use <a shape="rect" href="request-reply.html">Request Reply</a> messaging. Or the caller will complete as well if no reply was expected such as <a shape="rect" href="event-message.html">Request Only</a> messaging.</p><h3 id="Async-Camel2.4onwardsbehavior">Camel 2.4 onwards behavior</h3><p>The <code>threads</code> DSL leverages the JDK concurrency framework for multi threading. It can be used to turn a synchronous route into <a shape="rect" href="async.html">Async</a>. What happens is that from the point forwards from <code>threads</code> the messages is routed asynchronous in a new thread. Camel leverages the <a shape="rect" href="asynchronous-processing.html">asynchronous routing engine</a>, which was re-introduced in Camel 2.4, to continue routing the <a shape="rect" href="exchange.html">Exchange</a> asynchronously.</p><p>The <code>threads</code> DSL supports the following options:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Option</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>poolSize</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A number to indicate the core pool size of the underlying Java <code>ExecutorService</code> that is actually doing all the heavy lifting of handling <a shape="rect" href="async.html">Async</a> tasks and correlate replies etc. By default a pool size of 10 is used.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>maxPoolSize</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A number to indicate the maximum pool size of the of the underlying Java <code>ExecutorService</code></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>keepAliveTime</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A number to indicate how long to keep inactive threads alive</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>timeUnit</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Time unit for the <code>keepAliveTime</code> option</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>maxQueueSize</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A number to indicate the maximum number of tasks to keep in the worker queue for the underlying Java <code>ExecutorService</code></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>threadName</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a custom thread name pattern. See <a shape="rect" href="threading-model.html">Threading Model</a> for more details.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>rejectedPolicy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>How to handle rejected tasks. Can be either <code>Abort</code>, <code>CallerRuns</code>, <code>Discard</code>, or <code>DiscardOldest</code>. See below for more details.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>callerRunsWhenRejected</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A boolean to more easily configure between the most common rejection policies. This option is default enabled. <code>true</code> is the same as <code>rejectedPolicy=CallerRuns</code>, and <code>false</code> is the same as <code>rejectedPolicy=Abort</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>executorService</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>You can provide a custom <code>ExecutorService</code> to use, for instance in a managed environment a J2EE container could provide this service so all thread pools is controlled by the J2EE container.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">executorServiceRef</td><td colspan="1" rowspan="1" class="confluenceTd">You can provide a named reference to the custom <code>ExecutorService</code> from the Camel registry. Keep in mind that reference to the custom executor service cannot be used together with the executor-related options (like <code>poolSize</code> or <code>maxQueueSize</code>) as referenced executor service should be configured already.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>waitForTaskToComplete</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>@deprecated (removed in Camel 2.4):</strong> Option to specify if the caller should wait for the async task to be complete or not before continuing. The following 3 options is supported: <strong>Always</strong>, <strong>Never</strong> or <strong>IfReplyExpected</strong>. The first two options is self explained. The last will only wait if the message is <a shape="rect" href="request-reply.html">Request Reply</a> based. The default option is <strong>IfReplyExpected</strong>.</p></td></tr></tbody></table></div><h4 id="Async-Aboutrejectedtasks">About rejected tasks</h4><p>The <code>threads</code> DSL uses a thread pool which has a worker queue for tasks. When the worker queue gets full, the task is rejected. You can customize how to react upon this using the <code>rejectedPolicy</code> and <code>callerRunsWhenRejected</code> option. The latter is used for easily switch between the two most common and recommended settings. Either let the current caller thread execute the task (eg it will become synchronous), but also give time for the thread pool to process its current tasks, without adding more tasks - sort of self throttling. This is the default behavior. If setting <code>callerRunsWhenRejected</code> you use the <code>Abort</code> policy, which mean the task is rejected, and a <code>RejectedExecutionException</code> is set on the <a shape="rect" href="exchange.html">Exchange</a>, and the <a shape="rect" href="exchange.html">Exchange</a> will stop continue being routed, and its <code>UnitOfWork</code> will be regarded as failed.</p><p>The other options <code>Discard</code> and <code>DiscardOldest</code> works a bit like <code>Abort</code>, however they do <strong>not</strong> set any Exception on the <a shape="rect" href="exchange.html">Exchange</a>, which mean the <a shape="rect" href="exchange.html">Exchange</a> will <strong>not</strong> be regarded as failed, but the <a shape="rect" href="exchange.html">Exchange</a> will be successful. When using <code>Discard</code> and <code>DiscardOldest</code> then the <a shape="rect" href="exchange.html">Exchange</a> will not continue being routed. <strong>Notice:</strong> There is a issue with these two options in Camel 2.9 or below, that cause the <code>UnitOfWork</code> not to be triggered, so we discourage you from using these options in those Camel releases. This has been fixed in Camel 2.10 onwards.</p><h3 id="Async-Example:threadsDSL">Example: threads DSL</h3><p>Suppose we receive orders on a JMS queue. Some of the orders expect a reply while other do not (either a <code>JMSReplyTo</code> exists or not). And lets imagine to process this order we need to do some heavy CPU calculation. So how do we avoid the messages that does not expect a reply to block until the entire message is processed? Well we use the <code>threads</code> DSL to turn the route into multi threading asynchronous routing before the heavy CPU task. Then the messages that does not expect a reply can return beforehand. And the messages that expect a reply, well yeah they have to wait anyway. So this can be accomplished like the route below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// just a unit test but imaging using your own data format that does complex
+// and CPU heavy processing for decrypting the message
+DataFormat mySecureDataFormat = new StringDataFormat(&quot;iso-8859-1&quot;);
+
+// list on the JMS queue for new orders
+from(&quot;jms:queue:order&quot;)
+    // do some sanity check validation
+    .to(&quot;bean:validateOrder&quot;)
+    .to(&quot;mock:validate&quot;)
+    // use multi threading with a pool size of 20
+    // turn the route async as some others do not expect a reply
+    // and a few does then we can use the threads DSL as a turning point
+    // if the JMS ReplyTo was set then we expect a reply, otherwise not
+    // use a pool of 20 threads for the point forward
+    .threads(20)
+    // do some CPU heavy processing of the message (we simulate and delay just 500 ms)
+    .unmarshal(mySecureDataFormat).delay(500).to(&quot;bean:handleOrder&quot;).to(&quot;mock:order&quot;);
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-warning"><p class="title">Transactions and threads DSL</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Mind that when using transactions its often required that the <a shape="rect" href="exchange.html">Exchange</a> is processed entirely in the same thread, as the transaction manager often uses <code>ThreadLocal</code> to store the intermediate transaction status. For instance Spring Transaction does this. So when using <code>threads</code> DSL the <a shape="rect" href="exchange.html">Exchange</a> that is processed in the async thread cannot participate in the same transaction as the caller thread.</p><p><strong>Notice:</strong> This does not apply to the <code>ProducerTemplate</code> Async API as such as the client usually does not participate in a transaction. So you can still use the Camel Client Async API and do async messaging where the processing of the <a shape="rect" href="exchange.html">Exchange</a> is still handled within transaction. Its only the client that submitted the <a shape="rect" href="exchange.html">Exchange</a> that does not participate in the same transaction.</p></div></div><h3 id="Async-SeeAlso">See Also</h3><ul class="alternate"><li><a shape="rect" href="asynchronous-processing.html">Asynchronous Processing</a></li><li><a shape="rect" href="request-reply.html">Request Reply</a></li><li><a shape="rect" href="event-message.html">Request Only</a></li><li><a shape="rect" class="external-link" href="http://davsclaus.blogspot.com/2009/05/on-road-to-camel-20-concurrency-with.html" rel="nofollow">Blog entry on using async for concurrent file processing</a></li><li><a shape="rect" href="seda.html">SEDA</a></li><li><a shape="rect" href="direct.html">Direct</a></li><li><a shape="rect" href="toasync.html">ToAsync</a> for non blocking <a shape="rect" href="request-reply.html">Request Reply</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=117116">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=117116&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

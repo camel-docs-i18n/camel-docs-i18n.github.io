@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: NotifyBuilder
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="user-guide.html">User Guide</a>&nbsp;&gt;&nbsp;<a href="testing.html">Testing</a>&nbsp;&gt;&nbsp;<a href="notifybuilder.html">NotifyBuilder</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="NotifyBuilder-NotifyBuilder">NotifyBuilder</h2>
+<p><strong>Available as of Camel 2.2</strong></p>
+
+<p>The <code>NotifyBuilder</code> is a builder from the <code>org.apache.camel.builder</code> package which allows you to build expressions and then test or wait for that condition to occur. The expressions is based around notifications about <a shape="rect" href="exchange.html">Exchange</a> being routed. So what does that mean? It means that you can build an expressions which can tell you when Camel is finished with routing 5 messages etc.</p>
+
+<p>You may want to use this when testing a route which you cannot or will not use <a shape="rect" href="mock.html">Mock</a>s. </p>
+
+<p>Suppose we have a very simple route:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+  from(&quot;jms:queue:quotes&quot;)
+     .to(&quot;bean:quotes&quot;);
+]]></script>
+</div></div>
+
+<p>Now you want to test this route without using mocks or the likes. Imagine the route being more complex and a production ready route.<br clear="none">
+We want to test that it could process a message send to that queue. By using the <a shape="rect" href="notifybuilder.html">NotifyBuilder</a> we can build an expression which <em>expresses when that condition occurred</em>.</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[ 
+  NotifyBuilder notify = new NotifyBuilder().whenDone(1).create();
+
+  // now use some API to send a message etc. Maybe you cannot use Camel&#39;s ProducerTemplate
+  // now we want to wait until the message has been routed and completed
+
+  boolean done = notify.matches(10, TimeUnit.SECONDS);
+  assertTrue(&quot;Should be done&quot;, done);
+
+  // now maybe use some API to see that the message did as expected
+]]></script>
+</div></div>
+
+<p>This is a very basic example with a simple builder expression. What we said that we want it to match when any Exchange is done. The builder have many more methods to set more complex expressions, which even can be stacked using <strong>and, or, not</strong> operations.</p>
+
+<h3 id="NotifyBuilder-Methods">Methods</h3>
+
+<p>These methods is for building the expression:</p>
+
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Method </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Description </p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> from(endpointUri) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches only when <a shape="rect" href="exchange.html">Exchange</a>s are incoming from that particular endpoint. The endpointUri can be a pattern, which is the same pattern matching used by <a shape="rect" href="intercept.html">Intercept</a>. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> fromRoute(routeId) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> <strong>Camel 2.4:</strong> Matches only when <a shape="rect" href="exchange.html">Exchange</a>s are incoming from that particular route. The routeId can be a pattern, which is the same pattern matching used by <a shape="rect" href="intercept.html">Intercept</a>. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> filter(predicate) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Filters out unwanted <a shape="rect" href="exchange.html">Exchange</a>s (only messages passing (true) the predicate is used). </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> wereSentTo(endpointUri) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> <strong>Camel 2.9:</strong> Matches only when <a shape="rect" href="exchange.html">Exchange</a>s has at any point been sent to the given endpoint. The endpointUri can be a pattern, which is the same pattern matching used by <a shape="rect" href="intercept.html">Intercept</a>. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenReceived(number) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when X number or more messages has been received. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenDone(number) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when X number or more messages is done. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenDoneByIndex(index) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> <strong>Camel 2.8:</strong> Matches when the n'th (index) message is done. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenComplete(number) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when X number or more messages is complete. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenFailed(number) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when X number or more messages is failed. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenExactlyDone(number) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when exactly X number of messages is done. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenExactlyComplete(number) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when exactly X number of messages is complete. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenExactlyFailed(number) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when exactly X number of messages is failed. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenBodiesReceived(bodies) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when the message bodies has been received in the same order. This method is non strict which means that it will disregard any additional received messages. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenExactBodiesReceived(bodies) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when the message bodies has been received in the same order. This method is strict which means the exact number of message bodies is expected. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenBodiesDone(bodies) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when the message bodies are done in the same order. This method is non strict which means that it will disregard any additional done messages. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenExactBodiesDone(bodies) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches when the message bodies are done in the same order. This method is strict which means the exact number of message bodies is expected. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenAnyReceivedMatches(predicate) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches if any one of the received messages matched the <a shape="rect" href="predicate.html">Predicate</a>. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenAllReceivedMatches(predicate) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches only when all of the received messages matched the <a shape="rect" href="predicate.html">Predicate</a>. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenAnyDoneMatches(predicate) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches if any one of the done messages matched the <a shape="rect" href="predicate.html">Predicate</a>. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenAllDoneMatches(predicate) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches only when all of the done messages matched the <a shape="rect" href="predicate.html">Predicate</a>. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenReceivedSatisfied(mock) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches if the <a shape="rect" href="mock.html">Mock</a> is satisfied for received messages. Is used for fine grained matching by setting the expectations on the <a shape="rect" href="mock.html">Mock</a> which already have a great library for doing so. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenReceivedNotSatisfied(mock) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches if the <a shape="rect" href="mock.html">Mock</a> is <strong>not</strong> satisfied for received messages. Is used for fine grained matching by setting the expectations on the <a shape="rect" href="mock.html">Mock</a> which already have a great library for doing so. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenDoneSatisfied(mock) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches if the <a shape="rect" href="mock.html">Mock</a> is satisfied for messages done. Is used for fine grained matching by setting the expectations on the <a shape="rect" href="mock.html">Mock</a> which already have a great library for doing so. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> whenDoneNotSatisfied(mock) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Matches if the <a shape="rect" href="mock.html">Mock</a> is <strong>not</strong> satisfied for messages done. Is used for fine grained matching by setting the expectations on the <a shape="rect" href="mock.html">Mock</a> which already have a great library for doing so. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> and </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Appends an additional expressions using the <strong>and</strong> operator. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> or </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Appends an additional expressions using the <strong>or</strong> operator. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> not </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Appends an additional expressions using the <strong>not</strong> operator. </p></td></tr></tbody></table></div>
+
+
+<p>And these methods is for using the builder after creating the expression:</p>
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> Method </p></th><th colspan="1" rowspan="1" class="confluenceTh"><p> Description </p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> create() </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Creates the builder expression. After you have <strong>created</strong> it you can use the <code>matches</code> methods. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> matches() </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Does the builder match currently. This operation returns immediately. This method is to be used <strong>after</strong> you have created the expression. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> matches(timeout, TimeUnit) </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> Wait until the builder matches or timeout. This method is to be used <strong>after</strong> you have created the expression. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> matchesMockWaitTime </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> <strong>Camel 2.6:</strong> Wait until the builder matches or timeout. The timeout value used is based on the <em>highest result wait time</em> configured on any of mock endpoints being used. If no mock endpoint was used, then the default timeout value is 10 seconds. This method is convenient to use in unit tests when you use mocks. Then you dont have to specify the timeout value explicit. </p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p> reset() </p></td><td colspan="1" rowspan="1" class="confluenceTd"><p> <strong>Camel 2.3:</strong> Resets the notifier. </p></td></tr></tbody></table></div>
+
+
+<p>We will most likely add additional methods in the future, so check out the <code>NotifyBuilder</code> for latest and greatest methods.</p>
+
+<h3 id="NotifyBuilder-DifferencebetweenDoneandCompleted">Difference between Done and Completed</h3>
+<p>The difference between <strong>done</strong> and <strong>completed</strong> is that done can also include failed messages, where as completed is only successful processed messages.</p>
+
+<h3 id="NotifyBuilder-Examples">Examples</h3>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .from(&quot;direct:foo&quot;).whenDone(5)
+                .create();
+]]></script>
+</div></div>
+<p>Here we want to match when the <code>direct:foo</code> endpoint have done 5 messages. </p>
+
+<p>You may also want to be notified when an message is done by the index, for example the very first message. To do that you can simply do:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .whenDoneByIndex(0)
+                .create();
+]]></script>
+</div></div>
+
+<p>This ensures that the notifier only matches exactly when the first message is done.</p>
+
+<p>If you use <code>whenDone(1)</code> instead, then the notifier matches when at least one message is done. There could be use cases where <code>whenDone(1)</code> would match even if the first message hasn't been done yet, as other message in between could be done ahead of the first message. That is why <code>whenDoneByIndex</code> was introduced in <strong>Camel 2.8</strong> onwards to support this scenario.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .from(&quot;direct:foo&quot;).filter(body().contains(&quot;test&quot;)).whenDone(5)
+                .create();
+]]></script>
+</div></div>
+<p>Here we want to match when the <code>direct:foo</code> endpoint have done 5 messages which contains the word 'test' in the body.<br clear="none">
+The filter accepts a <a shape="rect" href="predicate.html">Predicate</a> so you can use <a shape="rect" href="xpath.html">XPath</a>, <a shape="rect" href="bean.html">Bean</a>, <a shape="rect" href="simple.html">Simple</a> and whatnot. </p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .from(&quot;jms:*&quot;).whenDone(1)
+                .create();
+]]></script>
+</div></div>
+<p>Here we just say that at least one message should be done received from any JMS endpoint (notice the wildcard matching).</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .fromRoute(&quot;myCoolRoutes*&quot;).whenDone(3)
+                .create();
+]]></script>
+</div></div>
+<p>Here we just say that at least three message should be done received from any of myCoolRoutes (notice the wildcard matching).</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .from(&quot;direct:foo&quot;).whenDone(5)
+                .and().from(&quot;direct:bar&quot;).whenDone(7)
+                .create();
+]]></script>
+</div></div>
+<p>Here both 5 foo messages and 7 bar messages must be done. Notice the use of the <strong>and</strong> operator.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .from(&quot;direct:foo&quot;).whenBodiesReceived(&quot;Hello World&quot;, &quot;Bye World&quot;)
+                .create();
+]]></script>
+</div></div>
+<p>Here we expect to receive two messages with <code>Hello World</code> and <code>Bye World</code>.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .whenAnyReceivedMatches(body().contains(&quot;Camel&quot;))
+                .create();
+]]></script>
+</div></div>
+<p>Here we want to match when we have received a message which contains Camel in the body.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        // lets use a mock to set the expressions as it got many great assertions for that
+        // notice we use mock:assert which does NOT exist in the route, its just a pseudo name
+        MockEndpoint mock = getMockEndpoint(&quot;mock:assert&quot;);
+        mock.expectedBodiesReceivedInAnyOrder(&quot;Hello World&quot;, &quot;Bye World&quot;, &quot;Hi World&quot;);
+
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .from(&quot;direct:foo&quot;).whenReceivedSatisfied(mock)
+                .create();
+]]></script>
+</div></div>
+<p>Now it bring powers to the table. We combine a mock with the builder. We use the mock to set fine grained expectations such as we should receive 3 messages in any order. Then using the builder we can tell that those messages should be received from the <code>direct:foo</code> endpoint.</p>
+
+<p>You can combine multiple expressions as much as you like. However we suggest to use the mock for fine grained expectations that you may already know how to use.</p>
+
+<p>You can also specify that the <a shape="rect" href="exchange.html">Exchange</a>s must have been sent to a given endpoint. For example in the following we expect the message to be sent to mock:bar</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .wereSentTo(&quot;mock:bar&quot;)
+                .create();
+]]></script>
+</div></div>
+
+<p>You can combine this with any of the other expectations, such as, to only match if 3+ messages are done, and were sent to the mock:bar endpoint:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .whenDone(3).wereSentTo(&quot;mock:bar&quot;)
+                .create();
+]]></script>
+</div></div>
+
+<p>You can add additional {{wereSentTo}}s, such as the following two:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .wereSentTo(&quot;activemq:queue:foo&quot;).wereSentTo(&quot;activemq:queue:bar&quot;)
+                .create();
+]]></script>
+</div></div>
+
+<p>As well as you can expect a number of messages to be done, and a message to fail, which has to be sent to another endpoint:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .whenDone(3).wereSentTo(&quot;activemq:queue:goodOrder&quot;)
+                .and().whenFailed(1).wereSentTo(&quot;activemq:queue:badOrder&quot;)
+                .create();
+]]></script>
+</div></div></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=11469138">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=11469138&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

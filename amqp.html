@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: AMQP
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="components.html">Components</a>&nbsp;&gt;&nbsp;<a href="amqp.html">AMQP</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="AMQP-AMQP">AMQP</h2><p>The <strong style="line-height: 1.42857;">amqp:</strong> component supports the <a shape="rect" class="external-link" href="http://www.amqp.org/" style="line-height: 1.42857;" rel="nofollow">AMQP 1.0 protocol</a> using the JMS Client API of the <a shape="rect" class="external-link" href="https://github.com/apache/qpid-jms/" rel="nofollow">Qpid</a> project. In case you want to use AMQP 0.9 (in particular RabbitMQ) you might also be interested in the <a shape="rect" href="rabbitmq.html">Camel RabbitMQ</a> component. Please keep in mind that prior to the Camel 2.17.0 AMQP component supported AMQP 0.9 and above, however since Camel 2.17.0 it supports only AMQP 1.0.</p><p>Maven users will need to add the following dependency to their <code>pom.xml</code> for this component:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-amqp&lt;/artifactId&gt;
+    &lt;version&gt;${camel.version}&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;
+]]></script>
+</div></div><h3 id="AMQP-URIformat">URI format</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[amqp:[queue:|topic:]destinationName[?options]
+]]></script>
+</div></div><h3 id="AMQP-AMQPOptions">AMQP Options</h3><p>You can specify all of the various configuration options of the <a shape="rect" href="jms.html">JMS</a> component after the destination name.</p><h3 id="AMQP-Usage">Usage</h3><p>As AMQP component is inherited from JMS component, the usage of the former is almost identical to the latter:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Using AMQP component</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[// Consuming from AMQP queue
+from(&quot;amqp:queue:incoming&quot;).
+  to(...);
+ 
+// Sending message to the AMQP topic
+from(...).
+  to(&quot;amqp:topic:notify&quot;);]]></script>
+</div></div><h3 id="AMQP-ConfiguringAMQPcomponent"><span style="line-height: 1.5;">Configuring AMQP component</span></h3><p>Starting from the Camel 2.16.1 you can also use the <code>AMQPComponent#amqp10Component(String connectionURI)</code> factory method to return the AMQP 1.0 component with the pre-configured&#160;topic prefix:&#160;</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Creating AMQP 1.0 component</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[ AMQPComponent amqp = AMQPComponent.amqp10Component(&quot;amqp://guest:guest@localhost:5672&quot;);]]></script>
+</div></div><p>Keep in mind that starting from the Camel&#160;2.17&#160;the&#160;<code>AMQPComponent#amqp10Component(String connectionURI)</code>&#160;factory method has been deprecated on the behalf of the <code><span>AMQPComponent#amqpComponent(String connectionURI)</span></code>:&#160;</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Creating AMQP 1.0 component</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[AMQPComponent amqp = AMQPComponent.amqpComponent(&quot;amqp://localhost:5672&quot;);
+ 
+AMQPComponent authorizedAmqp = AMQPComponent.amqpComponent(&quot;amqp://localhost:5672&quot;, &quot;user&quot;, &quot;password&quot;);]]></script>
+</div></div><p>Starting from Camel 2.17, in order to automatically configure the AMQP component, you can also add an instance of&#160;<code>org.apache.camel.component.amqp.AMQPConnectionDetails</code> to the registry. For example for Spring Boot you just have to define&#160;bean:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>AMQP connection details auto-configuration</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Bean
+AMQPConnectionDetails amqpConnection() {
+  return new AMQPConnectionDetails(&quot;amqp://lcoalhost:5672&quot;); 
+}
+ 
+@Bean
+AMQPConnectionDetails securedAmqpConnection() {
+  return new AMQPConnectionDetails(&quot;amqp://lcoalhost:5672&quot;, &quot;username&quot;, &quot;password&quot;); 
+}]]></script>
+</div></div><p>&#160;</p><p>You can also rely on the <a shape="rect" href="properties.html">Camel properties</a> to read the AMQP connection details. Factory method&#160;<code>AMQPConnectionDetails.discoverAMQP()</code>&#160;attempts to read Camel properties in a Kubernetes-like convention, just as demonstrated on the snippet below:</p><p>&#160;</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>AMQP connection details auto-configuration</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[export AMQP_SERVICE_HOST = &quot;mybroker.com&quot;
+export AMQP_SERVICE_PORT = &quot;6666&quot;
+export AMQP_SERVICE_USERNAME = &quot;username&quot;
+export AMQP_SERVICE_PASSWORD = &quot;password&quot;
+ 
+...
+ 
+@Bean
+AMQPConnectionDetails amqpConnection() {
+  return AMQPConnectionDetails.discoverAMQP(); 
+}
+]]></script>
+</div></div><h3 id="AMQP-ConfiguringConnectionFactory">Configuring Connection Factory</h3><p>Like with any other JMS-based component, usually it's important to configure JMS connection factory. For example, you'd like to set your broker url or set proper connection credentials. Additionally, you would always want to set some kind of pooling (or caching) on the connection factory. An example of how to do both of these tasks is shown below.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[     &lt;bean id=&quot;jmsConnectionFactory&quot; class=&quot;org.apache.qpid.jms.JmsConnectionFactory&quot;&gt;
+        &lt;property name=&quot;remoteURI&quot; value=&quot;amqp://localhost:5672&quot; /&gt;
+        &lt;property name=&quot;username&quot; value=&quot;admin&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;admin&quot;/&gt;
+    &lt;/bean&gt;
+
+	&lt;bean id=&quot;jmsCachingConnectionFactory&quot; class=&quot;org.springframework.jms.connection.CachingConnectionFactory&quot;&gt;
+    	&lt;property name=&quot;targetConnectionFactory&quot; ref=&quot;jmsConnectionFactory&quot; /&gt;
+	&lt;/bean&gt;
+
+	&lt;bean id=&quot;jmsConfig&quot; class=&quot;org.apache.camel.component.jms.JmsConfiguration&quot; &gt;
+  		&lt;property name=&quot;connectionFactory&quot; ref=&quot;jmsCachingConnectionFactory&quot; /&gt; 
+  		&lt;property name=&quot;cacheLevelName&quot; value=&quot;CACHE_CONSUMER&quot; /&gt;
+ 	&lt;/bean&gt;	
+
+	&lt;bean id=&quot;amqp&quot; class=&quot;org.apache.camel.component.amqp.AMQPComponent&quot;&gt;
+		&lt;property name=&quot;configuration&quot; ref=&quot;jmsConfig&quot; /&gt;
+	&lt;/bean&gt;	
+
+    &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/blueprint&quot; id=&quot;simple&quot;&gt;
+        &lt;route&gt;
+            &lt;from uri=&quot;timer:simple?period=5000&quot;/&gt;
+            &lt;setBody&gt;
+                &lt;simple&gt;Hello World&lt;/simple&gt;
+            &lt;/setBody&gt;
+            &lt;to uri=&quot;amqp:test&quot;/&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;]]></script>
+</div></div><h3 id="AMQP-UsinginsideKaraf">Using inside Karaf</h3><p>If you want to use <strong>amqp</strong> component inside the Karaf, there's already defined feature that will install all necessary bundles for you. All you need to do is</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[karaf@root()&gt; repo-add camel
+karaf@root()&gt; feature:install camel-amqp]]></script>
+</div></div><p>and the environment would be set. Additionally you can add <strong>camel-blueprint</strong> or <strong>camel-spring</strong> features if you want to define your routes in those contexts.</p><p>&#160;</p><p></p><h3 id="AMQP-SeeAlso">See Also</h3>
+<ul><li><a shape="rect" href="configuring-camel.html">Configuring Camel</a></li><li><a shape="rect" href="component.html">Component</a></li><li><a shape="rect" href="endpoint.html">Endpoint</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li></ul><p>&#160;</p></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=71375">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=71375&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Add New Component Guide
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="developers.html">Developers</a>&nbsp;&gt;&nbsp;<a href="add-new-component-guide.html">Add New Component Guide</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h1 id="AddNewComponentGuide-Howtoaddanewcomponent">How to add a new component</h1>
+
+<h2 id="AddNewComponentGuide-1.OpenanJIRAissue">1. Open an JIRA issue</h2>
+<p>Open a JIRA issue at <a shape="rect" class="external-link" href="https://issues.apache.org/jira/browse/CAMEL">https://issues.apache.org/jira/browse/CAMEL</a>, if does not already exist.<br clear="none">
+The issue type should be "New Feature". A sample can be found here: <a shape="rect" class="external-link" href="https://issues.apache.org/jira/browse/CAMEL-3468">https://issues.apache.org/jira/browse/CAMEL-3468</a></p>
+
+<h2 id="AddNewComponentGuide-2.Checkthelicenseofalldependencies">2. Check the license of all dependencies</h2>
+<p>You have to check whether or not all required dependencies have an Apache compatible license.<br clear="none">
+Please refer to <a shape="rect" class="external-link" href="http://www.apache.org/legal/3party.html#define-thirdpartywork">Third-Party Licensing Policy</a> for detailed information and acceptable licenses.<br clear="none">
+This <strong>doesn't</strong> mean, if one of the dependencies are not compatible with the Apache license we can't accept the component. In this case, we might have to add the component to the <a shape="rect" class="external-link" href="http://code.google.com/p/camel-extra/" rel="nofollow">Camel-Extra</a> repository.</p>
+
+<h2 id="AddNewComponentGuide-3.Providingapatch">3. Providing a patch</h2>
+<p>If you would like to contribute a new component as a patch (we love contributions), please refer to <a shape="rect" class="external-link" href="http://camel.apache.org/contributing.html">Contributing</a> (look for <code>Creating patches</code>) for instructions.</p>
+
+<h2 id="AddNewComponentGuide-4.Addthenewcomponent">4. Add the new component</h2>
+<p>Add the new component into the components pom modules section (note the alphabetical order of the project names).<br clear="none">
+After that, add the new component to the components folder.</p>
+
+<h2 id="AddNewComponentGuide-5.Checkthesourcesandresources">5. Check the sources and resources</h2>
+<p>The source and resources have to follow some Apache/Camel coding rules:</p>
+<ul class="alternate"><li>Make sure every added source and resource contains the Apache license header.</li><li>Make sure the new component has an adequate test coverage.</li><li>Run a build with checkstyle to ensure the sources are conform with the Apache Camel coding rules: <a shape="rect" class="external-link" href="http://camel.apache.org/building.html">Building Camel</a> (look for <code>Building with checkstyle</code>)</li><li>Make sure the log output is adequate on the INFO log level.</li></ul>
+
+
+<h2 id="AddNewComponentGuide-6.CheckwhetheralldependenciesareavailableasOSGIbundles">6. Check whether all dependencies are available as OSGI bundles</h2>
+<p>If a dependency is not available as an OSGI bundle, ask the Apache Servicemix guys for an OSGI-fied version of this dependency. You should do this by opening a JIRA issue at <a shape="rect" class="external-link" href="https://issues.apache.org/jira/browse/SMX4">https://issues.apache.org/jira/browse/SMX4</a><br clear="none">
+The issue type should be "Task". A sample can be found here: <a shape="rect" class="external-link" href="https://issues.apache.org/jira/browse/SMX4-723">https://issues.apache.org/jira/browse/SMX4-723</a></p>
+
+<h2 id="AddNewComponentGuide-7.Addanewfeature">7. Add a new feature</h2>
+<p>Add a new feature definition for this component to the feature file (under platforms/karaf/features).<br clear="none">
+Next, validate the correctness of this feature file as described in <a shape="rect" class="external-link" href="http://camel.apache.org/building.html">Working with features</a> (look for <code>Working with features</code>)</p>
+
+<h2 id="AddNewComponentGuide-8.Addthewikipage">8. Add the wiki page</h2>
+<p>Each component requires its own wiki page to document the component. If you don't have the <strong>karma</strong> to edit the wiki pages, plese refer to <a shape="rect" class="external-link" href="http://camel.apache.org/how-do-i-edit-the-website.html">how do I edit the website</a>.<br clear="none">
+Add the new component wiki page to the <a shape="rect" href="https://cwiki.apache.org/confluence/display/CAMEL/Components">Components</a> list by editing <a shape="rect" href="https://cwiki.apache.org/confluence/display/CAMEL/Component+List">Component List</a> wiki page.<br clear="none">
+Add a reference to the new component to the <a shape="rect" href="https://cwiki.apache.org/confluence/display/CAMEL/Book+Component+Appendix">Manual</a> wiki page.<br clear="none">
+Update the release notes for the version the development is <a shape="rect" href="https://cwiki.apache.org/confluence/display/CAMEL/In+Progress">in progress</a>.<br clear="none">
+Check whether other sites needs to be updated.</p>
+
+<h2 id="AddNewComponentGuide-9.Runacompletebuild">9. Run a complete build</h2>
+<p>To ensure you do not break the build, run a complete build from the new component directory:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+mvn clean install
+]]></script>
+</div></div>
+
+<h2 id="AddNewComponentGuide-10.Addthecomponenttodistribution">10. Add the component to distribution</h2>
+<p>Add the new component to the following files</p>
+<ul class="alternate"><li>parent/pom.xml</li><li>apache-camel/src/main/descriptors/common-bin.xml</li></ul>
+
+
+<p>Build the kit by running the following maven goal from the <code>apache-camel</code> directory:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+mvn clean install
+]]></script>
+</div></div>
+<p>Check the generated .zip file in the target folder contains the new component.</p></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=24192091">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=24192091&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

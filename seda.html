@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: SEDA
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="components.html">Components</a>&nbsp;&gt;&nbsp;<a href="seda.html">SEDA</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="SEDA-SEDAComponent">SEDA Component</h2><p>The <strong>seda:</strong> component provides asynchronous <a shape="rect" class="external-link" href="http://www.eecs.harvard.edu/~mdw/proj/seda/" rel="nofollow">SEDA</a> behavior, so that messages are exchanged on a <a shape="rect" class="external-link" href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/BlockingQueue.html" rel="nofollow">BlockingQueue</a> and consumers are invoked in a separate thread from the producer.</p><p>Note that queues are only visible within a <em>single</em> <a shape="rect" href="camelcontext.html">CamelContext</a>. If you want to communicate across <code>CamelContext</code> instances (for example, communicating between Web applications), see the <a shape="rect" href="vm.html">VM</a> component.</p><p>This component does not implement any kind of persistence or recovery, if the VM terminates while messages are yet to be processed. If you need persistence, reliability or distributed SEDA, try using either <a shape="rect" href="jms.html">JMS</a> or <a shape="rect" href="activemq.html">ActiveMQ</a>.</p><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Synchronous</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The <a shape="rect" href="direct.html">Direct</a> component provides synchronous invocation of any consumers when a producer sends a message exchange.</p></div></div><h3 id="SEDA-URIformat">URI format</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[seda:someName[?options]
+]]></script>
+</div></div><p>Where <strong>someName</strong> can be any string that uniquely identifies the endpoint within the current <a shape="rect" href="camelcontext.html">CamelContext</a>.</p><p>You can append query options to the URI in the following format: <code>?option=value&amp;option=value&amp;&#8230;</code></p><h3 id="SEDA-Options">Options</h3><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Name</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Since</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>size</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The maximum capacity of the SEDA queue (i.e., the number of messages it can hold). The default value in Camel 2.2 or older is <code>1000</code>. From Camel 2.3 onwards, the size is unbounded by default. <strong>Notice:</strong> Mind if you use this option, then its the first endpoint being created with the queue name, that determines the size. To make sure all endpoints use same size, then configure the size option on all of them, or the first endpoint being created. From <strong>Camel 2.11</strong> onwards, a validation is taken place to ensure if using mixed queue sizes for the same queue name, Camel would detect this and fail creating the endpoint.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>concurrentConsumers</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>1</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Number of concurrent threads processing exchanges.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>waitForTaskToComplete</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>IfReplyExpected</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Option to specify whether the caller should wait for the async task to complete or not before continuing. The following three options are supported: <code>Always</code>, <code>Never</code> or <code>IfReplyExpected</code>. The first two values are self-explanatory. The last value, <code>IfReplyExpected</code>, will only wait if the message is <a shape="rect" href="request-reply.html">Request Reply</a> based. The default option is <code>IfReplyExpected</code>. See more information about <a shape="rect" href="async.html">Async</a> messaging.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>timeout</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>30000</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Timeout (in milliseconds) before a SEDA producer will stop waiting for an asynchronous task to complete. See <code>waitForTaskToComplete</code> and <a shape="rect" href="async.html">Async</a> for more details. In <strong>Camel 2.2</strong> you can now disable timeout by using 0 or a negative value.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>multipleConsumers</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.2</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Specifies whether multiple consumers are allowed. If enabled, you can use <a shape="rect" href="seda.html">SEDA</a> for <a shape="rect" class="external-link" href="http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern" rel="nofollow">Publish-Subscribe</a> messaging. That is, you can send a message to the SEDA queue and have each consumer receive a copy of the message. When enabled, this option should be specified on every consumer endpoint.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>limitConcurrentConsumers</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.3</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>true</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether to limit the number of <code>concurrentConsumers</code> to the maximum of <code>500</code>. By default, an exception will be thrown if a SEDA endpoint is configured with a greater number. You can disable that check by turning this option off.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>blockWhenFull</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.9</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether a thread that sends messages to a full SEDA queue will block until the queue's capacity is no longer exhausted. By default, an exception will be thrown stating that the queue is full. By enabling this option, the calling thread will instead block and wait until the message can be accepted.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>queueSize</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.9</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Component only:</strong> The maximum default size (capacity of the number of messages it can hold) of the SEDA queue. This option is used if <code>size</code> is not in use.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>pollTimeout</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.9.3</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>1000</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><em>Consumer only</em> &#8211; The timeout used when polling. When a timeout occurs, the consumer can check whether it is allowed to continue running. Setting a lower value allows the consumer to react more quickly upon shutdown.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>purgeWhenStopping</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.11.1</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether to purge the task queue when stopping the consumer/route. This allows to stop faster, as any pending messages on the queue is discarded.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>queue</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.12.0</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>null</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Define the queue instance which will be used by seda endpoint</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>queueFactory</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.12.0</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>null</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Define the QueueFactory which could create the queue for the seda endpoint</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>failIfNoConsumers</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>2.12.0</strong></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>false</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether the producer should fail by throwing an exception, when sending to a SEDA queue with no active consumers.</p><p>Only one of the options discardIfNoConsumers and failIfNoConsumers can be enabled at the same time.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><code>discardIfNoConsumers</code></td><td colspan="1" rowspan="1" class="confluenceTd"><strong>2.16</strong></td><td colspan="1" rowspan="1" class="confluenceTd"><code>false</code></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether the producer should discard the message (do not add the message to the queue), when sending to a SEDA queue with no active consumers.</p><p><span>Only one of the options discardIfNoConsumers and failIfNoConsumers can be enabled at the same time.</span></p></td></tr></tbody></table></div><h3 id="SEDA-ChoosingBlockingQueueimplementation">Choosing BlockingQueue implementation</h3><p><strong>Available as of Camel 2.12</strong></p><p>By default, the SEDA component always intantiates LinkedBlockingQueue, but you can use different implementation, you can reference your own BlockingQueue implementation, in this case the size option is not used</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;bean id=&quot;arrayQueue&quot; class=&quot;java.util.ArrayBlockingQueue&quot;&gt;
+&lt;constructor-arg index=&quot;0&quot; value=&quot;10&quot; &gt;&lt;!-- size --&gt;
+&lt;constructor-arg index=&quot;1&quot; value=&quot;true&quot; &gt;&lt;!-- fairness --&gt;
+&lt;/bean&gt;
+&lt;!-- ... and later --&gt;
+&lt;from&gt;seda:array?queue=#arrayQueue&lt;/from&gt;
+]]></script>
+</div></div><p>Or you can reference a BlockingQueueFactory implementation, 3 implementations are provided LinkedBlockingQueueFactory, ArrayBlockingQueueFactory and PriorityBlockingQueueFactory:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;bean id=&quot;priorityQueueFactory&quot; class=&quot;org.apache.camel.component.seda.PriorityBlockingQueueFactory&quot;&gt;
+&lt;property name=&quot;comparator&quot;&gt;
+&lt;bean class=&quot;org.apache.camel.demo.MyExchangeComparator&quot; /&gt;
+&lt;/property&gt;
+&lt;/bean&gt;
+&lt;!-- ... and later --&gt;
+&lt;from&gt;seda:priority?queueFactory=#priorityQueueFactory&amp;size=100&lt;/from&gt;
+]]></script>
+</div></div><h3 id="SEDA-UseofRequestReply">Use of Request Reply</h3><p>The <a shape="rect" href="seda.html">SEDA</a> component supports using <a shape="rect" href="request-reply.html">Request Reply</a>, where the caller will wait for the <a shape="rect" href="async.html">Async</a> route to complete. For instance:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;mina:tcp://0.0.0.0:9876?textline=true&amp;sync=true&quot;).to(&quot;seda:input&quot;);
+
+from(&quot;seda:input&quot;).to(&quot;bean:processInput&quot;).to(&quot;bean:createResponse&quot;);
+]]></script>
+</div></div><p>In the route above, we have a TCP listener on port 9876 that accepts incoming requests. The request is routed to the <code>seda:input</code> queue. As it is a <a shape="rect" href="request-reply.html">Request Reply</a> message, we wait for the response. When the consumer on the <code>seda:input</code> queue is complete, it copies the response to the original message response.</p><div class="confluence-information-macro confluence-information-macro-note"><p class="title">until 2.2: Works only with 2 endpoints</p><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Using <a shape="rect" href="request-reply.html">Request Reply</a> over <a shape="rect" href="seda.html">SEDA</a> or <a shape="rect" href="vm.html">VM</a> only works with 2 endpoints. You <strong>cannot</strong> chain endpoints by sending to A -&gt; B -&gt; C etc. Only between A -&gt; B. The reason is the implementation logic is fairly simple. To support 3+ endpoints makes the logic much more complex to handle ordering and notification between the waiting threads properly.</p><p>This has been improved in <strong>Camel 2.3</strong> onwards, which allows you to chain as many endpoints as you like.</p></div></div><h3 id="SEDA-Concurrentconsumers">Concurrent consumers</h3><p>By default, the SEDA endpoint uses a single consumer thread, but you can configure it to use concurrent consumer threads. So instead of thread pools you can use:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;seda:stageName?concurrentConsumers=5&quot;).process(...)
+]]></script>
+</div></div><p>As for the difference between the two, note a <em>thread pool</em> can increase/shrink dynamically at runtime depending on load, whereas the number of concurrent consumers is always fixed.</p><h3 id="SEDA-Threadpools">Thread pools</h3><p>Be aware that adding a thread pool to a SEDA endpoint by doing something like:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;seda:stageName&quot;).thread(5).process(...)
+]]></script>
+</div></div><p>Can wind up with two <code>BlockQueues</code>: one from the SEDA endpoint, and one from the workqueue of the thread pool, which may not be what you want. Instead, you might wish to configure a <a shape="rect" href="direct.html">Direct</a> endpoint with a thread pool, which can process messages both synchronously and asynchronously. For example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[from(&quot;direct:stageName&quot;).thread(5).process(...)
+]]></script>
+</div></div><p>You can also directly configure number of threads that process messages on a SEDA endpoint using the <code>concurrentConsumers</code> option.</p><h3 id="SEDA-Sample">Sample</h3><p>In the route below we use the SEDA queue to send the request to this async queue to be able to send a fire-and-forget message for further processing in another thread, and return a constant reply in this thread to the original caller.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+public void configure() throws Exception {
+    from(&quot;direct:start&quot;)
+        // send it to the seda queue that is async
+        .to(&quot;seda:next&quot;)
+        // return a constant response
+        .transform(constant(&quot;OK&quot;));
+
+    from(&quot;seda:next&quot;).to(&quot;mock:result&quot;);
+}
+]]></script>
+</div></div>Here we send a Hello World message and expects the reply to be OK.<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+Object out = template.requestBody(&quot;direct:start&quot;, &quot;Hello World&quot;);
+assertEquals(&quot;OK&quot;, out);
+]]></script>
+</div></div>The "Hello World" message will be consumed from the SEDA queue from another thread for further processing. Since this is from a unit test, it will be sent to a <code>mock</code> endpoint where we can do assertions in the unit test.<h3 id="SEDA-UsingmultipleConsumers">Using multipleConsumers</h3><p><strong>Available as of Camel 2.2</strong></p><p>In this example we have defined two consumers and registered them as spring beans.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!-- define the consumers as spring beans --&gt;
+&lt;bean id=&quot;consumer1&quot; class=&quot;org.apache.camel.spring.example.FooEventConsumer&quot;/&gt;
+
+&lt;bean id=&quot;consumer2&quot; class=&quot;org.apache.camel.spring.example.AnotherFooEventConsumer&quot;/&gt;
+
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;!-- define a shared endpoint which the consumers can refer to instead of using url --&gt;
+    &lt;endpoint id=&quot;foo&quot; uri=&quot;seda:foo?multipleConsumers=true&quot;/&gt;
+&lt;/camelContext&gt;
+]]></script>
+</div></div>Since we have specified <strong>multipleConsumers=true</strong> on the seda foo endpoint we can have those two consumers receive their own copy of the message as a kind of pub-sub style messaging.<p>As the beans are part of an unit test they simply send the message to a mock endpoint, but notice how we can use @Consume to consume from the seda queue.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+public class FooEventConsumer {
+
+    @EndpointInject(uri = &quot;mock:result&quot;)
+    private ProducerTemplate destination;
+
+    @Consume(ref = &quot;foo&quot;)
+    public void doSomething(String body) {
+        destination.sendBody(&quot;foo&quot; + body);
+    }
+
+}
+]]></script>
+</div></div><h3 id="SEDA-Extractingqueueinformation.">Extracting queue information.</h3><p>If needed, information such as queue size, etc. can be obtained without using JMX in this fashion:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[SedaEndpoint seda = context.getEndpoint(&quot;seda:xxxx&quot;);
+int size = seda.getExchanges().size();
+]]></script>
+</div></div><p></p><h3 id="SEDA-SeeAlso">See Also</h3>
+<ul><li><a shape="rect" href="configuring-camel.html">Configuring Camel</a></li><li><a shape="rect" href="component.html">Component</a></li><li><a shape="rect" href="endpoint.html">Endpoint</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li></ul><ul class="alternate"><li><a shape="rect" href="vm.html">VM</a></li><li><a shape="rect" href="disruptor.html">Disruptor</a></li><li><a shape="rect" href="direct.html">Direct</a></li><li><a shape="rect" href="async.html">Async</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=61225">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=61225&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

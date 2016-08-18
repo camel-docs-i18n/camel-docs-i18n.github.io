@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Aggregator2
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a>&nbsp;&gt;&nbsp;<a href="aggregator2.html">Aggregator2</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h3 id="Aggregator2-Aggregator">Aggregator</h3><p><strong>This applies for Camel version 2.3 or newer. If you use an older version then use this <a shape="rect" href="aggregator.html">Aggregator</a> link instead.</strong></p><p>The <a shape="rect" class="external-link" href="http://www.enterpriseintegrationpatterns.com/Aggregator.html" rel="nofollow">Aggregator</a> from the <a shape="rect" href="enterprise-integration-patterns.html">EIP patterns</a> allows you to combine a number of messages together into a single message.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" src="http://www.enterpriseintegrationpatterns.com/img/Aggregator.gif" data-image-src="http://www.enterpriseintegrationpatterns.com/img/Aggregator.gif"></span></p><p>A correlation <a shape="rect" href="expression.html">Expression</a> is used to determine the messages which should be aggregated together. If you want to aggregate all messages into a single message, just use a constant expression. An AggregationStrategy is used to combine all the message exchanges for a single correlation key into a single message exchange.</p><h3 id="Aggregator2-Aggregatoroptions">Aggregator options</h3><p>The aggregator supports the following options:</p><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Option</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>correlationExpression</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Mandatory <a shape="rect" href="expression.html">Expression</a> which evaluates the correlation key to use for aggregation. The <a shape="rect" href="exchange.html">Exchange</a> which has the same correlation key is aggregated together. If the correlation key could not be evaluated an Exception is thrown. You can disable this by using the <code>ignoreBadCorrelationKeys</code> option.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>aggregationStrategy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Mandatory <code>AggregationStrategy</code> which is used to <em>merge</em> the incoming <a shape="rect" href="exchange.html">Exchange</a> with the existing already merged exchanges. At first call the <code>oldExchange</code> parameter is <code>null</code>. On subsequent invocations the <code>oldExchange</code> contains the merged exchanges and <code>newExchange</code> is of course the new incoming Exchange. From <strong>Camel 2.9.2</strong> onwards the strategy can also be a <code>TimeoutAwareAggregationStrategy</code> implementation, supporting the timeout callback, see further below for more details. From <strong>Camel 2.16</strong> onwards the strategy can also be a <code>PreCompletionAwareAggregationStrategy</code> implementation which then runs the completion check in pre-completion mode. See further below for more details.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>strategyRef</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A reference to lookup the <code>AggregationStrategy</code> in the <a shape="rect" href="registry.html">Registry</a>. From <strong>Camel 2.12</strong> onwards you can also use a POJO as the <code>AggregationStrategy</code>, see further below for details.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>strategyMethodName</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.12:</strong> This option can be used to explicit declare the method name to use, when using POJOs as the <code>AggregationStrategy</code>. See further below for more details.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>strategyMethodAllowNull</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.12:</strong> If this option is <code>false</code> then the aggregate method is not used for the very first aggregation. If this option is <code>true</code> then <code>null</code> values is used as the <code>oldExchange</code> (at the very first aggregation), when using POJOs as the <code>AggregationStrategy</code>. See further below for more details.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>completionSize</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Number of messages aggregated before the aggregation is complete. This option can be set as either a fixed value or using an <a shape="rect" href="expression.html">Expression</a> which allows you to evaluate a size dynamically - will use <code>Integer</code> as result. If both are set Camel will fallback to use the fixed value if the <a shape="rect" href="expression.html">Expression</a> result was <code>null</code> or <code>0</code>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>completionTimeout</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Time in millis that an aggregated exchange should be inactive before its complete. This option can be set as either a fixed value or using an <a shape="rect" href="expression.html">Expression</a> which allows you to evaluate a timeout dynamically - will use <code>Long</code> as result. If both are set Camel will fallback to use the fixed value if the <a shape="rect" href="expression.html">Expression</a> result was <code>null</code> or <code>0</code>. You cannot use this option together with completionInterval, only one of the two can be used.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>completionInterval</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A repeating period in millis by which the aggregator will complete all current aggregated exchanges. Camel has a background task which is triggered every period. You cannot use this option together with completionTimeout, only one of them can be used.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>completionPredicate</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A <a shape="rect" href="predicate.html">Predicate</a> to indicate when an aggregated exchange is complete. Starting in <strong>Camel 2.15</strong>, if this is not specified and the AggregationStrategy object implements Predicate, the aggregationStrategy object will be used as the completionPredicate.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>completionFromBatchConsumer</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>This option is if the exchanges are coming from a <a shape="rect" href="batch-consumer.html">Batch Consumer</a>. Then when enabled the <a shape="rect" href="aggregator2.html">Aggregator2</a> will use the batch size determined by the <a shape="rect" href="batch-consumer.html">Batch Consumer</a> in the message header <code>CamelBatchSize</code>. See more details at <a shape="rect" href="batch-consumer.html">Batch Consumer</a>. This can be used to aggregate all files consumed from a <a shape="rect" href="file2.html">File</a> endpoint in that given poll.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>forceCompletionOnStop</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9</strong> Indicates to complete all current aggregated exchanges when the context is stopped</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">completeAllOnStop</td><td colspan="1" rowspan="1" class="confluenceTd"><code>false</code></td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.16:</strong>&#160;Indicates to wait to complete all current and partial (pending) aggregated exchanges when the context is stopped. This also means that we will wait for all pending exchanges which are stored in the&#160;aggregation repository&#160;to complete so the repository is empty before we can stop. &#160;You may want to enable this when using the memory based aggregation repository that is memory based only,&#160;and do not store data on disk. When this option is enabled, then the aggregator is waiting to complete&#160;all those exchanges before its stopped, when stopping CamelContext or the route using it.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>eagerCheckCompletion</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether or not to eager check for completion when a new incoming <a shape="rect" href="exchange.html">Exchange</a> has been received. This option influences the behavior of the <code>completionPredicate</code> option as the <a shape="rect" href="exchange.html">Exchange</a> being passed in changes accordingly. When <code>false</code> the <a shape="rect" href="exchange.html">Exchange</a> passed in the <a shape="rect" href="predicate.html">Predicate</a> is the <em>aggregated</em> Exchange which means any information you may store on the aggregated Exchange from the <code>AggregationStrategy</code> is available for the <a shape="rect" href="predicate.html">Predicate</a>. When <code>true</code> the <a shape="rect" href="exchange.html">Exchange</a> passed in the <a shape="rect" href="predicate.html">Predicate</a> is the <em>incoming</em> <a shape="rect" href="exchange.html">Exchange</a>, which means you can access data from the incoming Exchange.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>groupExchanges</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>If enabled then Camel will group all aggregated Exchanges into a single combined <code>org.apache.camel.impl.GroupedExchange</code> holder class that holds all the aggregated Exchanges. And as a result only one Exchange is being sent out from the aggregator. Can be used to combine many incoming Exchanges into a single output Exchange without coding a custom <code>AggregationStrategy</code> yourself. <strong>Important:</strong> This option does <strong>not</strong> support persistent repository with the aggregator. See further below for an example and more details.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ignoreInvalidCorrelationKeys</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether or not to ignore correlation keys which could not be evaluated to a value. By default Camel will throw an Exception, but you can enable this option and ignore the situation instead.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>closeCorrelationKeyOnCompletion</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Whether or not too <em>late</em> Exchanges should be accepted or not. You can enable this to indicate that if a correlation key has already been completed, then any new exchanges with the same correlation key be denied. Camel will then throw a <code>closedCorrelationKeyException</code> exception. When using this option you pass in a <code>integer</code> which is a number for a LRUCache which keeps that last X number of closed correlation keys. You can pass in 0 or a negative value to indicate a unbounded cache. By passing in a number you are ensured that cache won't grow too big if you use a log of different correlation keys.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>discardOnCompletionTimeout</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.5:</strong> Whether or not exchanges which complete due to a timeout should be discarded. If enabled then when a timeout occurs the aggregated message will <strong>not</strong> be sent out but dropped (discarded).</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>aggregationRepository</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Allows you to plugin you own implementation of <code>org.apache.camel.spi.AggregationRepository</code> which keeps track of the current inflight aggregated exchanges. Camel uses by default a memory based implementation.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>aggregationRepositoryRef</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Reference to lookup a <code>aggregationRepository</code> in the <a shape="rect" href="registry.html">Registry</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>parallelProcessing</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>When aggregated are completed they are being send out of the aggregator. This option indicates whether or not Camel should use a thread pool with multiple threads for concurrency. If no custom thread pool has been specified then Camel creates a default pool with 10 concurrent threads.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>executorService</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>If using <code>parallelProcessing</code> you can specify a custom thread pool to be used. In fact also if you are not using <code>parallelProcessing</code> this custom thread pool is used to send out aggregated exchanges as well.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>executorServiceRef</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Reference to lookup a <code>executorService</code> in the <a shape="rect" href="registry.html">Registry</a></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>timeoutCheckerExecutorService</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> If using either of the <code>completionTimeout</code>, <code>completionTimeoutExpression</code>, or <code>completionInterval</code> options a background thread is created to check for the completion for every aggregator. Set this option to provide a custom thread pool to be used rather than creating a new thread for every aggregator.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>timeoutCheckerExecutorServiceRef</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> Reference to lookup a <code>timeoutCheckerExecutorService</code> in the <a shape="rect" href="registry.html">Registry</a></p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>optimisticLocking</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>false</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11:</strong> Turns on using optimistic locking, which requires the <code>aggregationRepository</code> being used, is supporting this by implementing the <code>org.apache.camel.spi.OptimisticLockingAggregationRepository</code> interface.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>optimisticLockRetryPolicy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.11.1:</strong> Allows to configure retry settings when using optimistic locking.</p></td></tr></tbody></table></div></div><h3 id="Aggregator2-ExchangeProperties">Exchange Properties</h3><p>The following properties are set on each aggregated Exchange:</p><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>header</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>type</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>CamelAggregatedSize</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>int</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>The total number of Exchanges aggregated into this combined Exchange.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>CamelAggregatedCompletedBy</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>String</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>Indicator how the aggregation was completed as a value of either: <code>predicate</code>, <code>size</code>, <code>strategy</code>, <code>consumer</code>, <code>timeout</code>, <code>forceCompletion</code> or <code>interval</code>.</p></td></tr></tbody></table></div></div><h3 id="Aggregator2-AboutAggregationStrategy">About AggregationStrategy</h3><p>The <code>AggregationStrategy</code> is used for aggregating the old (lookup by its correlation id) and the new exchanges together into a single exchange. Possible implementations include performing some kind of combining or delta processing, such as adding line items together into an invoice or just using the newest exchange and removing old exchanges such as for state tracking or market data prices; where old values are of little use.</p><p>Notice the aggregation strategy is a mandatory option and must be provided to the aggregator.</p><p>Here are a few example AggregationStrategy implementations that should help you create your own custom strategy.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[//simply combines Exchange String body values using &#39;+&#39; as a delimiter
+class StringAggregationStrategy implements AggregationStrategy {
+
+    public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+        if (oldExchange == null) {
+            return newExchange;
+        }
+
+        String oldBody = oldExchange.getIn().getBody(String.class);
+        String newBody = newExchange.getIn().getBody(String.class);
+        oldExchange.getIn().setBody(oldBody + &quot;+&quot; + newBody);
+        return oldExchange;
+    }
+}
+
+//simply combines Exchange body values into an ArrayList&lt;Object&gt;
+class ArrayListAggregationStrategy implements AggregationStrategy {
+
+    public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+		Object newBody = newExchange.getIn().getBody();
+		ArrayList&lt;Object&gt; list = null;
+        if (oldExchange == null) {
+			list = new ArrayList&lt;Object&gt;();
+			list.add(newBody);
+			newExchange.getIn().setBody(list);
+			return newExchange;
+        } else {
+	        list = oldExchange.getIn().getBody(ArrayList.class);
+			list.add(newBody);
+			return oldExchange;
+		}
+    }
+}
+]]></script>
+</div></div><h3 id="Aggregator2-Aboutcompletion">About completion</h3><p>When aggregation <a shape="rect" href="exchange.html">Exchange</a>s at some point you need to indicate that the aggregated exchanges is complete, so they can be send out of the aggregator. Camel allows you to indicate completion in various ways as follows:</p><ul class="alternate"><li>completionTimeout - Is an inactivity timeout in which is triggered if no new exchanges have been aggregated for that particular correlation key within the period.</li><li>completionInterval - Once every X period all the current aggregated exchanges are completed.</li><li>completionSize - Is a number indicating that after X aggregated exchanges it's complete.</li><li>completionPredicate - Runs a <a shape="rect" href="predicate.html">Predicate</a> when a new exchange is aggregated to determine if we are complete or not. Staring in&#160;<strong>Camel 2.15</strong>, the configured aggregationStrategy can implement the Predicate interface and will be used as the completionPredicate if no completionPredicate is configured. From&#160;<strong>Camel 2.16</strong>, the configured aggregationStrategy can implement&#160;<code>PreCompletionAwareAggregationStrategy</code> and will be used as the completionPredicate in pre-complete check mode. See further below for more details.</li><li>completionFromBatchConsumer - Special option for <a shape="rect" href="batch-consumer.html">Batch Consumer</a> which allows you to complete when all the messages from the batch has been aggregated.</li><li>forceCompletionOnStop - <strong>Camel 2.9</strong> Indicates to complete all current aggregated exchanges when the context is stopped</li><li>Using a&#160;<code>AggregateController</code> -&#160;<strong>Camel 2.16</strong> which allows to use an external source to complete groups or all groups. This can be done using Java or JMX API.</li></ul><p>Notice that all the completion ways are per correlation key. And you can combine them in any way you like. It's basically the first which triggers that wins. So you can use a completion size together with a completion timeout. Only completionTimeout and completionInterval cannot be used at the same time.</p><p>Notice the completion is a mandatory option and must be provided to the aggregator. If not provided Camel will thrown an Exception on startup.</p><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Callbacks</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>See the <code>TimeoutAwareAggregationStrategy</code> and <code>CompletionAwareAggregationStrategy</code> extensions to <code>AggregationStrategy</code> that has callbacks when the aggregated Exchange was completed and if a timeout occurred.</p></div></div><h3 id="Aggregator2-Pre-completionmode">Pre-completion mode</h3><p><strong>available as of Camel 2.16</strong></p><p>There can be use-cases where you want the incoming <a shape="rect" href="exchange.html">Exchange</a>&#160;to determine if the correlation group should pre-complete, and then the incoming <a shape="rect" href="exchange.html">Exchange</a>&#160;is starting a new group from scratch. To determine this the&#160;<code>AggregationStrategy</code> can implement&#160;<code>PreCompletionAwareAggregationStrategy</code> which has a&#160;<code>preComplete</code> method:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    /**
+     * Determines if the aggregation should complete the current group, and start a new group, or the aggregation
+     * should continue using the current group.
+     *
+     * @param oldExchange the oldest exchange (is &lt;tt&gt;null&lt;/tt&gt; on first aggregation as we only have the new exchange)
+     * @param newExchange the newest exchange (can be &lt;tt&gt;null&lt;/tt&gt; if there was no data possible to acquire)
+     * @return &lt;tt&gt;true&lt;/tt&gt; to complete current group and start a new group, or &lt;tt&gt;false&lt;/tt&gt; to keep using current
+     */
+    boolean preComplete(Exchange oldExchange, Exchange newExchange);]]></script>
+</div></div><p>If the preComplete method returns true, then the existing groups is completed (without aggregating the incoming exchange (newExchange). And then the newExchange is used to start the correlation group from scratch so the group would contain only that new incoming exchange. This is known as pre-completion mode. And when the aggregation is in pre-completion mode, then only the following completions are in use</p><ul style="list-style-type: square;"><li>aggregationStrategy must implement&#160;<code>PreCompletionAwareAggregationStrategy</code>&#160;xxx</li><li>completionTimeout or completionInterval can also be used as fallback completions</li><li>any other completion are not used (such as by size, from batch consumer etc)</li><li>eagerCheckCompletion is implied as true, but the option has no effect</li></ul><h3 id="Aggregator2-PersistentAggregationRepository">Persistent AggregationRepository</h3><p>The aggregator provides a pluggable repository which you can implement your own <code>org.apache.camel.spi.AggregationRepository</code>.<br clear="none"> If you need persistent repository then you can use either Camel <a shape="rect" href="hawtdb.html">HawtDB</a>, <a shape="rect" href="leveldb.html">LevelDB</a>, or <a shape="rect" href="sql-component.html">SQL Component</a> components.</p><h3 id="Aggregator2-Examples">Examples</h3><p>See some examples from the old <a shape="rect" href="aggregator.html">Aggregator</a> which is somewhat similar to this new aggregator.</p><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">Setting options in Spring XML</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Many of the options are configurable as attributes on the <code>&lt;aggregate&gt;</code> tag when using Spring XML.</p></div></div><h4 id="Aggregator2-UsingcompletionTimeout">Using completionTimeout</h4><p>In this example we want to aggregate all incoming messages and after 3 seconds of inactivity we want the aggregation to complete. This is done using the <code>completionTimeout</code> option as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    // aggregate all exchanges correlated by the id header.
+    // Aggregate them using the BodyInAggregatingStrategy strategy which
+    // and after 3 seconds of inactivity them timeout and complete the aggregation
+    // and send it to mock:aggregated
+    .aggregate(header(&quot;id&quot;), new BodyInAggregatingStrategy()).completionTimeout(3000)
+        .to(&quot;mock:aggregated&quot;);
+]]></script>
+</div></div>And the same example using Spring XML:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:start&quot;/&gt;
+        &lt;aggregate strategyRef=&quot;aggregatorStrategy&quot; completionTimeout=&quot;3000&quot;&gt;
+            &lt;correlationExpression&gt;
+                &lt;simple&gt;header.id&lt;/simple&gt;
+            &lt;/correlationExpression&gt;
+            &lt;to uri=&quot;mock:aggregated&quot;/&gt;
+        &lt;/aggregate&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id=&quot;aggregatorStrategy&quot; class=&quot;org.apache.camel.processor.BodyInAggregatingStrategy&quot;/&gt;
+]]></script>
+</div></div><h4 id="Aggregator2-UsingTimeoutAwareAggregationStrategy">Using TimeoutAwareAggregationStrategy</h4><p><strong>Available as of Camel 2.9.2</strong></p><p>If your aggregation strategy implements <code>TimeoutAwareAggregationStrategy</code>, then Camel will invoke the <code>timeout</code> method when the timeout occurs. Notice that the values for index and total parameters will be -1, and the timeout parameter will be provided only if configured as a fixed value. You must <strong>not</strong> throw any exceptions from the <code>timeout</code> method.</p><h4 id="Aggregator2-UsingCompletionAwareAggregationStrategy">Using CompletionAwareAggregationStrategy</h4><p><strong>Available as of Camel 2.9.3</strong></p><p>If your aggregation strategy implements <code>CompletionAwareAggregationStrategy</code>, then Camel will invoke the <code>onComplete</code> method when the aggregated Exchange is completed. This allows you to do any last minute custom logic such as to cleanup some resources, or additional work on the exchange as it's now completed.<br clear="none"> You must <strong>not</strong> throw any exceptions from the <code>onCompletion</code> method.</p><h4 id="Aggregator2-UsingcompletionSize">Using completionSize</h4><p>In this example we want to aggregate all incoming messages and when we have 3 messages aggregated (in the same correlation group) we want the aggregation to complete. This is done using the <code>completionSize</code> option as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    // aggregate all exchanges correlated by the id header.
+    // Aggregate them using the BodyInAggregatingStrategy strategy which
+    // and after 3 messages has been aggregated then complete the aggregation
+    // and send it to mock:aggregated
+    .aggregate(header(&quot;id&quot;), new BodyInAggregatingStrategy()).completionSize(3)
+        .to(&quot;mock:aggregated&quot;);
+]]></script>
+</div></div>And the same example using Spring XML:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:start&quot;/&gt;
+        &lt;aggregate strategyRef=&quot;aggregatorStrategy&quot; completionSize=&quot;3&quot;&gt;
+            &lt;correlationExpression&gt;
+                &lt;simple&gt;header.id&lt;/simple&gt;
+            &lt;/correlationExpression&gt;
+            &lt;to uri=&quot;mock:aggregated&quot;/&gt;
+        &lt;/aggregate&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id=&quot;aggregatorStrategy&quot; class=&quot;org.apache.camel.processor.BodyInAggregatingStrategy&quot;/&gt;
+]]></script>
+</div></div><h4 id="Aggregator2-UsingcompletionPredicate">Using completionPredicate</h4><p>In this example we want to aggregate all incoming messages and use a <a shape="rect" href="predicate.html">Predicate</a> to determine when we are complete. The <a shape="rect" href="predicate.html">Predicate</a> can be evaluated using either the aggregated exchange (default) or the incoming exchange. We will give an example for both situations. We start with the default situation as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    // aggregate all exchanges correlated by the id header.
+    // Aggregate them using the BodyInAggregatingStrategy strategy which
+    // and when the aggregated body contains A+B+C then complete the aggregation
+    // and send it to mock:aggregated
+    .aggregate(header(&quot;id&quot;), new BodyInAggregatingStrategy()).completionPredicate(body().contains(&quot;A+B+C&quot;))
+        .to(&quot;mock:aggregated&quot;);
+]]></script>
+</div></div>And the same example using Spring XML:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:start&quot;/&gt;
+        &lt;aggregate strategyRef=&quot;aggregatorStrategy&quot;&gt;
+            &lt;correlationExpression&gt;
+                &lt;simple&gt;header.id&lt;/simple&gt;
+            &lt;/correlationExpression&gt;
+            &lt;completionPredicate&gt;
+                &lt;simple&gt;${body} contains &#39;A+B+C&#39;&lt;/simple&gt;
+            &lt;/completionPredicate&gt;
+            &lt;to uri=&quot;mock:aggregated&quot;/&gt;
+        &lt;/aggregate&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id=&quot;aggregatorStrategy&quot; class=&quot;org.apache.camel.processor.BodyInAggregatingStrategy&quot;/&gt;
+]]></script>
+</div></div>And the other situation where we use the <code>eagerCheckCompletion</code> option to tell Camel to use the incoming Exchange. Notice how we can just test in the completion predicate that the incoming message is the <em>END</em> message:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    // aggregate all exchanges correlated by the id header.
+    // Aggregate them using the BodyInAggregatingStrategy strategy
+    // do eager checking which means the completion predicate will use the incoming exchange
+    // which allows us to trigger completion when a certain exchange arrived which is the
+    // END message
+    .aggregate(header(&quot;id&quot;), new BodyInAggregatingStrategy())
+        .eagerCheckCompletion().completionPredicate(body().isEqualTo(&quot;END&quot;))
+        .to(&quot;mock:aggregated&quot;);
+]]></script>
+</div></div>And the same example using Spring XML:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:start&quot;/&gt;
+        &lt;aggregate strategyRef=&quot;aggregatorStrategy&quot; eagerCheckCompletion=&quot;true&quot;&gt;
+            &lt;correlationExpression&gt;
+                &lt;simple&gt;header.id&lt;/simple&gt;
+            &lt;/correlationExpression&gt;
+            &lt;completionPredicate&gt;
+                &lt;simple&gt;${body} == &#39;END&#39;&lt;/simple&gt;
+            &lt;/completionPredicate&gt;
+            &lt;to uri=&quot;mock:aggregated&quot;/&gt;
+        &lt;/aggregate&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id=&quot;aggregatorStrategy&quot; class=&quot;org.apache.camel.processor.BodyInAggregatingStrategy&quot;/&gt;
+]]></script>
+</div></div><h4 id="Aggregator2-UsingdynamiccompletionTimeout">Using dynamic completionTimeout</h4><p>In this example we want to aggregate all incoming messages and after a period of inactivity we want the aggregation to complete. The period should be computed at runtime based on the <code>timeout</code> header in the incoming messages. This is done using the <code>completionTimeout</code> option as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    // aggregate all exchanges correlated by the id header.
+    // Aggregate them using the BodyInAggregatingStrategy strategy which
+    // and the timeout header contains the timeout in millis of inactivity them timeout and complete the aggregation
+    // and send it to mock:aggregated
+    .aggregate(header(&quot;id&quot;), new BodyInAggregatingStrategy()).completionTimeout(header(&quot;timeout&quot;))
+        .to(&quot;mock:aggregated&quot;);
+]]></script>
+</div></div>And the same example using Spring XML:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:start&quot;/&gt;
+        &lt;aggregate strategyRef=&quot;aggregatorStrategy&quot;&gt;
+            &lt;correlationExpression&gt;
+                &lt;simple&gt;header.id&lt;/simple&gt;
+            &lt;/correlationExpression&gt;
+            &lt;completionTimeout&gt;
+                &lt;header&gt;timeout&lt;/header&gt;
+            &lt;/completionTimeout&gt;
+            &lt;to uri=&quot;mock:aggregated&quot;/&gt;
+        &lt;/aggregate&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id=&quot;aggregatorStrategy&quot; class=&quot;org.apache.camel.processor.BodyInAggregatingStrategy&quot;/&gt;
+]]></script>
+</div></div><strong>Note:</strong> You can also add a fixed timeout value and Camel will fallback to use this value if the dynamic value was <code>null</code> or <code>0</code>.<h4 id="Aggregator2-UsingdynamiccompletionSize">Using dynamic completionSize</h4><p>In this example we want to aggregate all incoming messages based on a dynamic size per correlation key. The size is computed at runtime based on the <code>mySize</code> header in the incoming messages. This is done using the <code>completionSize</code> option as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;direct:start&quot;)
+    // aggregate all exchanges correlated by the id header.
+    // Aggregate them using the BodyInAggregatingStrategy strategy which
+    // and the header mySize determines the number of aggregated messages should trigger the completion
+    // and send it to mock:aggregated
+    .aggregate(header(&quot;id&quot;), new BodyInAggregatingStrategy()).completionSize(header(&quot;mySize&quot;))
+        .to(&quot;mock:aggregated&quot;);
+]]></script>
+</div></div>And the same example using Spring XML:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:start&quot;/&gt;
+        &lt;aggregate strategyRef=&quot;aggregatorStrategy&quot;&gt;
+            &lt;correlationExpression&gt;
+                &lt;simple&gt;header.id&lt;/simple&gt;
+            &lt;/correlationExpression&gt;
+            &lt;completionSize&gt;
+                &lt;header&gt;mySize&lt;/header&gt;
+            &lt;/completionSize&gt;
+            &lt;to uri=&quot;mock:aggregated&quot;/&gt;
+        &lt;/aggregate&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id=&quot;aggregatorStrategy&quot; class=&quot;org.apache.camel.processor.BodyInAggregatingStrategy&quot;/&gt;
+]]></script>
+</div></div><strong>Note:</strong> You can also add a fixed size value and Camel will fallback to use this value if the dynamic value was <code>null</code> or <code>0</code>.<p></p><h4 id="Aggregator2-UsingThisPattern">Using This Pattern</h4>
+
+<p>If you would like to use this EIP Pattern then please read the <a shape="rect" href="getting-started.html">Getting Started</a>, you may also find the <a shape="rect" href="architecture.html">Architecture</a> useful particularly the description of <a shape="rect" href="endpoint.html">Endpoint</a> and <a shape="rect" href="uris.html">URIs</a>. Then you could try out some of the <a shape="rect" href="examples.html">Examples</a> first before trying this pattern out.</p><h4 id="Aggregator2-CompletingcurrentgroupdecidedfromtheAggregationStrategy">Completing current group decided from the AggregationStrategy</h4><p><strong>Available as of Camel 2.15</strong></p><p>The&#160;<code>AggregationStrategy</code> can now included a property on the returned&#160;<code>Exchange</code> that contains a boolean to indicate if the current group should be completed. This allows to overrule any existing completion predicates / sizes / timeouts etc, and complete the group.</p><p>For example the following logic (from an unit test) will complete the group if the message body size is larger than 5. This is done by setting the property&#160;<span style="line-height: 1.4285715;">Exchange.AGGREGATION_COMPLETE_CURRENT_GROUP to true.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    public final class MyCompletionStrategy implements AggregationStrategy {
+        @Override
+        public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+            if (oldExchange == null) {
+                return newExchange;
+            }
+            String body = oldExchange.getIn().getBody(String.class) + &quot;+&quot; 
+                + newExchange.getIn().getBody(String.class);
+            oldExchange.getIn().setBody(body);
+            if (body.length() &gt;= 5) {
+                oldExchange.setProperty(Exchange.AGGREGATION_COMPLETE_CURRENT_GROUP, true);
+            }
+            return oldExchange;
+        }
+    }]]></script>
+</div></div><p>&#160;</p><h4 id="Aggregator2-ManuallyForcetheCompletionofAllAggregatedExchangesImmediately">Manually Force the Completion of All Aggregated Exchanges Immediately</h4><p><strong>Available as of Camel 2.9</strong><br clear="none"> You can manually trigger completion of all current aggregated exchanges by sending a message containing the header Exchange.AGGREGATION_COMPLETE_ALL_GROUPS set to true. The message is considered a signal message only, the message headers/contents will not be processed otherwise.</p><p><strong>Available as of Camel 2.11</strong><br clear="none"> You can alternatively set the header Exchange.AGGREGATION_COMPLETE_ALL_GROUPS_INCLUSIVE to true to trigger completion of all groups after processing the current message.</p><h4 id="Aggregator2-UsingaList&lt;V&gt;inAggregationStrategy">Using a List&lt;V&gt; in AggregationStrategy</h4><p><strong>Available as of Camel 2.11</strong></p><p>If you want to aggregate some value from the messages &lt;V&gt; into a List&lt;V&gt; then we have added a <code>org.apache.camel.processor.aggregate.AbstractListAggregationStrategy</code> abstract class in <strong>Camel 2.11</strong> that makes this easier. The completed Exchange that is sent out of the aggregator will contain the List&lt;V&gt; in the message body.</p><p>For example to aggregate a List&lt;Integer&gt; you can extend this class as shown below, and implement the <code>getValue</code> method:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+/**
+ * Our strategy just group a list of integers.
+ */
+public final class MyListOfNumbersStrategy extends AbstractListAggregationStrategy&lt;Integer&gt; {
+
+    @Override
+    public Integer getValue(Exchange exchange) {
+        // the message body contains a number, so just return that as-is
+        return exchange.getIn().getBody(Integer.class);
+    }
+}
+]]></script>
+</div></div><h3 id="Aggregator2-UsingAggregateController">Using AggregateController</h3><p><strong>Available as of Camel 2.16</strong></p><p>The&#160;<code>org.apache.camel.processor.aggregate.AggregateController</code> allows you to control the aggregate at runtime using Java or JMX API. This can be used to force completing groups of exchanges, or query its current runtime statistics.</p><p>The aggregator provides a default implementation if no custom have been configured, which can be accessed using&#160;<code>getAggregateController()</code>&#160;method. Though it may be easier to configure a controller in the route using aggregateController as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[private AggregateController controller = new DefaultAggregateController();
+ 
+from(&quot;direct:start&quot;)
+   .aggregate(header(&quot;id&quot;), new MyAggregationStrategy()).completionSize(10).id(&quot;myAggregator&quot;)
+      .aggregateController(controller)
+      .to(&quot;mock:aggregated&quot;);]]></script>
+</div></div><p>Then there is API on AggregateController to force completion. For example to complete a group with key foo</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[int groups = controller.forceCompletionOfGroup(&quot;foo&quot;);]]></script>
+</div></div><p>The number return would be the number of groups completed. In this case it would be 1 if the foo group existed and was completed. If foo does not exists then 0 is returned.</p><p>There is also an api to complete all groups</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[int groups = controller.forceCompletionOfAllGroups();]]></script>
+</div></div><p>&#160;</p><p>To configure this from XML DSL</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;bean id=&quot;myController&quot; class=&quot;org.apache.camel.processor.aggregate.DefaultAggregateController&quot;/&gt;
+ 
+  &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+        &lt;route&gt;
+            &lt;from uri=&quot;direct:start&quot;/&gt;
+            &lt;aggregate strategyRef=&quot;myAppender&quot; completionSize=&quot;10&quot; aggregateControllerRef=&quot;myController&quot;&gt;
+                &lt;correlationExpression&gt;
+                    &lt;header&gt;id&lt;/header&gt;
+                &lt;/correlationExpression&gt;
+                &lt;to uri=&quot;mock:result&quot;/&gt;
+            &lt;/aggregate&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;]]></script>
+</div></div><p>&#160;</p><p>There is also JMX API on the aggregator which is available under the processors node in the Camel JMX tree.</p><p>&#160;</p><h3 id="Aggregator2-UsingGroupedExchanges">Using GroupedExchanges</h3><p>In the route below we group all the exchanges together using <code>groupExchanges()</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[                from(&quot;direct:start&quot;)
+                    // aggregate all using same expression
+                    .aggregate(constant(true))
+                    // wait for 0.5 seconds to aggregate
+                    .completionTimeout(500L)
+                    // group the exchanges so we get one single exchange containing all the others
+                    .groupExchanges()
+                    .to(&quot;mock:result&quot;);
+]]></script>
+</div></div><p>As a result we have one outgoing <a shape="rect" href="exchange.html">Exchange</a> being routed the the "mock:result" endpoint. The exchange is a holder containing all the incoming Exchanges.<br clear="none"> To get access to these exchanges you need to access them from a property on the outgoing exchange as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[List&lt;Exchange&gt; grouped = out.getProperty(Exchange.GROUPED_EXCHANGE, List.class);
+]]></script>
+</div></div><p>From <strong>Camel 2.13</strong> onwards this behavior has changed to store these exchanges directly on the message body which is more intuitive:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[List&lt;Exchange&gt; grouped = exchange.getIn().getBody(List.class);
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Notice the old way using the property is still present in <strong>Camel 2.13</strong> onwards, but its considered deprecated and to be removed in Camel 3.0 onwards.</p></div></div><h3 id="Aggregator2-UsingPOJOsasAggregationStrategy">Using POJOs as AggregationStrategy</h3><p><strong>Available as of Camel 2.12</strong></p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can use POJOs as AggregationStrategy with the other <a shape="rect" href="eip.html">EIP</a>s that supports aggregation, such as <a shape="rect" href="splitter.html">Splitter</a>, <a shape="rect" href="recipient-list.html">Recipient List</a>, etc.</p></div></div><p>To use the <code>AggregationStrategy</code> you had to implement the <code>org.apache.camel.processor.aggregate.AggregationStrategy</code> interface, which means your logic would be tied to the Camel API. From <strong>Camel 2.12</strong> onwards you can use a POJO for the logic and let Camel adapt to your POJO. To use a POJO a convention must be followed:</p><ul class="alternate"><li>there must be a public method to use</li><li>the method must not be void</li><li>the method can be static or non-static</li><li>the method must have 2 or more parameters</li><li>the parameters is paired so the first 50% is applied to the <code>oldExchange</code> and the reminder 50% is for the <code>newExchange</code></li><li>.. meaning that there must be an equal number of parameters, eg 2, 4, 6 etc.</li></ul><p>The paired methods is expected to be ordered as follows:</p><ul class="alternate"><li>the first parameter is the message body</li><li>the 2nd parameter is a Map of the headers</li><li>the 3rd parameter is a Map of the Exchange properties</li></ul><p>This convention is best explained with some examples.</p><p>In the method below, we have only 2 parameters, so the 1st parameter is the body of the <code>oldExchange</code>, and the 2nd is paired to the body of the <code>newExchange</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public String append(String existing, String next) {
+  return existing + next;
+}
+]]></script>
+</div></div><p>In the method below, we have only 4 parameters, so the 1st parameter is the body of the <code>oldExchange</code>, and the 2nd is the Map of the <code>oldExchange} headers, and the 3rd is paired to the body of the {{newExchange</code>, and the 4th parameter is the Map of the <code>newExchange</code> headers:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public String append(String existing, Map existingHeaders, String next, Map nextHeaders) {
+  return existing + next;
+}
+]]></script>
+</div></div><p>And finally if we have 6 parameters the we also have the properties of the <a shape="rect" href="exchange.html">Exchange</a>s:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public String append(String existing, Map existingHeaders, Map existingProperties, String next, Map nextHeaders, Map nextProperties) {
+  return existing + next;
+}
+]]></script>
+</div></div><p>To use this with the <a shape="rect" href="aggregator2.html">Aggregate</a> EIP we can use a POJO with the aggregate logic as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class MyBodyAppender {
+
+    public String append(String existing, String next) {
+        return next + existing;
+    }
+
+}
+]]></script>
+</div></div><p>And then in the Camel route we create an instance of our bean, and then refer to the bean in the route using <code>bean</code> method from <code>org.apache.camel.util.toolbox.AggregationStrategies</code> as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    private MyBodyAppender appender = new MyBodyAppender();
+
+    public void configure() throws Exception {
+        from(&quot;direct:start&quot;)
+            .aggregate(constant(true), AggregationStrategies.bean(appender, &quot;append&quot;))
+                .completionSize(3)
+                .to(&quot;mock:result&quot;);
+    }
+]]></script>
+</div></div><p>We can also provide the bean type directly:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    public void configure() throws Exception {
+        from(&quot;direct:start&quot;)
+            .aggregate(constant(true), AggregationStrategies.bean(MyBodyAppender.class, &quot;append&quot;))
+                .completionSize(3)
+                .to(&quot;mock:result&quot;);
+    }
+]]></script>
+</div></div><p>And if the bean has only one method we do not need to specify the name of the method:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    public void configure() throws Exception {
+        from(&quot;direct:start&quot;)
+            .aggregate(constant(true), AggregationStrategies.bean(MyBodyAppender.class))
+                .completionSize(3)
+                .to(&quot;mock:result&quot;);
+    }
+]]></script>
+</div></div><p>And the <code>append</code> method could be static:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[public class MyBodyAppender {
+
+    public static String append(String existing, String next) {
+        return next + existing;
+    }
+
+}
+]]></script>
+</div></div><p>If you are using XML DSL then we need to declare a &lt;bean&gt; with the POJO:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    &lt;bean id=&quot;myAppender&quot; class=&quot;com.foo.MyBodyAppender&quot;/&gt;
+]]></script>
+</div></div><p>And in the Camel route we use <code>strategyRef</code> to refer to the bean by its id, and the <code>strategyMethodName</code> can be used to define the method name to call:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+        &lt;route&gt;
+            &lt;from uri=&quot;direct:start&quot;/&gt;
+            &lt;aggregate strategyRef=&quot;myAppender&quot; strategyMethodName=&quot;append&quot; completionSize=&quot;3&quot;&gt;
+                &lt;correlationExpression&gt;
+                    &lt;constant&gt;true&lt;/constant&gt;
+                &lt;/correlationExpression&gt;
+                &lt;to uri=&quot;mock:result&quot;/&gt;
+            &lt;/aggregate&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;
+]]></script>
+</div></div><p>When using XML DSL you must define the POJO as a &lt;bean&gt;.</p><h4 id="Aggregator2-Aggregatingwhennodata">Aggregating when no data</h4><p>By default when using POJOs as AggregationStrategy, then the method is <strong>only</strong> invoked when there is data to be aggregated (by default). You can use the option <code>strategyMethodAllowNull</code> to configure this. Where as without using POJOs then you may have <code>null</code> as <code>oldExchange</code> or <code>newExchange</code> parameters. For example the <a shape="rect" href="aggregator2.html">Aggregate</a> EIP will invoke the <code>AggregationStrategy</code> with <code>oldExchange</code> as null, for the first <a shape="rect" href="exchange.html">Exchange</a> incoming to the aggregator. And then for subsequent <a shape="rect" href="exchange.html">Exchange</a>s then <code>oldExchange</code> and <code>newExchange</code> parameters are both not null.</p><h5 id="Aggregator2-Examplewithandnodata">Example with <a shape="rect" href="content-enricher.html">Content Enricher</a> and no data</h5><p>Though with POJOs as AggregationStrategy we made this simpler and only call the method when <code>oldExchange</code> and <code>newExchange</code> is not null, as that would be the most common use-case. If you need to allow <code>oldExchange</code> or <code>newExchange</code> to be null, then you can configure this with the POJO using the <code>AggregationStrategyBeanAdapter</code> as shown below. On the bean adapter we call <code>setAllowNullNewExchange</code> to allow the new exchange to be null.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    public void configure() throws Exception {
+        AggregationStrategyBeanAdapter myStrategy = new AggregationStrategyBeanAdapter(appender, &quot;append&quot;);
+        myStrategy.setAllowNullOldExchange(true);
+        myStrategy.setAllowNullNewExchange(true);
+
+        from(&quot;direct:start&quot;)
+            .pollEnrich(&quot;seda:foo&quot;, 1000, myStrategy)
+                .to(&quot;mock:result&quot;);
+    }
+]]></script>
+</div></div><p>This can be configured a bit easier using the <code>beanAllowNull</code> method from <code>AggregationStrategies</code> as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    public void configure() throws Exception {
+        from(&quot;direct:start&quot;)
+            .pollEnrich(&quot;seda:foo&quot;, 1000, AggregationStrategies.beanAllowNull(appender, &quot;append&quot;))
+                .to(&quot;mock:result&quot;);
+    }
+]]></script>
+</div></div><p>Then the <code>append</code> method in the POJO would need to deal with the situation that <code>newExchange</code> can be null:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    public class MyBodyAppender {
+
+        public String append(String existing, String next) {
+            if (next == null) {
+                return &quot;NewWasNull&quot; + existing;
+            } else {
+                return existing + next;
+            }
+        }
+
+    }
+]]></script>
+</div></div><p>In the example above we use the <a shape="rect" href="content-enricher.html">Content Enricher</a> EIP using <code>pollEnrich</code>. The <code>newExchange</code> will be null in the situation we could not get any data from the "seda:foo" endpoint, and therefore the timeout was hit after 1 second. So if we need to do some special merge logic we would need to set <code>setAllowNullNewExchange=true</code>, so the <code>append</code> method will be invoked. If we do not do that then when the timeout was hit, then the append method would normally not be invoked, meaning the <a shape="rect" href="content-enricher.html">Content Enricher</a> did not merge/change the message.</p><p>In XML DSL you would configure the <code>strategyMethodAllowNull</code> option and set it to true as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+        &lt;route&gt;
+            &lt;from uri=&quot;direct:start&quot;/&gt;
+            &lt;aggregate strategyRef=&quot;myAppender&quot; strategyMethodName=&quot;append&quot; strategyMethodAllowNull=&quot;true&quot; completionSize=&quot;3&quot;&gt;
+                &lt;correlationExpression&gt;
+                    &lt;constant&gt;true&lt;/constant&gt;
+                &lt;/correlationExpression&gt;
+                &lt;to uri=&quot;mock:result&quot;/&gt;
+            &lt;/aggregate&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;
+]]></script>
+</div></div><h5 id="Aggregator2-Differentbodytypes">Different body types</h5><p>When for example using <code>strategyMethodAllowNull</code> as true, then the parameter types of the message bodies does not have to be the same. For example suppose we want to aggregate from a <code>com.foo.User</code> type to a <code>List&lt;String&gt;</code> that contains the user name. We could code a POJO doing this as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    public static final class MyUserAppender {
+
+        public List addUsers(List names, User user) {
+            if (names == null) {
+                names = new ArrayList();
+            }
+            names.add(user.getName());
+            return names;
+        }
+    }
+]]></script>
+</div></div><p>Notice that the return type is a List which we want to contain the user names. The 1st parameter is the list of names, and then notice the 2nd parameter is the incoming <code>com.foo.User</code> type.</p><h3 id="Aggregator2-Seealso">See also</h3><ul class="alternate"><li>The <a shape="rect" href="loan-broker-example.html">Loan Broker Example</a> which uses an aggregator</li><li><a shape="rect" class="external-link" href="http://tmielke.blogspot.com/2009/01/using-camel-aggregator-correctly.html" rel="nofollow">Blog post by Torsten Mielke</a> about using the aggregator correctly.</li><li>The old <a shape="rect" href="aggregator.html">Aggregator</a></li><li><a shape="rect" href="hawtdb.html">HawtDB</a>, <a shape="rect" href="leveldb.html">LevelDB</a> or <a shape="rect" href="sql-component.html">SQL Component</a> for persistence support</li><li><a shape="rect" href="aggregate-example.html">Aggregate Example</a> for an example application</li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=14057759">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=14057759&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

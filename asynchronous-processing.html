@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Asynchronous Processing
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="cookbook.html">Cookbook</a>&nbsp;&gt;&nbsp;<a href="asynchronous-processing.html">Asynchronous Processing</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="AsynchronousProcessing-AsynchronousProcessing">Asynchronous Processing</h2>
+
+<h3 id="AsynchronousProcessing-Overview">Overview</h3>
+
+<div class="confluence-information-macro confluence-information-macro-information"><p class="title">Supported versions</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>The information on this page applies for Camel 2.4 onwards. Before Camel 2.4 the asynchronous processing is only implemented for <a shape="rect" href="jbi.html">JBI</a> where as in Camel 2.4 onwards we have implemented it in many other areas. See more at <a shape="rect" href="asynchronous-routing-engine.html">Asynchronous Routing Engine</a>.</p></div></div>
+
+<p>Camel supports a more complex asynchronous processing model.  The asynchronous processors implement the AsyncProcessor interface which is derived from the more synchronous Processor interface.  There are advantages and disadvantages when using asynchronous processing when compared to using the standard synchronous processing model.</p>
+
+<p>Advantages:</p>
+<ul><li>Processing routes that are composed fully of asynchronous processors do not use up threads waiting for processors to complete on blocking calls.  This can increase the scalability of your system by reducing the number of threads needed to process the same workload.</li><li>Processing routes can be broken up into <a shape="rect" href="seda.html">SEDA</a> processing stages where different thread pools can process the different stages.  This means that your routes can be processed concurrently.</li></ul>
+
+
+<p>Disadvantages:</p>
+<ul><li>Implementing asynchronous processors is more complex than implementing the synchronous versions.</li></ul>
+
+
+<h3 id="AsynchronousProcessing-WhentoUse">When to Use</h3>
+
+<p>We recommend that processors and components be implemented the more simple synchronous APIs unless you identify a performance of scalability requirement that dictates otherwise.  A Processor whose process() method blocks for a long time would be good candidates for being converted into an asynchronous processor.</p>
+
+<h3 id="AsynchronousProcessing-InterfaceDetails">Interface Details</h3>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+public interface AsyncProcessor extends Processor {
+   boolean process(Exchange exchange, AsyncCallback callback);
+}
+]]></script>
+</div></div>
+
+<p>The AsyncProcessor defines a single <code>process()</code> method which is very similar to it's synchronous Processor.process() brethren.  Here are the differences:</p>
+<ul><li>A non-null AsyncCallback <strong>MUST</strong> be supplied which will be notified when the exchange processing is completed.</li><li>It <strong>MUST</strong> not throw any exceptions that occurred while processing the exchange.  Any such exceptions must be stored on the exchange's Exception property.</li><li>It <strong>MUST</strong> know if it will complete the processing synchronously or asynchronously.  The method will return <code>true</code> if it does complete synchronously, otherwise it returns <code>false</code>.</li><li>When the processor has completed processing the exchange, it must call the <code>callback.done(boolean sync)</code> method.  The sync parameter <strong>MUST</strong> match the value returned by the <code>process()</code> method.</li></ul>
+
+
+<h3 id="AsynchronousProcessing-ImplementingProcessorsthatUsetheAsyncProcessorAPI">Implementing Processors that Use the AsyncProcessor API</h3>
+
+<p>All processors, even synchronous processors that do not implement the AsyncProcessor interface, can be coerced to implement the AsyncProcessor interface.  This is usually done when you are implementing a Camel component consumer that supports asynchronous completion of the exchanges that it is pushing through the Camel routes.  Consumers are provided a Processor object when created.  All Processor object can be coerced to a AsyncProcessor using the following API:</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+Processor processor = ...
+AsyncProcessor asyncProcessor = AsyncProcessorTypeConverter.convert(processor);
+]]></script>
+</div></div>
+
+<p>For a route to be fully asynchronous and reap the benefits to lower Thread usage, it must start with the consumer implementation making use of the asynchronous processing API.  If it called the synchronous process() method instead, the consumer's thread would be forced to be blocked and in use for the duration that it takes to process the exchange.</p>
+
+<p>It is important to take note that just because you call the asynchronous API, it does not mean that the processing will take place asynchronously.  It only allows the possibility that it can be done without tying up the caller's thread.  If the processing happens asynchronously is dependent on the configuration of the Camel route.</p>
+
+<p>Normally, the the process call is passed in an inline inner AsyncCallback class instance which can reference the exchange object that was declared final.  This allows it  to finish up any post processing that is needed when the called processor is done processing the exchange.  See below for an example.</p>
+
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+final Exchange exchange = ...
+AsyncProcessor asyncProcessor = ...
+asyncProcessor.process(exchange, new AsyncCallback() {
+    public void done(boolean sync) {
+
+        if (exchange.isFailed()) {
+            ... // do failure processing.. perhaps rollback etc.
+        } else {
+            ... // processing completed successfully, finish up 
+                // perhaps commit etc.
+        }
+    }
+});
+]]></script>
+</div></div>
+
+
+<h3 id="AsynchronousProcessing-AsynchronousRouteSequenceScenarios">Asynchronous Route Sequence Scenarios</h3>
+
+<p>Now that we have understood the interface contract of the AsyncProcessor, and have seen how to make use of it when calling processors, lets looks a what the thread model/sequence scenarios will look like for some sample routes.</p>
+
+<p>The Jetty component's consumers support async processing by using continuations.  Suffice to say it can take a http request and pass it to a camel route for async processing.  If the processing is indeed async, it uses Jetty continuation so that the http request is 'parked' and the thread is released.  Once the camel route finishes processing the request, the jetty component uses the AsyncCallback to tell Jetty to 'un-park' the request.  Jetty un-parks the request, the http response returned using the result of the exchange processing.</p>
+
+<p>Notice that the jetty continuations feature is only used "If the processing is indeed async".  This is why AsyncProcessor.process() implementations MUST accurately report if request is completed synchronously or not.  </p>
+
+<p>The jhc component's producer allows you to make HTTP requests and implement the AsyncProcessor interface.  A route that uses both the jetty asynchronous consumer and the jhc asynchronous producer will be a fully asynchronous route and has some nice attributes that can be seen if we take a look at a sequence diagram of the processing route.  For the route:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;jetty:http://localhost:8080/service&quot;).to(&quot;jhc:http://localhost/service-impl&quot;);
+]]></script>
+</div></div>
+
+<p>The sequence diagram would look something like this:</p>
+
+<p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="asynchronous-processing.data/simple-async-route.png" data-image-src="/confluence/download/attachments/68592/simple-async-route.png?version=1&amp;modificationDate=1192103278000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="59670856" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="simple-async-route.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="68592" data-linked-resource-container-version="14"></span></p>
+
+<p>The diagram simplifies things by making it looks like processors implement the AsyncCallback interface when in reality the AsyncCallback interfaces are inline inner classes, but it illustrates the processing flow and shows how 2 separate threads are used to complete the processing of the original http request.  The first thread is synchronous up until processing hits the jhc producer which issues the http request.  It then reports that the exchange processing will complete async since it will use a NIO to complete getting the response back.  Once the jhc component has received a full response it uses <code>AsyncCallback.done()</code> method to notify the caller.  These callback notifications continue up until it reaches the original jetty consumer which then un-parks the http request and completes it by providing the response.</p>
+
+<h3 id="AsynchronousProcessing-MixingSynchronousandAsynchronousProcessors">Mixing Synchronous and Asynchronous Processors</h3>
+
+<p>It is totally possible and reasonable to mix the use of synchronous and asynchronous processors/components.  The pipeline processor is the backbone of a Camel processing route.  It glues all the processing steps together.  It is implemented as an AsyncProcessor and supports interleaving synchronous and asynchronous processors as the processing steps in the pipeline.  </p>
+
+<p>Lets say we have 2 custom processors, MyValidator and MyTransformation, both of which are synchronous processors.  Lets say we want to load file from the data/in directory validate them with the MyValidator() processor, Transform them into JPA java objects using MyTransformation and then insert them into the database using the <a shape="rect" href="jpa.html">JPA</a> component.  Lets say that the transformation process takes quite a bit of time and we want to allocate 20 threads to do parallel transformations of the input files.  The solution is to make use of the thread processor. The thread is AsyncProcessor that forces subsequent processing in asynchronous thread from a thread pool.</p>
+
+<p>The route might look like:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+from(&quot;file:data/in&quot;).process(new MyValidator()).threads(20).process(new MyTransformation()).to(&quot;jpa:PurchaseOrder&quot;);
+]]></script>
+</div></div>
+
+<p>The sequence diagram would look something like this:</p>
+
+<p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="asynchronous-processing.data/camel-mixed-processors.png" data-image-src="/confluence/download/attachments/68592/camel-mixed-processors.png?version=1&amp;modificationDate=1192110286000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="59670857" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="camel-mixed-processors.png" data-base-url="https://cwiki.apache.org/confluence" data-linked-resource-content-type="image/png" data-linked-resource-container-id="68592" data-linked-resource-container-version="14"></span></p>
+
+<p>You would actually have multiple threads executing the 2nd part of the thread sequence.</p>
+
+
+<h3 id="AsynchronousProcessing-StayingsynchronousinanAsyncProcessor">Staying synchronous in an AsyncProcessor</h3>
+
+<p>Generally speaking you get better throughput processing when you process things synchronously.  This is due to the fact that starting up an asynchronous thread and doing a context switch to it adds a little bit of of overhead.  So it is generally encouraged that AsyncProcessors do as much work as they can synchronously.  When they get to a step that would block for a long time, at that point they should return from the process call and let the caller know that it will be completing the call asynchronously.</p></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=68592">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=68592&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

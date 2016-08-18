@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Mock
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="components.html">Components</a>&nbsp;&gt;&nbsp;<a href="mock.html">Mock</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="Mock-MockComponent">Mock Component</h2><p><a shape="rect" href="testing.html">Testing</a> of distributed and asynchronous processing is notoriously difficult. The <a shape="rect" href="mock.html">Mock</a>, <a shape="rect" href="test.html">Test</a> and <a shape="rect" href="dataset.html">DataSet</a> endpoints work great with the <a shape="rect" href="testing.html">Camel Testing Framework</a> to simplify your unit and integration testing using <a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a> and Camel's large range of <a shape="rect" href="components.html">Components</a> together with the powerful <a shape="rect" href="bean-integration.html">Bean Integration</a>.</p><p>The Mock component provides a powerful declarative testing mechanism, which is similar to <a shape="rect" class="external-link" href="http://www.jmock.org" rel="nofollow">jMock</a><a shape="rect" class="external-link" href="http://jmock.org" rel="nofollow"></a> in that it allows declarative expectations to be created on any Mock endpoint before a test begins. Then the test is run, which typically fires messages to one or more endpoints, and finally the expectations can be asserted in a test case to ensure the system worked as expected.</p><p>This allows you to test various things like:</p><ul><li>The correct number of messages are received on each endpoint,</li><li>The correct payloads are received, in the right order,</li><li>Messages arrive on an endpoint in order, using some <a shape="rect" href="expression.html">Expression</a> to create an order testing function,</li><li>Messages arrive match some kind of <a shape="rect" href="predicate.html">Predicate</a> such as that specific headers have certain values, or that parts of the messages match some predicate, such as by evaluating an <a shape="rect" href="xpath.html">XPath</a> or <a shape="rect" href="xquery.html">XQuery</a> <a shape="rect" href="expression.html">Expression</a>.</li></ul><p><strong>Note</strong> that there is also the <a shape="rect" href="test.html">Test endpoint</a> which is a Mock endpoint, but which uses a second endpoint to provide the list of expected message bodies and automatically sets up the Mock endpoint assertions. In other words, it's a Mock endpoint that automatically sets up its assertions from some sample messages in a <a shape="rect" href="file2.html">File</a> or <a shape="rect" href="jpa.html">database</a>, for example.</p><div class="confluence-information-macro confluence-information-macro-warning"><p class="title">Mock endpoints keep received Exchanges in memory indefinitely</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Remember that Mock is designed for testing. When you add Mock endpoints to a route, each <a shape="rect" href="exchange.html">Exchange</a> sent to the endpoint will be stored (to allow for later validation) in memory until explicitly reset or the JVM is restarted. If you are sending high volume and/or large messages, this may cause excessive memory use. If your goal is to test deployable routes inline, consider using <a shape="rect" href="notifybuilder.html">NotifyBuilder</a> or <a shape="rect" href="advicewith.html">AdviceWith</a> in your tests instead of adding Mock endpoints to routes directly.</p><p>From Camel 2.10 onwards there are two new options <code>retainFirst</code>, and <code>retainLast</code> that can be used to limit the number of messages the Mock endpoints keep in memory.</p></div></div><h3 id="Mock-URIformat">URI format</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[mock:someName[?options]
+]]></script>
+</div></div><p>Where <strong>someName</strong> can be any string that uniquely identifies the endpoint.</p><p>You can append query options to the URI in the following format, <code>?option=value&amp;option=value&amp;...</code></p><h3 id="Mock-Options">Options</h3><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Option</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Default</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>reportGroup</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><code>null</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>A size to use a <a shape="rect" href="log.html">throughput logger</a> for reporting</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>retainFirst</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.10:</strong> To only keep first X number of messages in memory.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><code>retainLast</code></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>&#160;</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.10:</strong> To only keep last X number of messages in memory.</p></td></tr></tbody></table></div></div><h3 id="Mock-SimpleExample">Simple Example</h3><p>Here's a simple example of Mock endpoint in use. First, the endpoint is resolved on the context. Then we set an expectation, and then, after the test has run, we assert that our expectations have been met.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[MockEndpoint resultEndpoint = context.resolveEndpoint(&quot;mock:foo&quot;, MockEndpoint.class);
+
+resultEndpoint.expectedMessageCount(2);
+
+// send some messages
+...
+
+// now lets assert that the mock:foo endpoint received 2 messages
+resultEndpoint.assertIsSatisfied();
+]]></script>
+</div></div><p>You typically always call the <a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#assertIsSatisfied()">assertIsSatisfied() method</a> to test that the expectations were met after running a test.</p><p>Camel will by default wait 10 seconds when the <code>assertIsSatisfied()</code> is invoked. This can be configured by setting the <code>setResultWaitTime(millis)</code> method.</p><h4 id="Mock-UsingassertPeriod">Using assertPeriod</h4><p><strong>Available as of Camel 2.7</strong><br clear="none"> When the assertion is satisfied then Camel will stop waiting and continue from the <code>assertIsSatisfied</code> method. That means if a new message arrives on the mock endpoint, just a bit later, that arrival will not affect the outcome of the assertion. Suppose you do want to test that no new messages arrives after a period thereafter, then you can do that by setting the <code>setAssertPeriod</code> method, for example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[MockEndpoint resultEndpoint = context.resolveEndpoint(&quot;mock:foo&quot;, MockEndpoint.class);
+resultEndpoint.setAssertPeriod(5000);
+resultEndpoint.expectedMessageCount(2);
+
+// send some messages
+...
+
+// now lets assert that the mock:foo endpoint received 2 messages
+resultEndpoint.assertIsSatisfied();
+]]></script>
+</div></div><h3 id="Mock-Settingexpectations">Setting expectations</h3><p>You can see from the javadoc of <a shape="rect" href="httphttp://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html" rel="nofollow">MockEndpoint</a> the various helper methods you can use to set expectations. The main methods are as follows:</p><div class="confluenceTableSmall"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Method</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#expectedMessageCount(int)">expectedMessageCount(int)</a></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To define the expected message count on the endpoint.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#expectedMinimumMessageCount(int)">expectedMinimumMessageCount(int)</a></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To define the minimum number of expected messages on the endpoint.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#expectedBodiesReceived(java.lang.Object...)">expectedBodiesReceived(...)</a></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To define the expected bodies that should be received (in order).</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#expectedHeaderReceived(java.lang.String,%20java.lang.String)">expectedHeaderReceived(...)</a></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To define the expected header that should be received</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#expectsAscending(org.apache.camel.Expression)">expectsAscending(Expression)</a></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To add an expectation that messages are received in order, using the given <a shape="rect" href="expression.html">Expression</a> to compare messages.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#expectsDescending(org.apache.camel.Expression)">expectsDescending(Expression)</a></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To add an expectation that messages are received in order, using the given <a shape="rect" href="expression.html">Expression</a> to compare messages.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p><a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#expectsNoDuplicates(org.apache.camel.Expression)">expectsNoDuplicates(Expression)</a></p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To add an expectation that no duplicate messages are received; using an <a shape="rect" href="expression.html">Expression</a> to calculate a unique identifier for each message. This could be something like the <code>JMSMessageID</code> if using JMS, or some unique reference number within the message.</p></td></tr></tbody></table></div></div><p>Here's another example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[resultEndpoint.expectedBodiesReceived(&quot;firstMessageBody&quot;, &quot;secondMessageBody&quot;, &quot;thirdMessageBody&quot;);
+]]></script>
+</div></div><h4 id="Mock-Addingexpectationstospecificmessages">Adding expectations to specific messages</h4><p>In addition, you can use the <a shape="rect" class="external-link" href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/component/mock/MockEndpoint.html#message(int)">message(int messageIndex)</a> method to add assertions about a specific message that is received.</p><p>For example, to add expectations of the headers or body of the first message (using zero-based indexing like <code>java.util.List</code>), you can use the following code:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[resultEndpoint.message(0).header(&quot;foo&quot;).isEqualTo(&quot;bar&quot;);
+]]></script>
+</div></div><p>There are some examples of the Mock endpoint in use in the <a shape="rect" class="external-link" href="http://svn.apache.org/viewvc/camel/trunk/camel-core/src/test/java/org/apache/camel/processor/">camel-core processor tests</a>.</p><h3 id="Mock-Mockingexistingendpoints">Mocking existing endpoints</h3><p><strong>Available as of Camel 2.7</strong></p><p>Camel now allows you to automatically mock existing endpoints in your Camel routes.</p><div class="confluence-information-macro confluence-information-macro-information"><p class="title">How it works</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>Important:</strong> The endpoints are still in action. What happens differently is that a <a shape="rect" href="mock.html">Mock</a> endpoint is injected and receives the message first and then delegates the message to the target endpoint. You can view this as a kind of intercept and delegate or endpoint listener.</p></div></div><p>Suppose you have the given route below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Route</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// tag::route[]
+@Override
+protected RouteBuilder createRouteBuilder() throws Exception {
+    return new RouteBuilder() {
+        @Override
+        public void configure() throws Exception {
+            from(&quot;direct:start&quot;).to(&quot;direct:foo&quot;).to(&quot;log:foo&quot;).to(&quot;mock:result&quot;);
+
+            from(&quot;direct:foo&quot;).transform(constant(&quot;Bye World&quot;));
+        }
+    };
+}
+// end::route[]
+]]></script>
+</div></div><p>You can then use the <code>adviceWith</code> feature in Camel to mock all the endpoints in a given route from your unit test, as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>adviceWith mocking all endpoints</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// tag::e1[]
+public void testAdvisedMockEndpoints() throws Exception {
+    // advice the first route using the inlined AdviceWith route builder
+    // which has extended capabilities than the regular route builder
+    context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+        @Override
+        public void configure() throws Exception {
+            // mock all endpoints
+            mockEndpoints();
+        }
+    });
+
+    getMockEndpoint(&quot;mock:direct:start&quot;).expectedBodiesReceived(&quot;Hello World&quot;);
+    getMockEndpoint(&quot;mock:direct:foo&quot;).expectedBodiesReceived(&quot;Hello World&quot;);
+    getMockEndpoint(&quot;mock:log:foo&quot;).expectedBodiesReceived(&quot;Bye World&quot;);
+    getMockEndpoint(&quot;mock:result&quot;).expectedBodiesReceived(&quot;Bye World&quot;);
+
+    template.sendBody(&quot;direct:start&quot;, &quot;Hello World&quot;);
+
+    assertMockEndpointsSatisfied();
+
+    // additional test to ensure correct endpoints in registry
+    assertNotNull(context.hasEndpoint(&quot;direct:start&quot;));
+    assertNotNull(context.hasEndpoint(&quot;direct:foo&quot;));
+    assertNotNull(context.hasEndpoint(&quot;log:foo&quot;));
+    assertNotNull(context.hasEndpoint(&quot;mock:result&quot;));
+    // all the endpoints was mocked
+    assertNotNull(context.hasEndpoint(&quot;mock:direct:start&quot;));
+    assertNotNull(context.hasEndpoint(&quot;mock:direct:foo&quot;));
+    assertNotNull(context.hasEndpoint(&quot;mock:log:foo&quot;));
+}
+// end::e1[]
+]]></script>
+</div></div><p>Notice that the mock endpoints is given the uri <code>mock:&lt;endpoint&gt;</code>, for example <code>mock:direct:foo</code>. Camel logs at <code>INFO</code> level the endpoints being mocked:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[INFO  Adviced endpoint [direct://foo] with mock endpoint [mock:direct:foo]
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Mocked endpoints are without parameters</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Endpoints which are mocked will have their parameters stripped off. For example the endpoint "log:foo?showAll=true" will be mocked to the following endpoint "mock:log:foo". Notice the parameters have been removed.</p></div></div><p>Its also possible to only mock certain endpoints using a pattern. For example to mock all <code>log</code> endpoints you do as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>adviceWith mocking only log endpoints using a pattern</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// tag::e2[]
+public void testAdvisedMockEndpointsWithPattern() throws Exception {
+    // advice the first route using the inlined AdviceWith route builder
+    // which has extended capabilities than the regular route builder
+    context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+        @Override
+        public void configure() throws Exception {
+            // mock only log endpoints
+            mockEndpoints(&quot;log*&quot;);
+        }
+    });
+
+    // now we can refer to log:foo as a mock and set our expectations
+    getMockEndpoint(&quot;mock:log:foo&quot;).expectedBodiesReceived(&quot;Bye World&quot;);
+
+    getMockEndpoint(&quot;mock:result&quot;).expectedBodiesReceived(&quot;Bye World&quot;);
+
+    template.sendBody(&quot;direct:start&quot;, &quot;Hello World&quot;);
+
+    assertMockEndpointsSatisfied();
+
+    // additional test to ensure correct endpoints in registry
+    assertNotNull(context.hasEndpoint(&quot;direct:start&quot;));
+    assertNotNull(context.hasEndpoint(&quot;direct:foo&quot;));
+    assertNotNull(context.hasEndpoint(&quot;log:foo&quot;));
+    assertNotNull(context.hasEndpoint(&quot;mock:result&quot;));
+    // only the log:foo endpoint was mocked
+    assertNotNull(context.hasEndpoint(&quot;mock:log:foo&quot;));
+    assertNull(context.hasEndpoint(&quot;mock:direct:start&quot;));
+    assertNull(context.hasEndpoint(&quot;mock:direct:foo&quot;));
+}
+// end::e2[]
+]]></script>
+</div></div><p>The pattern supported can be a wildcard or a regular expression. See more details about this at <a shape="rect" href="intercept.html">Intercept</a> as its the same matching function used by Camel.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Mind that mocking endpoints causes the messages to be copied when they arrive on the mock.<br clear="none"> That means Camel will use more memory. This may not be suitable when you send in a lot of messages.</p></div></div><h4 id="Mock-Mockingexistingendpointsusingthecamel-testcomponent">Mocking existing endpoints using the <code>camel-test</code> component</h4><p>Instead of using the <code>adviceWith</code> to instruct Camel to mock endpoints, you can easily enable this behavior when using the <code>camel-test</code> Test Kit.<br clear="none"> The same route can be tested as follows. Notice that we return <code>"*"</code> from the <code>isMockEndpoints</code> method, which tells Camel to mock all endpoints.<br clear="none"> If you only want to mock all <code>log</code> endpoints you can return <code>"log*"</code> instead.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>isMockEndpoints using camel-test kit</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// tag::e1[]
+public class IsMockEndpointsJUnit4Test extends CamelTestSupport {
+
+    @Override
+    public String isMockEndpoints() {
+        // override this method and return the pattern for which endpoints to mock.
+        // use * to indicate all
+        return &quot;*&quot;;
+    }
+
+    @Test
+    public void testMockAllEndpoints() throws Exception {
+        // notice we have automatic mocked all endpoints and the name of the endpoints is &quot;mock:uri&quot;
+        getMockEndpoint(&quot;mock:direct:start&quot;).expectedBodiesReceived(&quot;Hello World&quot;);
+        getMockEndpoint(&quot;mock:direct:foo&quot;).expectedBodiesReceived(&quot;Hello World&quot;);
+        getMockEndpoint(&quot;mock:log:foo&quot;).expectedBodiesReceived(&quot;Bye World&quot;);
+        getMockEndpoint(&quot;mock:result&quot;).expectedBodiesReceived(&quot;Bye World&quot;);
+
+        template.sendBody(&quot;direct:start&quot;, &quot;Hello World&quot;);
+
+        assertMockEndpointsSatisfied();
+
+        // additional test to ensure correct endpoints in registry
+        assertNotNull(context.hasEndpoint(&quot;direct:start&quot;));
+        assertNotNull(context.hasEndpoint(&quot;direct:foo&quot;));
+        assertNotNull(context.hasEndpoint(&quot;log:foo&quot;));
+        assertNotNull(context.hasEndpoint(&quot;mock:result&quot;));
+        // all the endpoints was mocked
+        assertNotNull(context.hasEndpoint(&quot;mock:direct:start&quot;));
+        assertNotNull(context.hasEndpoint(&quot;mock:direct:foo&quot;));
+        assertNotNull(context.hasEndpoint(&quot;mock:log:foo&quot;));
+    }
+
+    @Override
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                from(&quot;direct:start&quot;).to(&quot;direct:foo&quot;).to(&quot;log:foo&quot;).to(&quot;mock:result&quot;);
+
+                from(&quot;direct:foo&quot;).transform(constant(&quot;Bye World&quot;));
+            }
+        };
+    }
+}
+// end::e1[]
+]]></script>
+</div></div><h4 id="Mock-MockingexistingendpointswithXMLDSL">Mocking existing endpoints with XML DSL</h4><p>If you do not use the <code>camel-test</code> component for unit testing (as shown above) you can use a different approach when using XML files for routes.<br clear="none"> The solution is to create a new XML file used by the unit test and then include the intended XML file which has the route you want to test.</p><p>Suppose we have the route in the <code>camel-route.xml</code> file:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>camel-route.xml</b></div><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!-- tag::e1[] --&gt;
+&lt;!-- this camel route is in the camel-route.xml file --&gt;
+&lt;camelContext xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:start&quot;/&gt;
+        &lt;to uri=&quot;direct:foo&quot;/&gt;
+        &lt;to uri=&quot;log:foo&quot;/&gt;
+        &lt;to uri=&quot;mock:result&quot;/&gt;
+    &lt;/route&gt;
+
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:foo&quot;/&gt;
+        &lt;transform&gt;
+            &lt;constant&gt;Bye World&lt;/constant&gt;
+        &lt;/transform&gt;
+    &lt;/route&gt;
+
+&lt;/camelContext&gt;
+&lt;!-- end::e1[] --&gt;
+]]></script>
+</div></div><p>Then we create a new XML file as follows, where we include the <code>camel-route.xml</code> file and define a spring bean with the class <code>org.apache.camel.impl.InterceptSendToMockEndpointStrategy</code> which tells Camel to mock all endpoints:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>test-camel-route.xml</b></div><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!-- tag::e1[] --&gt;
+&lt;!-- the Camel route is defined in another XML file --&gt;
+&lt;import resource=&quot;camel-route.xml&quot;/&gt;
+
+&lt;!-- bean which enables mocking all endpoints --&gt;
+&lt;bean id=&quot;mockAllEndpoints&quot; class=&quot;org.apache.camel.impl.InterceptSendToMockEndpointStrategy&quot;/&gt;
+&lt;!-- end::e1[] --&gt;
+]]></script>
+</div></div><p>Then in your unit test you load the new XML file (<code>test-camel-route.xml</code>) instead of <code>camel-route.xml</code>.</p><p>To only mock all <a shape="rect" href="log.html">Log</a> endpoints you can define the pattern in the constructor for the bean:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;bean id=&quot;mockAllEndpoints&quot; class=&quot;org.apache.camel.impl.InterceptSendToMockEndpointStrategy&quot;&gt;
+    &lt;constructor-arg index=&quot;0&quot; value=&quot;log*&quot;/&gt;
+&lt;/bean&gt;
+]]></script>
+</div></div><h4 id="Mock-Mockingendpointsandskipsendingtooriginalendpoint">Mocking endpoints and skip sending to original endpoint</h4><p><strong>Available as of Camel 2.10</strong></p><p>Sometimes you want to easily mock and skip sending to a certain endpoints. So the message is detoured and send to the mock endpoint only. From Camel 2.10 onwards you can now use the <code>mockEndpointsAndSkip</code> method using <a shape="rect" href="advicewith.html">AdviceWith</a> or the <a shape="rect" class="unresolved" href="#">Test Kit</a>. The example below will skip sending to the two endpoints <code>"direct:foo"</code>, and <code>"direct:bar"</code>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>adviceWith mock and skip sending to endpoints</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// tag::e1[]
+public void testAdvisedMockEndpointsWithSkip() throws Exception {
+    // advice the first route using the inlined AdviceWith route builder
+    // which has extended capabilities than the regular route builder
+    context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+        @Override
+        public void configure() throws Exception {
+            // mock sending to direct:foo and direct:bar and skip send to it
+            mockEndpointsAndSkip(&quot;direct:foo&quot;, &quot;direct:bar&quot;);
+        }
+    });
+
+    getMockEndpoint(&quot;mock:result&quot;).expectedBodiesReceived(&quot;Hello World&quot;);
+    getMockEndpoint(&quot;mock:direct:foo&quot;).expectedMessageCount(1);
+    getMockEndpoint(&quot;mock:direct:bar&quot;).expectedMessageCount(1);
+
+    template.sendBody(&quot;direct:start&quot;, &quot;Hello World&quot;);
+
+    assertMockEndpointsSatisfied();
+
+    // the message was not send to the direct:foo route and thus not sent to the seda endpoint
+    SedaEndpoint seda = context.getEndpoint(&quot;seda:foo&quot;, SedaEndpoint.class);
+    assertEquals(0, seda.getCurrentQueueSize());
+}
+// end::e1[]
+]]></script>
+</div></div><p>The same example using the <a shape="rect" href="testing.html">Test Kit</a></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>isMockEndpointsAndSkip using camel-test kit</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// tag::e1[]
+public class IsMockEndpointsAndSkipJUnit4Test extends CamelTestSupport {
+
+    @Override
+    public String isMockEndpointsAndSkip() {
+        // override this method and return the pattern for which endpoints to mock,
+        // and skip sending to the original endpoint.
+        return &quot;direct:foo&quot;;
+    }
+
+    @Test
+    public void testMockEndpointAndSkip() throws Exception {
+        // notice we have automatic mocked the direct:foo endpoints and the name of the endpoints is &quot;mock:uri&quot;
+        getMockEndpoint(&quot;mock:result&quot;).expectedBodiesReceived(&quot;Hello World&quot;);
+        getMockEndpoint(&quot;mock:direct:foo&quot;).expectedMessageCount(1);
+
+        template.sendBody(&quot;direct:start&quot;, &quot;Hello World&quot;);
+
+        assertMockEndpointsSatisfied();
+
+        // the message was not send to the direct:foo route and thus not sent to the seda endpoint
+        SedaEndpoint seda = context.getEndpoint(&quot;seda:foo&quot;, SedaEndpoint.class);
+        assertEquals(0, seda.getCurrentQueueSize());
+    }
+
+    @Override
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                from(&quot;direct:start&quot;).to(&quot;direct:foo&quot;).to(&quot;mock:result&quot;);
+
+                from(&quot;direct:foo&quot;).transform(constant(&quot;Bye World&quot;)).to(&quot;seda:foo&quot;);
+            }
+        };
+    }
+}
+// end::e1[]
+]]></script>
+</div></div><h3 id="Mock-Limitingthenumberofmessagestokeep">Limiting the number of messages to keep</h3><p><strong>Available as of Camel 2.10</strong></p><p>The <a shape="rect" href="mock.html">Mock</a> endpoints will by default keep a copy of every <a shape="rect" href="exchange.html">Exchange</a> that it received. So if you test with a lot of messages, then it will consume memory.<br clear="none"> From Camel 2.10 onwards we have introduced two options <code>retainFirst</code> and <code>retainLast</code> that can be used to specify to only keep N'th of the first and/or last <a shape="rect" href="exchange.html">Exchange</a>s.</p><p>For example in the code below, we only want to retain a copy of the first 5 and last 5 <a shape="rect" href="exchange.html">Exchange</a>s the mock receives.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[  MockEndpoint mock = getMockEndpoint(&quot;mock:data&quot;);
+  mock.setRetainFirst(5);
+  mock.setRetainLast(5);
+  mock.expectedMessageCount(2000);
+
+  ...
+
+  mock.assertIsSatisfied();
+]]></script>
+</div></div><p>Using this has some limitations. The <code>getExchanges()</code> and <code>getReceivedExchanges()</code> methods on the <code>MockEndpoint</code> will return only the retained copies of the <a shape="rect" href="exchange.html">Exchange</a>s. So in the example above, the list will contain 10 <a shape="rect" href="exchange.html">Exchange</a>s; the first five, and the last five.<br clear="none"> The <code>retainFirst</code> and <code>retainLast</code> options also have limitations on which expectation methods you can use. For example the expectedXXX methods that work on message bodies, headers, etc. will only operate on the retained messages. In the example above they can test only the expectations on the 10 retained messages.</p><h3 id="Mock-Testingwitharrivaltimes">Testing with arrival times</h3><p><strong>Available as of Camel 2.7</strong></p><p>The <a shape="rect" href="mock.html">Mock</a> endpoint stores the arrival time of the message as a property on the <a shape="rect" href="exchange.html">Exchange</a>.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[Date time = exchange.getProperty(Exchange.RECEIVED_TIMESTAMP, Date.class);
+]]></script>
+</div></div><p>You can use this information to know when the message arrived on the mock. But it also provides foundation to know the time interval between the previous and next message arrived on the mock. You can use this to set expectations using the <code>arrives</code> DSL on the <a shape="rect" href="mock.html">Mock</a> endpoint.</p><p>For example to say that the first message should arrive between 0-2 seconds before the next you can do:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[mock.message(0).arrives().noLaterThan(2).seconds().beforeNext();
+]]></script>
+</div></div><p>You can also define this as that 2nd message (0 index based) should arrive no later than 0-2 seconds after the previous:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[mock.message(1).arrives().noLaterThan(2).seconds().afterPrevious();
+]]></script>
+</div></div><p>You can also use between to set a lower bound. For example suppose that it should be between 1-4 seconds:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[mock.message(1).arrives().between(1, 4).seconds().afterPrevious();
+]]></script>
+</div></div><p>You can also set the expectation on all messages, for example to say that the gap between them should be at most 1 second:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[mock.allMessages().arrives().noLaterThan(1).seconds().beforeNext();
+]]></script>
+</div></div><div class="confluence-information-macro confluence-information-macro-tip"><p class="title">time units</p><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In the example above we use <code>seconds</code> as the time unit, but Camel offers <code>milliseconds</code>, and <code>minutes</code> as well.</p></div></div><p></p><h3 id="Mock-SeeAlso">See Also</h3>
+<ul><li><a shape="rect" href="configuring-camel.html">Configuring Camel</a></li><li><a shape="rect" href="component.html">Component</a></li><li><a shape="rect" href="endpoint.html">Endpoint</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li></ul><ul><li><a shape="rect" href="spring-testing.html">Spring Testing</a></li><li><a shape="rect" href="testing.html">Testing</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=52081">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=52081&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Advanced configuration of CamelContext using Spring
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="user-guide.html">User Guide</a>&nbsp;&gt;&nbsp;<a href="spring.html">Spring</a>&nbsp;&gt;&nbsp;<a href="advanced-configuration-of-camelcontext-using-spring.html">Advanced configuration of CamelContext using Spring</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="AdvancedconfigurationofCamelContextusingSpring-AdvancedconfigurationofCamelContextusingSpring">Advanced configuration of CamelContext using Spring</h2><p>When using Spring the CamelContext can be pre configured based on defined beans in spring XML.<br clear="none"> This wiki page documentes these features. Most of these features requires <strong>Camel 2.0</strong>.</p><h3 id="AdvancedconfigurationofCamelContextusingSpring-Whatcanbeconfigured">What can be configured</h3><p>The following functions can be configured:</p><ul class="alternate"><li>Class resolvers</li><li>Lifecycle factories</li><li>Registry for lookup</li><li><a shape="rect" href="debugger.html">Debugger</a>, <a shape="rect" href="tracer.html">Tracer</a>, <a shape="rect" href="delay-interceptor.html">Delay</a> and <a shape="rect" href="uuidgenerator.html">UuidGenerator</a></li><li><a shape="rect" href="intercept.html">Intercept</a></li><li><a shape="rect" href="graceful-shutdown.html">Graceful Shutdown</a></li><li><a shape="rect" href="stream-caching.html">Stream caching</a></li><li>Logging</li></ul><p>Camel will configure these functions by doing a lookup in the Spring bean registry to find beans of the given type<br clear="none"> When Camel finds and uses any of these it logs at <code>INFO</code> level.</p><p>The following list all requires at most 1 beans defined. If there are more than 1 bean of this type, then Camel will <strong>not</strong> use it.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Type</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Number of beans</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>PackageScanClassResolver</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a 3rd party package scan resolver. More details at <a shape="rect" href="pluggable-class-resolvers.html">Pluggable Class Resolvers</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ClassResolver</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a 3rd party class resolver. More details at <a shape="rect" href="pluggable-class-resolvers.html">Pluggable Class Resolvers</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>FactoryFinderResolver</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a 3rd party factory finder.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>Registry</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a 3rd party bean registry. By default Camel will use Spring ApplicationContext as registry.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>Debugger</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a <a shape="rect" href="debugger.html">Debugger</a> usually for tooling.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>Tracer</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a 3rd party <a shape="rect" href="tracer.html">Tracer</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>TraceFormatter</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a bean that has the tracing options configured.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>HandleFault</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a 3rd part fault handler to handle FAULT messages.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>Delayer</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use a 3rd part <a shape="rect" href="delayer.html">Delayer</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ManagementStrategy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.1:</strong> To use a 3rd part strategy for <a shape="rect" href="camel-jmx.html">management</a>, for example JMX management.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ManagementNamingStrategy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.6:</strong> To use a 3rd part strategy for naming MBeans for <a shape="rect" href="camel-jmx.html">management</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>NodeIdFactory</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.10:</strong> To use a 3rd part node id factory.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>EventFactory</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.1:</strong> To use a 3rd part event factory.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>EventNotifier</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.1:</strong> To use a 3rd part event notifier. In Camel 2.2 onwards you can have multiple notifiers, see next table.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>InflightRepository</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.1:</strong> To use a 3rd part inflight repository.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ShutdownStrategy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.2:</strong> To use a 3rd part shutdown strategy.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ExecutorServiceStrategy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.3 - 2.8.x:</strong> To use a 3rd part executor service strategy. More details at <a shape="rect" href="threading-model.html">Threading Model</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ExecutorServiceManager</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> To use a 3rd part executor service manager. More details at <a shape="rect" href="threading-model.html">Threading Model</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ThreadPoolFactory</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.9:</strong> To use a 3rd part thread pool factory. More details at <a shape="rect" href="threading-model.html">Threading Model</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>ProcessorFactory</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.4:</strong> To use a 3rd part processor factory.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>UuidGenerator</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.5:</strong> To use a 3rd part <a shape="rect" href="uuidgenerator.html">UuidGenerator</a>.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>StreamCachingStrategy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.12:</strong> To use a 3rd part <a shape="rect" href="stream-caching.html">Stream caching</a> strategy.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>UnitOfWorkFactory</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..1</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.12.3/2.13:</strong> To use 3rd part <code>UnitOfWork</code> implementations created by the factory.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">RuntimeEndpointRegistry</td><td colspan="1" rowspan="1" class="confluenceTd">0..1</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.13.1:</strong> To use a 3rd party RuntimeEndpointRegistry implementation.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">Logger</td><td colspan="1" rowspan="1" class="confluenceTd">0..1</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.12.4/2.13.1:</strong> To use provided org.slf4j.Logger for <a shape="rect" href="log.html">Log</a> component and <a shape="rect" href="logeip.html">log() EIP</a>.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">AsyncProcessorAwaitManager</td><td colspan="1" rowspan="1" class="confluenceTd">0..1</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.15:</strong> To use a 3rd part async process await manager.</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><span>ModelJAXBContextFactory</span></td><td colspan="1" rowspan="1" class="confluenceTd">0..1</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.15.2:</strong> To use a 3rd party model JAXB ContextFactory</td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">MessageHistoryFactory</td><td colspan="1" rowspan="1" class="confluenceTd">0..1</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.17:</strong> To use a 3rd party MessageHistoryFactory implementation.</td></tr></tbody></table></div><p>And the following options have support for any number of beans defined.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th colspan="1" rowspan="1" class="confluenceTh"><p>Type</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Number of beans</p></th><th colspan="1" rowspan="1" class="confluenceTh"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>InterceptStrategy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..n</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>To use your own <a shape="rect" href="intercept.html">Intercept</a> that intercepts every processing steps in all routes in the <a shape="rect" href="camelcontext.html">CamelContext</a>. For instance you can use this to do an AOP like performance timer interceptor.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>LifecycleStrategy</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..n</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.1:</strong> To use 3rd party lifecycle strategies. By default Camel uses a JMX aware that does JMX instrumentation.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd"><p>EventNotifier</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p>0..n</p></td><td colspan="1" rowspan="1" class="confluenceTd"><p><strong>Camel 2.2:</strong> To use 3rd part event notifiers.</p></td></tr><tr><td colspan="1" rowspan="1" class="confluenceTd">RoutePolicyFactory</td><td colspan="1" rowspan="1" class="confluenceTd">0..n</td><td colspan="1" rowspan="1" class="confluenceTd"><strong>Camel 2.14:</strong> To use a 3rd party route policy factory to create a route policy for every route.</td></tr></tbody></table></div><p>Camel will log at <code>INFO</code> level if it pickup and uses a custom bean using <code>org.apache.camel.spring.CamelContextFactoryBean</code> as name.</p><h3 id="AdvancedconfigurationofCamelContextusingSpring-Usingcontainerwideinterceptors">Using container wide interceptors</h3><p>Imagine that you have multiple <a shape="rect" href="camelcontext.html">CamelContext</a> and you want to configure that they all use the same container wide interceptor. How do we do that? Well we can leverage the fact that Camel can auto detect and use custom interceptors. So what we simply do is to define our interceptor in the spring xml file. The sample below does this and also define 2 camel contexts. The sample is based on unit test.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Spring DSL</b></div><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+
+&lt;!-- here we define a spring bean that is our container wide interceptor
+     its important to notice that the class ContainerWideInterceptor implements
+     org.apache.camel.spi.InterceptStrategy that allows us to plugin our interceptors
+     Camel will at startup automatic look for any beans in spring registry that is an
+     instance of org.apache.camel.spi.InterceptStrategy and add it as interceptor
+     to all its routes. Using this we are capable of defining container wide interceptors
+     that gets used in all camel contests we define with spring --&gt;
+&lt;bean id=&quot;myInterceptor&quot; class=&quot;org.apache.camel.spring.interceptor.ContainerWideInterceptor&quot;/&gt;
+
+&lt;!-- here we have the 1st CamelContext --&gt;
+&lt;camelContext id=&quot;camel1&quot; xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:one&quot;/&gt;
+        &lt;to uri=&quot;mock:result&quot;/&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;!-- and there we have the 2nd CamelContext --&gt;
+&lt;camelContext id=&quot;camel2&quot; xmlns=&quot;http://camel.apache.org/schema/spring&quot;&gt;
+    &lt;route&gt;
+        &lt;from uri=&quot;direct:two&quot;/&gt;
+        &lt;to uri=&quot;log:two&quot;/&gt;
+        &lt;to uri=&quot;mock:result&quot;/&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+]]></script>
+</div></div>Okay lets build our interceptor to simply count the number of interceptions. This is quite easy as we can just implement this logic in our implementation directly as the code below illustrates:<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>InterceptorStrategy</b></div><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+public class ContainerWideInterceptor implements InterceptStrategy {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ContainerWideInterceptor.class);
+    private static int count;
+
+    public Processor wrapProcessorInInterceptors(final CamelContext context, final ProcessorDefinition&lt;?&gt; definition,
+                                                 final Processor target, final Processor nextTarget) throws Exception {
+
+        // as this is based on an unit test we are a bit lazy and just create an inlined processor
+        // where we implement our interception logic.
+        return new Processor() {
+            public void process(Exchange exchange) throws Exception {
+                // we just count number of interceptions
+                count++;
+                LOG.info(&quot;I am the container wide interceptor. Intercepted total count: &quot; + count);
+                // its important that we delegate to the real target so we let target process the exchange
+                target.process(exchange);
+            }
+
+            @Override
+            public String toString() {
+                return &quot;ContainerWideInterceptor[&quot; + target + &quot;]&quot;;
+            }
+        };
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+]]></script>
+</div></div>When Camel boots up it logs at <code>INFO</code> level the container wide interceptors it have found:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[INFO  CamelContextFactoryBean        - Using custom intercept strategy with id: myInterceptor and implementation:org.apache.camel.spring.interceptor.ContainerWideInterceptor@b84c44
+]]></script>
+</div></div><p><strong>Notice:</strong> If we have more than 1 container wide interceptor, we can just define them as spring bean. Camel will find and use them.</p><h2 id="AdvancedconfigurationofCamelContextusingSpring-SeeAlso">See Also</h2><ul><li><a shape="rect" href="spring.html">Spring</a></li><li><a shape="rect" href="tutorial-jmsremoting.html">Spring JMS Tutorial</a></li><li><a shape="rect" href="creating-a-new-spring-based-camel-route.html">Creating a new Spring based Camel Route</a></li><li><a shape="rect" href="spring-example.html">Spring example</a></li><li><a shape="rect" href="xml-reference.html">Xml Reference</a></li></ul></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=120229">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=120229&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+

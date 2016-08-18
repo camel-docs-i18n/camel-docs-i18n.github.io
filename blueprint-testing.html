@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+<head>
+    <link href="//camel.apache.org/styles/site.css" rel="stylesheet" type="text/css">
+    <link href="//camel.apache.org/styles/type-settings.css" rel="stylesheet" type="text/css">
+<!-- <script src="//camel.apache.org/styles/prototype.js" type="text/javascript"></script>
+    <script src="//camel.apache.org/styles/rico.js" type="text/javascript"></script>    
+    <script src="//camel.apache.org/styles/site.js" type="text/javascript"></script> -->
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style type="text/css">
+      .maincontent { overflow:hidden; }
+    </style>
+    <!--[if IE]>
+    <style type="text/css">
+      .maincontent { width:100%; }
+    </style>
+    <![endif]-->
+
+
+  <link href='//camel.apache.org/styles/highlighter/styles/shCoreCamel.css' rel='stylesheet' type='text/css' />
+  <link href='//camel.apache.org/styles/highlighter/styles/shThemeCamel.css' rel='stylesheet' type='text/css' />
+  <script src='//camel.apache.org/styles/highlighter/scripts/shCore.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushJava.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushXml.js' type='text/javascript'></script>
+  <script src='//camel.apache.org/styles/highlighter/scripts/shBrushPlain.js' type='text/javascript'></script>
+  
+  <script type="text/javascript">
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+
+    <title>
+    Apache Camel: Blueprint Testing
+    </title>
+<script type="text/javascript">window.liveSettings={api_key:"9bc4339107134d7498f2c68a7d3db5ee"};</script><script type="text/javascript" src="//cdn.transifex.com/live.js"></script></head>
+<body>
+<div class="white_box">
+<div class="header">
+  <div class="header_l">
+    <div class="header_r">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="content_l">
+    <div class="content_r">
+      <div>
+          <!-- Banner -->
+<div id="banner-content"><div id="asf_logo">
+	<div id="activemq_logo" style="height:108px; background:transparent url(//camel.apache.org/banner.data/apache-camel-7.png) no-repeat scroll left top;">
+            <a shape="rect" style="float:left; width:310px;display:block;text-indent:-5000px;text-decoration:none;line-height:140px; margin-top:20px; margin-left:18px;" href="http://camel.apache.org/">Camel</a>
+            <a shape="rect" style="float:right; width:180px;display:block;text-indent:-5000px;text-decoration:none;line-height:80px; margin-top:45px; margin-right:10px;" href="http://www.apache.org">Apache</a>
+	</div>
+</div></div>
+          <!-- Banner -->
+        <div class="top_red_bar">
+          <div id="site-breadcrumbs">
+                <!-- Breadcrumbs -->
+<a href="index.html">Apache Camel</a>&nbsp;&gt;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&gt;&nbsp;<a href="user-guide.html">User Guide</a>&nbsp;&gt;&nbsp;<a href="testing.html">Testing</a>&nbsp;&gt;&nbsp;<a href="blueprint-testing.html">Blueprint Testing</a>
+          </div>
+          <!-- Quicklinks -->
+<div id="site-quicklinks"><p><a shape="rect" href="download.html">Download</a> | <a shape="rect" href="javadoc.html">JavaDoc</a> | <a shape="rect" href="source.html">Source</a> | <a shape="rect" href="discussion-forums.html">Forums</a> | <a shape="rect" href="support.html">Support</a></p></div>
+          <!-- Quicklinks -->
+        </div>
+
+	<table border="0">
+	<tbody>
+        <tr>
+        <td valign="top" width="100%">
+<div class="wiki-content maincontent"><h2 id="BlueprintTesting-BlueprintTesting">Blueprint Testing</h2><p><strong>Available as of Camel 2.10</strong></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>camel-test-blueprint</strong> does only support testing <em>one</em> CamelContext. So if you have two or more CamelContexts in your blueprint XML files, then only the CamelContext first found is used during testing.</p></div></div><p><a shape="rect" href="testing.html">Testing</a><span style="line-height: 1.4285715;"> is a crucial part of any development or integration work. Camel supports the definition of </span><a shape="rect" href="using-osgi-blueprint-with-camel.html">Blueprint routes</a><span style="line-height: 1.4285715;">, but given that Blueprint is an OSGi specific technology, writing unit tests is quite difficult. This library leverages </span><a shape="rect" class="external-link" href="http://code.google.com/p/pojosr/" style="line-height: 1.4285715;" rel="nofollow">PojoSR</a><span style="line-height: 1.4285715;">&#160;(now Felix Connect) which provides a service registry without using a fully compliant OSGi container. This allows defining real unit tests (as opposed to integration tests using </span><a shape="rect" class="external-link" href="http://team.ops4j.org/wiki/display/paxexam/Pax+Exam" style="line-height: 1.4285715;" rel="nofollow">Pax Exam</a><span style="line-height: 1.4285715;">. Please make sure all test jars in your classpath are OSGi bundles.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+// tag::example[]
+// to use camel-test-blueprint, then extend the CamelBlueprintTestSupport class,
+// and add your unit tests methods as shown below.
+public class DebugBlueprintTest extends CamelBlueprintTestSupport {
+
+    private boolean debugBeforeMethodCalled;
+    private boolean debugAfterMethodCalled;
+
+    // override this method, and return the location of our Blueprint XML file to be used for testing
+    @Override
+    protected String getBlueprintDescriptor() {
+        return &quot;org/apache/camel/test/blueprint/camelContext.xml&quot;;
+    }
+
+    // here we have regular JUnit @Test method
+    @Test
+    public void testRoute() throws Exception {
+
+        // set mock expectations
+        getMockEndpoint(&quot;mock:a&quot;).expectedMessageCount(1);
+
+        // send a message
+        template.sendBody(&quot;direct:start&quot;, &quot;World&quot;);
+
+        // assert mocks
+        assertMockEndpointsSatisfied();
+
+        // assert on the debugBefore/debugAfter methods below being called as we&#39;ve enabled the debugger
+        assertTrue(debugBeforeMethodCalled);
+        assertTrue(debugAfterMethodCalled);
+    }
+
+    @Override
+    public boolean isUseDebugger() {
+        // must enable debugger
+        return true;
+    }
+
+    @Override
+    protected void debugBefore(Exchange exchange, org.apache.camel.Processor processor, ProcessorDefinition&lt;?&gt; definition, String id, String label) {
+        log.info(&quot;Before &quot; + definition + &quot; with body &quot; + exchange.getIn().getBody());
+        debugBeforeMethodCalled = true;
+    }
+
+    @Override
+    protected void debugAfter(Exchange exchange, org.apache.camel.Processor processor, ProcessorDefinition&lt;?&gt; definition, String id, String label, long timeTaken) {
+        log.info(&quot;After &quot; + definition + &quot; with body &quot; + exchange.getIn().getBody());
+        debugAfterMethodCalled = true;
+    }
+}
+// end::example[]
+]]></script>
+</div></div>Also notice the use of <strong><code>getBlueprintDescriptor</code></strong> to specify the location of the OSGi Blueprint XML file.<br clear="none"> If you have multiple OSGi Blueprint XML files, then you can specify them with a comma-separated list in the <strong><code>getBlueprintDescriptor</code></strong> method.<p>Here's the <a shape="rect" class="external-link" href="http://svn.apache.org/viewvc/camel/trunk/components/camel-test-blueprint/src/test/resources/org/apache/camel/test/blueprint/camelContext.xml?view=markup">Blueprint XML file</a>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[
+&lt;!-- tag::example[] --&gt;
+&lt;blueprint xmlns=&quot;http://www.osgi.org/xmlns/blueprint/v1.0.0&quot;
+           xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+           xsi:schemaLocation=&quot;
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd&quot;&gt;
+
+  &lt;camelContext xmlns=&quot;http://camel.apache.org/schema/blueprint&quot;&gt;
+
+    &lt;route&gt;
+      &lt;from uri=&quot;direct:start&quot;/&gt;
+      &lt;transform&gt;
+        &lt;simple&gt;Hello ${body}&lt;/simple&gt;
+      &lt;/transform&gt;
+      &lt;to uri=&quot;mock:a&quot;/&gt;
+    &lt;/route&gt;
+
+  &lt;/camelContext&gt;
+
+&lt;/blueprint&gt;
+&lt;!-- end::example[] --&gt;
+]]></script>
+</div></div>In order to define blueprint tests, add the following dependency to your pom:<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-test-blueprint&lt;/artifactId&gt;
+  &lt;version&gt;2.10&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+]]></script>
+</div></div><h3 id="BlueprintTesting-Classpathscanning">Classpath scanning</h3><p>By default PojoSR test container scans the test classpath for all the OSGi bundles available there. All the bundles with Blueprint descriptor files will be automatically started by the test container. If you would like to prevent particular bundles from being started by the test container, override the <code><strong>getBundleFilter</strong></code> method, just as demonstrated in the snippet below.&#160;</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[@Override
+protected String getBundleFilter() {
+  // I don&#39;t want test container to scan and load Logback bundle during the test
+  return &quot;(!(Bundle-SymbolicName=ch.qos.logback.core))&quot;;
+}
+]]></script>
+</div></div><p class="caseCommentStyle privateComment"><br clear="none">Keep in mind that not specifying the Blueprint descriptor in the getBlueprintDescriptor method will not prevent the test container from loading a given descriptor. The <code>getBundleFilter</code> method is the proper way of filtering out bundles you don't want to start during the test.</p><h3 id="BlueprintTesting-SettingtimeoutwhengettingCamelContext">Setting timeout when getting CamelContext</h3><p><strong>Available as of Camel 2.13.0/2.12.1/2.11.2</strong></p><p><code>CamelBlueprintTestSupport</code> waits 30 seconds for Camel Context to be ready by default, now you can override this value in two ways:</p><ul><li>Globally, by setting <code>org.apache.camel.test.blueprint.camelContextCreationTimeout</code> system property.</li><li>Locally for each test, by overriding <em>getCamelContextCreationTimeout</em> method.</li></ul><h3 id="BlueprintTesting-Addingservicesonstartup">Adding services on startup</h3><p><strong>Available as of Camel 2.11.2/2.12.0</strong></p><p>When using <code>camel-test-blueprint</code> you may do unit tests which requires using shared services which are not available during unit testing, but only in the real OSGi container, for example a shared <code>DataSource</code>.</p><p>To make it easier to register services on startup, such as a standalone <code>DataSource</code> or any other service, you can override the method <code>addServicesOnStartup</code> when your unit test class extends <code>CamelBlueprintTestSupport</code>.</p><p>In the example below we register a service <code>org.apache.camel.test.blueprint.MyService</code> using the name <code>myService</code> having a property <code>beer=Carlsberg</code>, as shown below:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    @Override
+    protected void addServicesOnStartup(Map&lt;String, KeyValueHolder&lt;Object, Dictionary&gt;&gt; services) {
+        services.put(&quot;myService&quot;, asService(myService, &quot;beer&quot;, &quot;Carlsberg&quot;));
+    }
+]]></script>
+</div></div><p>The asService is a builder method that makes it easy to register a service with a single property. If you need more properties you can use the <code>asService</code> method that takes a <code>Dictionary</code> as argument. And if you do not need any properties, then just pass in <code>null</code>, eg:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[services.put(&quot;myService&quot;, asService(myService, null));
+]]></script>
+</div></div><p>This allows us to use the service by calling a method on it from a Camel <a shape="rect" href="bean.html">Bean</a> component in a route as shown:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    &lt;route&gt;
+      &lt;from uri=&quot;direct:start&quot;/&gt;
+      &lt;to uri=&quot;bean:myService&quot;/&gt;
+      &lt;to uri=&quot;mock:result&quot;/&gt;
+    &lt;/route&gt;
+]]></script>
+</div></div><p>Notice the bean endpoint uses the service name <code>myService</code> which was the name we registered the service as. You can also use the fully qualified class name instead, which is more common with OSGi.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    @Override
+    protected void addServicesOnStartup(Map&lt;String, KeyValueHolder&lt;Object, Dictionary&gt;&gt; services) {
+        services.put(MyService.class.getName(), asService(myService, &quot;beer&quot;, &quot;Carlsberg&quot;));
+    }
+]]></script>
+</div></div><p>And in the route we use the FQN name:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: xml; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[    &lt;route&gt;
+      &lt;from uri=&quot;direct:start&quot;/&gt;
+      &lt;to uri=&quot;bean:org.apache.camel.test.blueprint.MyService&quot;/&gt;
+      &lt;to uri=&quot;mock:result&quot;/&gt;
+    &lt;/route&gt;
+]]></script>
+</div></div><p>&#160;</p><p><span>From&#160;</span><strong>Camel 2.16.0</strong><span>, an additional&#160;</span><span><code>addServicesOnStartup</code> method is available to be overridden making it ideal for when needing to specify multiple services with the same interface.</span><span>&#160;</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script class="brush: java; gutter: false; theme: Default" type="syntaxhighlighter"><![CDATA[  @Override
+  protected void addServicesOnStartup(List&lt;KeyValueHolder&lt;String, KeyValueHolder&lt;Object, Dictionary&gt;&gt;&gt; services) {
+      Dictionary&lt;String, String&gt; dict1 = new Hashtable&lt;String, String&gt;();
+      dict1.put(&quot;osgi.jndi.service.name&quot;, &quot;jdbc/db1&quot;);
+        
+      Dictionary&lt;String, String&gt; dict2 = new Hashtable&lt;String, String&gt;();
+      dict2.put(&quot;osgi.jndi.service.name&quot;, &quot;jdbc/db2&quot;);
+        
+      services.add(asKeyValueService(javax.sql.DataSource.class.getName(), mockService1, dict1));
+      services.add(asKeyValueService(javax.sql.DataSource.class.getName(), mockService2, dict2));
+    }
+]]></script>
+</div></div><p><span>The <code>asKeyValueService</code> builder method can be used to construct the necessary parameters to create the service. The method takes in the name of the registered service, the object, and and a <code><span>Dictionary</span></code>&#160;as arguments.</span></p></div>
+        </td>
+        <td valign="top">
+          <div class="navigation">
+            <div class="navigation_top">
+                <!-- NavigationBar -->
+<div class="navigation_bottom" id="navigation_bottom"><h3 id="Navigation-Overview"><a shape="rect" href="overview.html">Overview</a></h3><ul class="alternate"><li><a shape="rect" href="index.html">Home</a></li><li><a shape="rect" href="download.html">Download</a></li><li><a shape="rect" href="getting-started.html">Getting Started</a></li><li><a shape="rect" href="faq.html">FAQ</a></li></ul><h3 id="Navigation-Documentation"><a shape="rect" href="documentation.html">Documentation</a></h3><ul class="alternate"><li><a shape="rect" href="user-guide.html">User Guide</a></li><li><a shape="rect" href="manual.html">Manual</a></li><li><a shape="rect" href="books.html">Books</a></li><li><a shape="rect" href="tutorials.html">Tutorials</a></li><li><a shape="rect" href="examples.html">Examples</a></li><li><a shape="rect" href="cookbook.html">Cookbook</a></li><li><a shape="rect" href="architecture.html">Architecture</a></li><li><a shape="rect" href="enterprise-integration-patterns.html">Enterprise Integration Patterns</a></li><li><a shape="rect" href="dsl.html">DSL</a></li><li><a shape="rect" href="components.html">Components</a></li><li><a shape="rect" href="data-format.html">Data Format</a></li><li><a shape="rect" href="languages.html">Languages</a></li><li><a shape="rect" href="security.html">Security</a></li><li><a shape="rect" href="security-advisories.html">Security Advisories</a></li></ul><h3 id="Navigation-Search">Search</h3><form enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse">
+  <div>
+    <input type="hidden" name="cx" value="007878419884033443453:m5nhvy4hmyq">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="21">
+    <input type="submit" name="sa" value="Search">
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script><h3 id="Navigation-Community"><a shape="rect" href="community.html">Community</a></h3><ul class="alternate"><li><a shape="rect" href="support.html">Support</a></li><li><a shape="rect" href="contributing.html">Contributing</a></li><li><a shape="rect" href="discussion-forums.html">Discussion Forums</a></li><li><a shape="rect" href="mailing-lists.html">Mailing Lists</a></li><li><a shape="rect" href="user-stories.html">User Stories</a></li><li><a shape="rect" href="news.html">News</a></li><li><a shape="rect" href="articles.html">Articles</a></li><li><a shape="rect" href="site.html">Site</a></li><li><a shape="rect" href="team.html">Team</a></li><li><a shape="rect" class="external-link" href="http://camel-extra.googlecode.com/" rel="nofollow">Camel Extra</a></li></ul><h3 id="Navigation-Developers"><a shape="rect" href="developers.html">Developers</a></h3><ul class="alternate"><li><a shape="rect" href="developers.html">Developer Guide</a></li><li><a shape="rect" href="source.html">Source</a></li><li><a shape="rect" href="building.html">Building</a></li><li><a shape="rect" href="javadoc.html">JavaDoc</a></li><li><a shape="rect" href="irc-room.html">IRC Room</a></li></ul><h3 id="Navigation-ApacheSoftwareFoundation">Apache Software Foundation</h3><ul class="alternate"><li><a shape="rect" class="external-link" href="http://www.apache.org/licenses/">License</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li><li><a shape="rect" class="external-link" href="http://www.apache.org/security/">Security</a></li></ul></div>
+                <!-- NavigationBar -->
+            </div>
+          </div>
+        </td>
+        </tr>
+	</tbody>
+        </table>
+
+
+        <div class="bottom_red_bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="black_box">
+<div class="footer">
+  <div class="footer_l">
+    <div class="footer_r">
+      <div>
+        <a href="$base/privacy-policy.html">Privacy Policy</a> -
+        (<a href="https://cwiki.apache.org/confluence/pages/editpage.action?pageId=27836052">edit page</a>)
+   	 (<a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27836052&amp;showComments=true&amp;showCommentArea=true#addcomment">add comment</a>)
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="design_attribution">
+&copy; 2004-2015 The Apache Software Foundation.
+<br>          
+Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation.  All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+<br>
+<a href="http://hiramchirino.com">Graphic Design By Hiram</a>
+</div>
+
+<!-- Camel committers that would like access to the Analytics, send a note to private@camel.apache.org -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
+
+
